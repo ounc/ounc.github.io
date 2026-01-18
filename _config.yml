@@ -1,0 +1,7 @@
+title: ounc Tech Blog
+description: Backend · System · AI Engineering
+url: https://ounc.github.io
+
+# 如果 GitHub Pages 允许 jekyll-feed，会自动生成 /feed.xml
+plugins:
+  - jekyll-feed
