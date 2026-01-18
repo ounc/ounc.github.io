@@ -1,11 +1,11 @@
 body {
   margin: 0;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  background: #0d1117;
-  color: #c9d1d9;
+  background: #f6f8fa;
+  color: #1f2328;
 }
 
-a { color: #58a6ff; text-decoration: none; }
+a { color: #0969da; text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 .container {
@@ -15,7 +15,7 @@ a:hover { text-decoration: underline; }
 }
 
 .site-header {
-  border-bottom: 1px solid #30363d;
+  border-bottom: 1px solid #d0d7de;
 }
 
 .header-inner {
@@ -31,8 +31,8 @@ a:hover { text-decoration: underline; }
 }
 
 .avatar {
-  background: #161b22;
-  border: 1px solid #30363d;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
   border-radius: 8px;
   padding: 6px 10px;
 }
@@ -43,12 +43,12 @@ a:hover { text-decoration: underline; }
 
 .tagline {
   font-size: 12px;
-  color: #8b949e;
+  color: #57606a;
 }
 
 .nav a {
   margin-left: 16px;
-  color: #8b949e;
+  color: #57606a;
 }
 
 .hero h1 {
@@ -56,8 +56,8 @@ a:hover { text-decoration: underline; }
 }
 
 .pill {
-  background: #161b22;
-  border: 1px solid #30363d;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
   padding: 2px 8px;
   margin-right: 6px;
   border-radius: 6px;
@@ -71,23 +71,23 @@ a:hover { text-decoration: underline; }
 .post {
   display: block;
   padding: 16px;
-  border: 1px solid #30363d;
+  border: 1px solid #d0d7de;
   border-radius: 6px;
   margin-bottom: 16px;
-  background: #010409;
+  background: #ffffff;
 }
 
 .post:hover {
-  background: #161b22;
+  background: #f6f8fa;
 }
 
 .meta {
   font-size: 12px;
-  color: #8b949e;
+  color: #57606a;
 }
 
 .project {
-  border-left: 3px solid #58a6ff;
+  border-left: 3px solid #0969da;
   padding-left: 12px;
   margin-bottom: 16px;
 }
@@ -95,5 +95,5 @@ a:hover { text-decoration: underline; }
 .footer {
   margin-top: 60px;
   font-size: 12px;
-  color: #8b949e;
+  color: #57606a;
 }
