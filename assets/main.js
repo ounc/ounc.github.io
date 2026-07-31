@@ -1,329 +1,402 @@
 /* ==========================================
-   purai.cc - Interactive Frontend Logic
+   ounc.github.io - Interactive Frontend Logic
    ========================================== */
 
 // --- 1. TRANSLATION DICTIONARY ---
 
 const TRANSLATIONS = {
   zh: {
-    'nav-products': '产品方案',
-    'nav-insights': '行业洞察',
-    'nav-about': '关于我们',
-    'nav-contact': '合作意向',
-    'hero-subtitle': 'Design the Unbuilt',
-    'hero-title-prefix': '人工智能重塑',
-    'hero-title-gradient': '建筑与空间设计',
-    'hero-btn-explore': '申请产品试用',
-    'hero-btn-projects': '提交商务合作',
-    'blog-tag': 'Insights',
-    'blog-title': '行业洞察与研究',
+    'nav-blog': '博客',
+    'nav-projects': '项目',
+    'nav-about': '关于我',
+    'nav-guestbook': '留言板',
+    'hero-subtitle': 'Engineering & Architecture',
+    'hero-title-prefix': '构建高可用的',
+    'hero-title-gradient': '后端与空间 AI 系统',
+    'hero-btn-explore': '探索技术文章',
+    'hero-btn-projects': '查看开源项目',
+    'blog-tag': 'Read Articles',
+    'blog-title': '技术博客录',
     'filter-all': '全部',
-    'filter-backend': '生成式设计',
-    'filter-architecture': '空间智能',
-    'filter-ai': '行业生态',
-    'projects-tag': 'Solutions',
-    'projects-title': '产品与解决方案',
-    'about-tag': 'About Us',
-    'about-title': '关于普瑞智能',
-    'about-intro': '关于 purai',
-    'about-p1': '普瑞智能 (purai.cc) 是一家专注于将人工智能融入建筑设计与空间规划的科技创新企业。我们致力于打破传统设计流水线的效率壁垒，将生成式扩散模型、三维场景重建以及空间计算等前沿技术，无缝交付给全球的建筑师与设计师。',
-    'about-p2': '我们相信，AI 的角色不是取代灵感，而是消除繁琐的机械重复。通过自主研发的空间大模型，设计师可以在数秒内将草图渲染为高保真效果图，或基于复杂的地块限制进行最优空间布局规划，让设计的边界无限延伸。',
-    'about-github-btn': '在 GitHub 关注我们',
-    'skill-backend': 'Spatial AI & Image Generation (空间智能与渲染生成)',
-    'skill-distributed': '3D Scene Reconstruction (三维空间场景重建)',
-    'skill-ai': 'AI-Driven Layout Planning (智能空间布局规划)',
-    'skill-cloud': 'BIM & CAD Cloud Integration (BIM/CAD云端协同)',
-    'guestbook-tag': 'Inquiry',
-    'guestbook-title': '意向留言与商洽',
-    'form-nickname': '您的称呼 / 公司名称',
-    'form-content': '合作意向与需求描述',
-    'form-submit': '提交合作意向',
-    'footer-feed': '产品订阅',
-    'footer-discussions': '合作留言订阅',
-    'placeholder-nickname': '例如：普瑞建设 / 极客建筑师事务所',
-    'placeholder-content': '请描述您的合作意向或对我们 AI 工具的试用需求...',
-    'btn-read-more': '阅读详情',
+    'filter-backend': '后端与架构',
+    'filter-architecture': '图形与空间算法',
+    'filter-ai': '大模型工程',
+    'projects-tag': 'Showcase',
+    'projects-title': '开源项目与工程实践',
+    'about-tag': 'About Me',
+    'about-title': '个人简介',
+    'about-intro': '我是 ounc，一名专注于后端高并发架构与 AI 空间算法落地的工程师。',
+    'about-p1': '目前我主要负责空间计算与建筑 AI 创业项目 purai.cc 的核心渲染后端与空间求解器算法的研发工作。我热衷于使用优雅的系统架构和算法，来解决真实空间设计中的效率难题。',
+    'about-p2': '在这里，我记录自己在高并发分布式系统、三维空间重构、扩散渲染管道优化以及大模型工程落地中的实践经验。我相信好的代码和架构不仅是冰冷的逻辑，更是解决物理世界复杂性的桥梁。',
+    'about-github-btn': '在 GitHub 关注我',
+    'skill-backend': 'Go / Java (后端高并发与架构)',
+    'skill-distributed': 'Spatial AI & Image Diffusion (空间智能与图像扩散算法)',
+    'skill-ai': '3D Spatial Geometry & Solvers (三维空间几何与求解算法)',
+    'skill-cloud': 'Kubernetes & GPU Orchestration (云原生与GPU算力调度)',
+    'guestbook-tag': 'Interactive',
+    'guestbook-title': '留言板',
+    'form-nickname': '昵称',
+    'form-content': '留言内容',
+    'form-submit': '发送留言',
+    'footer-feed': '网站订阅',
+    'footer-discussions': '讨论订阅',
+    'placeholder-nickname': '留下你的极客代号',
+    'placeholder-content': '写点什么吧... 支持 Markdown 符号哦',
+    'btn-read-more': '阅读全文',
     'btn-project-code': '开源仓库',
-    'btn-project-demo': '产品演示',
-    'comment-default-1': 'purai Render 的渲染速度非常惊人，草图一键生成的建筑阴影和材质细节处理得非常合理，极大地缩短了我们前期方案的比选时间！',
-    'comment-default-2': '我们事务所近期在尝试将 CAD 图纸通过 Spatial3D 重建导入 BIM，空间识别率非常高，期待能和普瑞智能开展深度技术合作。'
+    'btn-project-demo': '演示链接',
+    'comment-default-1': '网页排版真舒服，暖色调在冷冰冰的极客主页里确实有温度。催更你的 Raft 实践文！',
+    'comment-default-2': '对 Go 的 GC 分析很到位，我们线上也在通过微调 GOGC 缓解瞬间 STW，期待更多深度文章。'
   },
   en: {
-    'nav-products': 'Products',
-    'nav-insights': 'Insights',
-    'nav-about': 'About Us',
-    'nav-contact': 'Inquiry',
-    'hero-subtitle': 'Design the Unbuilt',
-    'hero-title-prefix': 'Reimagining Architecture &',
-    'hero-title-gradient': 'Spatial Design with AI',
-    'hero-btn-explore': 'Request Free Trial',
-    'hero-btn-projects': 'Submit Partnership',
-    'blog-tag': 'Insights',
-    'blog-title': 'Industry Insights & Research',
+    'nav-blog': 'Blog',
+    'nav-projects': 'Projects',
+    'nav-about': 'About',
+    'nav-guestbook': 'Guestbook',
+    'hero-subtitle': 'Engineering & Architecture',
+    'hero-title-prefix': 'Building High-Availability',
+    'hero-title-gradient': 'Backend & Spatial AI Systems',
+    'hero-btn-explore': 'Explore Articles',
+    'hero-btn-projects': 'View Open Source',
+    'blog-tag': 'Read Articles',
+    'blog-title': 'Technical Blog',
     'filter-all': 'All',
-    'filter-backend': 'Generative Design',
-    'filter-architecture': 'Spatial AI',
-    'filter-ai': 'PropTech Ecosystem',
-    'projects-tag': 'Solutions',
-    'projects-title': 'Products & Solutions',
-    'about-tag': 'About Us',
-    'about-title': 'About purai',
-    'about-intro': 'About purai',
-    'about-p1': 'purai (purai.cc) is a cutting-edge PropTech startup specializing in integrating Artificial Intelligence into architectural design and spatial planning. We break traditional workflow bottlenecks by delivering generative diffusion pipelines, 3D spatial reconstruction, and spatial computing to architects worldwide.',
-    'about-p2': 'We believe AI is built not to replace inspiration, but to automate repetition. Through our spatial models, architects convert hand sketches into high-fidelity renders in seconds or generate optimized layouts conforming to local zoning laws, infinitely extending the boundaries of creativity.',
-    'about-github-btn': 'Follow us on GitHub',
-    'skill-backend': 'Spatial AI & Image Generation',
-    'skill-distributed': '3D Scene Reconstruction',
-    'skill-ai': 'AI-Driven Layout Planning',
-    'skill-cloud': 'BIM & CAD Cloud Integration',
-    'guestbook-tag': 'Inquiry',
-    'guestbook-title': 'Business Inquiry',
-    'form-nickname': 'Your Name / Company Name',
-    'form-content': 'Inquiry / Requirements Description',
-    'form-submit': 'Submit Inquiry',
-    'footer-feed': 'Product Feed',
-    'footer-discussions': 'Inquiry Feed',
-    'placeholder-nickname': 'e.g., purai Construction / Geek Architects Ltd.',
-    'placeholder-content': 'Please describe your business inquiry or request for our AI design tools...',
-    'btn-read-more': 'Read Details',
+    'filter-backend': 'Backend & Systems',
+    'filter-architecture': 'Graphics & Spatial Algos',
+    'filter-ai': 'LLM Engineering',
+    'projects-tag': 'Showcase',
+    'projects-title': 'Open Source Projects & Engineering Practice',
+    'about-tag': 'About Me',
+    'about-title': 'Profile',
+    'about-intro': 'I\'m ounc, a backend engineer focusing on high-concurrency architecture and AI spatial systems implementation.',
+    'about-p1': 'Currently, I focus on developing the core rendering backends and spatial solver algorithms for purai.cc, a spatial architecture AI startup. I enjoy using clean architecture and logic to solve real-world spatial design efficiency issues.',
+    'about-p2': 'Here, I log my engineering journeys in high-concurrency distributed systems, 3D spatial reconstruction, image diffusion pipelines optimization, and LLM implementations. I believe good architecture is a bridge to solving physical world complexity.',
+    'about-github-btn': 'Follow me on GitHub',
+    'skill-backend': 'Go / Java (Backend & Systems)',
+    'skill-distributed': 'Spatial AI & Image Diffusion',
+    'skill-ai': '3D Spatial Geometry & Solvers',
+    'skill-cloud': 'Kubernetes & GPU Orchestration',
+    'guestbook-tag': 'Interactive',
+    'guestbook-title': 'Guestbook',
+    'form-nickname': 'Nickname',
+    'form-content': 'Message',
+    'form-submit': 'Send Message',
+    'footer-feed': 'Site Feed',
+    'footer-discussions': 'Discussions Feed',
+    'placeholder-nickname': 'Your geek handle',
+    'placeholder-content': 'Write something... Supports Markdown formatting',
+    'btn-read-more': 'Read More',
     'btn-project-code': 'GitHub Repo',
-    'btn-project-demo': 'Live Demo',
-    'comment-default-1': 'The rendering speed of purai Render is impressive. Generating materials and realistic shadows from a simple sketch saves us days during early bidding phases!',
-    'comment-default-2': 'Our firm tried uploading CAD drawings to Spatial3D for BIM reconstruction, and the spatial recognition rates were incredibly high. Looking forward to deepening our collaboration.'
+    'btn-project-demo': 'Demo Link',
+    'comment-default-1': 'The layout and custom sunset theme look absolutely stunning! Can\'t wait to read your next post on Raft implementation.',
+    'comment-default-2': 'Great deep-dive into Go GC tuning! We\'re adjusting GOGC ratios in our production API services to shave off latency spikes too. Looking forward to more posts.'
   }
 };
 
 const TYPEWRITER_TEXTS = {
   zh: [
-    '一键将草图与线框图转化为写实建筑渲染图。',
-    '基于地块限制与日照分析自动规划最优空间户型。',
-    '使用空间智能，从全景照片一键重建 3D BIM 场景。'
+    '关注高并发后端架构与空间计算算法开发。',
+    '设计 purai.cc 的核心渲染后端与空间布局求解器。',
+    '热衷于用算法与系统设计解决建筑空间效率。'
   ],
   en: [
-    'Convert sketches & wireframes into photorealistic renders in seconds.',
-    'Auto-generate optimized floor plans conforming to zoning & sunlight.',
-    'Reconstruct 3D BIM models from 2D photos via spatial intelligence.'
+    'Focusing on high-concurrency backend & spatial computing.',
+    'Designing rendering backend & spatial solvers for purai.cc.',
+    'Passionate about solving spatial efficiency via system design.'
   ]
 };
 
-// --- 2. BILINGUAL PRODUCTS DATA ---
+// --- 2. BILINGUAL PROJECTS DATA ---
 
 const PROJECTS = [
   {
-    id: 'purai-render',
+    id: 'purai-render-scheduler',
     icon: '🎨',
-    github: 'https://github.com/purai-cc/purai-render',
+    github: 'https://github.com/ounc/purai-render-scheduler',
     demo: '#',
-    tech: ['Diffusion Model', 'ControlNet', 'Stable Diffusion', 'GPU Edge'],
+    tech: ['Go', 'Redis', 'gRPC', 'Docker', 'GPU-Metrics'],
     zh: {
-      title: 'purai Render (建筑智能渲染引擎)',
-      description: '一键将建筑手绘草图、CAD 线框图转化为高拟真的写实渲染图。内置写实、概念、水彩等十余种风格模板，支持日景、夜景、阴雨天等精细光影调节。'
+      title: 'purai-render-scheduler',
+      description: '面向高并发 GPU 渲染任务的分布式调度引擎。采用 Go 语言开发，支持基于 GPU 显存压力的动态负载均衡、多等级渲染任务优先级队列与自动重试，为 purai.cc 的渲染后端提供高可靠调度支持。'
     },
     en: {
-      title: 'purai Render (AI Rendering Engine)',
-      description: 'Converts hand sketches or CAD wireframes into high-fidelity photorealistic renders instantly. Features 10+ architectural styles and day/night lighting overrides.'
+      title: 'purai-render-scheduler',
+      description: 'A distributed scheduling engine for high-concurrency GPU rendering tasks. Developed in Go, featuring dynamic load balancing based on GPU memory pressure, priority queues, and automatic fault-tolerance.'
     }
   },
   {
-    id: 'purai-generator',
+    id: 'spatial-layout-solver',
     icon: '📐',
-    github: 'https://github.com/purai-cc/purai-plan-generator',
+    github: 'https://github.com/ounc/spatial-layout-solver',
     demo: '#',
-    tech: ['Genetic Algorithm', 'Constraint Solving', 'CAD Engine', 'Python'],
+    tech: ['Go', 'Genetic Algorithm', 'Constraint Solving', 'JSON-Schema'],
     zh: {
-      title: 'purai PlanGenerator (智能空间布局规划)',
-      description: '根据日照时间、地块红线、容积率及朝向限制，通过遗传算法自动计算生成最优的户型平面图与楼宇排布方案，极大地减少方案调整周期。'
+      title: 'spatial-layout-solver',
+      description: '基于图约束关系与遗传算法的室内空间布局生成器。输入房屋红线、日照采光方向和相对距离约束，引擎即可在秒级内并行求解并输出符合人体工学的 3D 家具排布方案。'
     },
     en: {
-      title: 'purai PlanGenerator (Auto-Layout Planner)',
-      description: 'Calculates and generates optimized residential floor plans and building layouts based on specific sunlight requirements, zoning boundaries, and density limits.'
+      title: 'spatial-layout-solver',
+      description: 'An indoor layout generator based on genetic algorithms and graph constraints. Solves and generates optimal 3D furniture arrangements in seconds matching daylight and ergonomic requirements.'
     }
   },
   {
-    id: 'purai-spatial',
+    id: 'mesh-extractor-3dgs',
     icon: '🧊',
-    github: 'https://github.com/purai-cc/purai-spatial3d',
+    github: 'https://github.com/ounc/mesh-extractor-3dgs',
     demo: '#',
-    tech: ['Spatial Intelligence', 'NeRF / 3DGS', 'LiDAR Scan', 'C++'],
+    tech: ['C++', 'Python', '3DGS', 'Marching Cubes', 'Open3D'],
     zh: {
-      title: 'purai Spatial3D (三维空间场景重建)',
-      description: '利用三维高斯泼溅 (3DGS) 及语义分割技术，从手机拍摄的全景视频或激光雷达点云中提取空间三维网格，一键转化为主流设计软件可编辑的标准 BIM 构件。'
+      title: 'mesh-extractor-3dgs',
+      description: '使用 C++ 结合 TSDF 和 Marching Cubes 算法从训练完成的三维高斯泼溅 (3DGS) 场景中提取三维空间网格的轻量工具，支持一键导出为可以直接拖入 CAD/BIM 软件的 OBJ 网格。'
     },
     en: {
-      title: 'purai Spatial3D (3D Reconstruction System)',
-      description: 'Uses 3D Gaussian Splatting (3DGS) and computer vision to extract spatial meshes from mobile videos or scans, generating editable, standard BIM components.'
+      title: 'mesh-extractor-3dgs',
+      description: 'A lightweight 3D mesh extractor written in C++ and Python. Utilizes TSDF and Marching Cubes to reconstruct clean OBJ meshes from trained 3DGS spatial scans.'
     }
   },
   {
-    id: 'purai-copilot',
-    icon: '💬',
-    github: 'https://github.com/purai-cc/purai-architect-copilot',
+    id: 'gocache-sync',
+    icon: '💾',
+    github: 'https://github.com/ounc/gocache-sync',
     demo: '#',
-    tech: ['LLM', 'RAG Engine', 'Vector DB', 'Zoning Code'],
+    tech: ['Go', 'Raft Consensus', 'gRPC', 'Protobuf'],
     zh: {
-      title: 'purai Copilot (建筑师智能助理)',
-      description: '基于大语言模型的建筑智能顾问。输入自然语言即可秒级检索全国复杂的地方建筑设计规范、消防通则，并智能推荐合规的节能低碳绿色建材。'
+      title: 'gocache-sync',
+      description: '基于 Raft 协议实现高可用与强一致性的分布式 KV 缓存。支持 LRU 淘汰机制，专门用于在空间计算引擎的分布式节点中进行三维切片文件状态和图元元数据的高速同步。'
     },
     en: {
-      title: 'purai Copilot (AI Architect Assistant)',
-      description: 'An LLM-based assistant that queries complex building codes, zoning regulations, and fire codes, recommending eligible green and low-carbon construction materials.'
+      title: 'gocache-sync',
+      description: 'A Raft-based consistent distributed KV cache. Features LRU eviction and HTTP/gRPC protocols, optimized for high-speed synchronization of 3D spatial slice metadata across nodes.'
     }
   }
 ];
 
-// --- 3. BILINGUAL INSIGHTS DATA ---
+// --- 3. BILINGUAL BLOG POSTS DATA ---
 
 const BLOG_POSTS = [
   {
-    id: 'facade-ai',
-    category: 'ai-design',
+    id: 'render-scheduler-post',
+    category: 'backend',
     date: '2026-07-28',
     zh: {
-      title: '生成式 AI 在现代建筑立面设计中的应用实践',
-      categoryName: '生成式设计',
-      description: '探索基于 Stable Diffusion 和 ControlNet 的条件图像生成技术，在幕墙设计阶段从体块草图直接生成多方案立面纹理与材质配色的工程工作流。',
+      title: '深度解析 purai.cc 架构：构建高可用 GPU 渲染任务调度器',
+      categoryName: '后端与架构',
+      description: '本文分享了我在 purai.cc 架构设计中，如何基于 Go 协程、Redis 阻塞队列和 gRPC，为成千上万的 Stable Diffusion 渲染实例实现一套具备弹性扩缩容和错误重试能力的 GPU 渲染任务调度后端。',
       content: `
-        <p>建筑立面设计是表达建筑美感与技术性的关键环节，传统的幕墙立面比选需要建模、打光、材质贴图以及数小时的漫长渲染。<strong>生成式 AI 正在打破这一繁杂工作流</strong>，将概念设计时间缩短至秒级。</p>
+        <p>在 <code>purai.cc</code> 这样的生成式建筑渲染平台中，渲染任务是高度消耗 GPU 显存和算力的。传统的 Web 后端遇到暴涨的渲染请求很容易导致显卡溢出（OOM）或请求阻塞。<strong>为此，我编写了一套分布式的 GPU 渲染任务调度系统。</strong></p>
         
-        <h3>一、立面条件生成的控制瓶颈</h3>
-        <p>在直接将 Diffusion 模型应用于立面设计时，通常面临两大难题：</p>
+        <h3>一、核心挑战</h3>
         <ul>
-          <li><strong>结构失真</strong>：建筑结构具有严苛的物理对齐特征。单纯通过 Prompt 生成图像常会导致外轮廓扭曲、窗缝歪斜。</li>
-          <li><strong>材质模糊</strong>：生成的玻璃、金属板纹理缺乏物理厚度与精确的高光反馈，无法用于方案决策。</li>
+          <li><strong>冷启动与延迟</strong>：GPU 渲染节点启动拉取大模型权重需要时间，调度器需要预测算力并提前唤醒节点。</li>
+          <li><strong>请求排队与防雪崩</strong>：当大量用户并行请求渲染时，必须对任务进行优先级排列与排队阻尼，防止显卡物理服务器雪崩。</li>
         </ul>
 
-        <h3>二、基于 ControlNet + 提示词权重的完美解法</h3>
-        <p>为了获得高可控度的立面生成，我们构建了以下工程管道：</p>
+        <h3>二、基于 Go + Redis + gRPC 的调度设计</h3>
+        <p>调度器的设计分为三层：</p>
         <ol>
-          <li><strong>深度图与边缘线（Lineart）提取</strong>：从三维软件（如 Rhino/SketchUp）导出立面体块图，使用 Canny 或 Lineart 算法提取控制线稿。</li>
-          <li><strong>多网络并联控制</strong>：在 ControlNet 中并联加载线稿模型（控制宏观结构）与深度模型（控制遮阳格栅、窗洞凹凸的深度层级）。</li>
-          <li><strong>风格权重调优</strong>：在主模型中融合建筑学经典摄影语义（例如 “minimalist, curtain wall glass, dynamic parametric paneling, architectural photography, Hasselblad”），并使用负向提示词屏蔽非理性构件。</li>
+          <li><strong>事件网关（API Gateway）</strong>：接收客户端请求，将请求封装为渲染事件，压入 Redis 优先级阻尼阻塞队列（ZSet）。</li>
+          <li><strong>核心调度器（Scheduler Core）</strong>：运行一个无锁控制循环（Control Loop），监听队列。通过长连接与各个 GPU 工作节点（Worker）保持 gRPC 状态通信。</li>
+          <li><strong>GPU 工作节点（Worker Node）</strong>：单机部署的 Python/C++ 封装实例，订阅 GPU 空闲度并主动向调度器上报。</li>
         </ol>
-        <blockquote>
-          <p><strong>实战成果：</strong> 配合我们的渲染引擎，设计师只需绘制一张铅笔线条的结构草图，就可以在一分钟内并行产出 10 套包含了金属格栅、通高玻璃幕墙等不同参数化质感的立面方案大图。</p>
-        </blockquote>
+        
+        <pre><code>// 伪代码：调度器核心循环
+func (s *Scheduler) startDispatchLoop() {
+    for {
+        worker := s.GetLeastLoadedWorker()
+        if worker == nil {
+            s.ScaleUpGPUInstances() // 弹性扩容
+            time.Sleep(1 * time.Second)
+            continue
+        }
+        task := s.Queue.PopHighestPriorityTask()
+        go s.dispatch(task, worker)
+    }
+}</code></pre>
 
-        <h3>三、结语</h3>
-        <p>生成式 AI 的使命不是代替建筑师画施工图，而是将前期的创意头脑风暴放大百倍。通过人机协同，未来的建筑外立面可以拥有更强的参数化细节与环境适应力。</p>
+        <h3>三、落地收益</h3>
+        <p>通过这套 Go 后端调度引擎，我们成功解决了 GPU 节点的频繁空闲与突发请求堆积问题。系统的渲染平均排队延迟降低了 <strong>75%</strong>，且具备完备的单点容错能力，某台 GPU 宿主机宕机时，调度器会自动拦截并重分发其未完成的渲染任务。</p>
       `
     },
     en: {
-      title: 'Generative AI Applications in Modern Architectural Facade Design',
-      categoryName: 'Generative Design',
-      description: 'Explore the conditional image generation pipeline using Stable Diffusion and ControlNet to render complex facade textures and materials from volumetric massing models.',
+      title: 'Deep Dive into purai.cc Architecture: Designing a High-Availability GPU Render Scheduler',
+      categoryName: 'Backend & Systems',
+      description: 'A technical write-up detailing how I designed and implemented a concurrent GPU task scheduler in Go using Redis priority queues and gRPC to scale Stable Diffusion pipelines.',
       content: `
-        <p>Architectural facade design is critical for aesthetics and engineering. Traditional facade options require modeling, texturing, lighting, and hours of rendering. <strong>Generative AI is bypassing this heavy workflow</strong>, cutting concept iterations down to seconds.</p>
+        <p>For generative architecture platforms like <code>purai.cc</code>, rendering is heavily resource-intensive. Standard API servers easily crash or experience OOM under sudden spikes. **I designed a dedicated distributed scheduler to queue and balance these jobs.**</p>
         
-        <h3>1. The Bottlenecks of Facade Generative Control</h3>
-        <p>When directly using diffusion models for facade rendering, architects face two major issues:</p>
+        <h3>1. Architectural Challenges</h3>
         <ul>
-          <li><strong>Structural Distortion</strong>: Buildings demand strict alignments. Naive prompts result in curved structural grids and distorted windows.</li>
-          <li><strong>Unrealistic Materials</strong>: Generated glass and metal panels lack physical thickness and correct reflection properties.</li>
+          <li><strong>Cold Boot Latencies</strong>: Loading large weights on a GPU takes time. The scheduler must forecast load and scale nodes preemptively.</li>
+          <li><strong>Queueing & Anti-Avalanche</strong>: Large volumes of render requests require strict prioritization to prevent physical GPU hosts from crashing.</li>
         </ul>
 
-        <h3>2. Solving via ControlNet & Conditional Multi-Pipelining</h3>
-        <p>To acquire highly controllable facade renderings, we built the following pipeline:</p>
+        <h3>2. Go + Redis + gRPC Architecture</h3>
+        <p>The scheduler uses a three-tier model:</p>
         <ol>
-          <li><strong>Lineart and Depth Extraction</strong>: Export structural wireframes from CAD/Rhino, and run Canny or Lineart edge extraction.</li>
-          <li><strong>Parallel Network Control</strong>: Load structural lineart to lock global framing, concurrently utilizing depth controls to parse louvers and window extrusions.</li>
-          <li><strong>Textual Prompts Tuning</strong>: Feed architectural photography tags (e.g. "parametric facade, aluminum paneling, clear low-E glass, architectural photography") and negative prompts to rule out illogical artifacts.</li>
+          <li><strong>API Gateway</strong>: Encapsulates requests into render events and pushes them onto Redis sorted sets (ZSet) by priority.</li>
+          <li><strong>Scheduler Core</strong>: Runs a lock-free control loop to monitor queues. Maintains real-time gRPC tunnels with active Workers.</li>
+          <li><strong>GPU Workers</strong>: Local scripts monitoring VRAM availability, reporting metrics back to the core.</li>
         </ol>
-        <blockquote>
-          <p><strong>Result:</strong> By drawing a simple pencil sketch, designers generate 10 high-fidelity variants of aluminum parametric grids and curtain-wall skins in under a minute.</p>
-        </blockquote>
+        
+        <pre><code>// Dispatch loop pseudo-code
+func (s *Scheduler) startDispatchLoop() {
+    for {
+        worker := s.GetLeastLoadedWorker()
+        if worker == nil {
+            s.ScaleUpGPUInstances()
+            time.Sleep(1 * time.Second)
+            continue
+        }
+        task := s.Queue.PopHighestPriorityTask()
+        go s.dispatch(task, worker)
+    }
+}</code></pre>
 
-        <h3>3. Summary</h3>
-        <p>Generative AI is not designed to replace architects, but to supercharge concepts. Man-machine synergy enables facades with deeper detailing and environmental performance.</p>
+        <h3>3. Outcome</h3>
+        <p>This scheduler cut queueing latency by <strong>75%</strong>. If a GPU node crashes, the scheduler intercepts and re-routes its active workloads automatically, achieving bulletproof resilience.</p>
       `
     }
   },
   {
-    id: 'spatial-llm-interior',
-    category: 'spatial-llm',
+    id: 'spatial-solver-post',
+    category: 'spatial-ai',
     date: '2026-06-12',
     zh: {
-      title: '空间大模型 (Spatial LLM) 在室内空间智能规划中的落地探索',
-      categoryName: '空间智能',
-      description: '大模型不仅能读懂文本，还能理解空间。本文探讨普瑞智能如何构建轻量级空间边界表示算法，将三维空间坐标映射为 LLM 向量，从而实现自动户型诊断与家具软装智能排布。',
+      title: '从零编写一个室内空间布局求解器 (Go + 遗传算法实践)',
+      categoryName: '图形与空间算法',
+      description: '空间排布在算法上面临巨大的搜索维度挑战。本文详细记录了我如何采用图约束表示户型关系，并设计遗传算法的适应度函数，让 Go 求解器引擎在 2 秒内求解出符合日照和建筑学规则的户型排布。',
       content: `
-        <p>传统大语言模型（LLM）擅长逻辑与符号推导，但无法感知物理空间。要实现真正的智能空间规划，必须解决<strong>“大模型如何理解三维几何与距离约束”</strong>的问题。我们在 purai-generator 的研发中开展了探索。</p>
+        <p>自动布局生成是 <code>purai.cc</code> 空间规划模型的核心。从数学上看，这是一个典型的<strong>约束满足问题 (Constraint Satisfaction Problem, CSP)</strong>，我们通常需要在一个无限连续的三维空间中寻找最优解。本文将介绍我是如何用 Go 从零实现这个求解器的。</p>
         
-        <h3>一、空间边界的向量化编码 (Spatial Tokenization)</h3>
-        <p>为了让 LLM 能够处理空间排布，我们采用三维网格（3D Grids）与图表示（Graph Representation）对室内格局进行编码：</p>
+        <h3>一、将空间布局抽象为图</h3>
+        <p>在编写求解器之前，我们不能把房间看作毫无关系的积木。我将室内空间建模为一个有向带有属性的图：</p>
         <ul>
-          <li>将房间划分成细颗粒度的体素（Voxels），每个障碍物、门窗、柱体用一个三维边界坐标包围盒（AABB Bounding Box）表示。</li>
-          <li>把建筑动线（Circulation）和采光要求建模为拓扑图中的边（Edges），例如 “卧室 -> 必须直达 -> 独立卫浴”、“沙发 -> 必须面对 -> 电视背景墙”。</li>
+          <li><strong>节点 (Nodes)</strong>：代表各个空间，如“客厅”、“主卧”、“玄关”，每个节点包含长、宽、高的范围。</li>
+          <li><strong>边 (Edges)</strong>：代表空间的相对约束，包含连通约束（如“卧室必须通向走廊”）与朝向约束（如“客厅必须朝向正南 ±15°”）。</li>
         </ul>
 
-        <h3>二、基于空间约束的网络优化</h3>
-        <p>我们将上述编码拼接进 prompt，利用专门经过空间拓扑对齐微调的开源底模进行布局推荐。模型会返回一组建议的三维物体坐标点。最后，通过传统的<strong>约束求解器 (Constraint Solver)</strong> 对物体坐标进行物理碰撞微调，避免软装穿墙或阻挡走道。</p>
-        <pre><code>// 拓扑图依赖示例
-Room: LivingRoom
-Constraint 1: Sofa facing TV-Wall, distance [2.5m, 4.0m]
-Constraint 2: CoffeeTable between Sofa and TV-Wall
-Constraint 3: Free passage width >= 0.9m</code></pre>
+        <h3>二、遗传算法的编码与演化设计</h3>
+        <p>由于空间搜索边界极其巨大，且存在非线性的重叠约束，传统的搜索树极易陷入局部最优。我设计了以下遗传算法架构：</p>
+        <ol>
+          <li><strong>基因编码 (Chromosome)</strong>：一条染色体代表一套房屋内的房间相对坐标及旋转角度。</li>
+          <li><strong>适应度函数 (Fitness Function)</strong>：
+            <ul>
+              <li><strong>重叠度罚分</strong>：房间与房间重叠，扣除高额积分。</li>
+              <li><strong>日照匹配分</strong>：窗户朝向阳光方向，增加积分。</li>
+              <li><strong>动线合理性</strong>：主要交通路线的总长度越短，积分越高。</li>
+            </ul>
+          </li>
+          <li><strong>变异与杂交</strong>：随机平移房间，或者在两条优秀的户型图之间交换卧室与次卧的分支。</li>
+        </ol>
 
-        <h3>三、商业价值</h3>
-        <p>该技术使普通用户可以仅用日常语言说出：“我需要一个能容纳三口之家、兼顾安静书房区和充足采光的客厅布局”，系统即可在 2 秒内输出符合人体工学与物理约束的三维设计模型，极大地降低了定制家居与精装房的设计门槛。</p>
+        <pre><code>// 适应度计算逻辑
+func evaluate(c *Chromosome) float64 {
+    score := 1000.0
+    score -= c.CalculateOverlapArea() * 100.0
+    score += c.EvaluateSunlightExposure() * 50.0
+    score -= c.CalculateCirculationPathLength() * 10.0
+    return score
+}</code></pre>
+
+        <h3>三、结语</h3>
+        <p>该求解器单次运行在 Go 并发优化下，可在 <strong>2.1秒</strong> 内跑完 500 代进化，输出合理性接近专业设计师排出的高水准户型图，极大地展现了算法在物理空间应用中的神奇魅力。</p>
       `
     },
     en: {
-      title: 'Spatial LLM Implementations in Intelligent Interior Layout Planning',
-      categoryName: 'Spatial AI',
-      description: 'How to map 3D spatial boundary matrices into LLM tokens, achieving automatic floorplan auditing and ergonomic furniture layout suggestions.',
+      title: 'Writing an Indoor Spatial Layout Solver from Scratch: Go & Genetic Algorithms',
+      categoryName: 'Graphics & Spatial Algos',
+      description: 'Floorplan arrangement is a challenging constraint satisfaction problem. This article reviews how I built a Go-based layout solver using genetic algorithms to align architectural spaces.',
       content: `
-        <p>Traditional Large Language Models (LLMs) are great at text but blind to physical spaces. To build smart layout planners, we must resolve <strong>"how to make LLMs understand 3D geometry and distance constraints"</strong>. We developed solutions inside purai-generator.</p>
+        <p>Automated floorplan planning is the core module in purai.cc. Mathematically, it is a **Constraint Satisfaction Problem (CSP)** with an infinite 3D search space. Here is how I built the solver using Go.</p>
         
-        <h3>1. Spatial Tokenization</h3>
-        <p>We encode indoor layouts using voxel subdivisions and topological graph representations:</p>
-        <ul>
-          <li>Rooms are divided into fine-grained voxels. Walls, columns, windows, and doors are modeled as Axis-Aligned Bounding Boxes (AABB).</li>
-          <li>Circulations and lighting rules are modeled as graph edges (e.g. "Bedroom -> direct access -> Bathroom", "Sofa -> face -> TV-wall").</li>
-        </ul>
+        <h3>1. Space as a Directed Constraint Graph</h3>
+        <p>Before writing math, we must model room links. Rooms are represented as nodes in a graph, with walls and paths as directional edges enforcing rules (e.g. "Living Room must orient South", "Bedroom requires Bathroom access").</p>
 
-        <h3>2. Integrating Constraint Solvers</h3>
-        <p>The topological inputs are fed to a fine-tuned spatial LLM, which outputs proposed 3D coordinate boxes. We then pass coordinates through a **deterministic Constraint Solver** to prevent collisions, wall-clippings, or corridor blocks.</p>
-        <pre><code>// Topological constraint model
-Room: LivingRoom
-Constraint 1: Sofa facing TV-Wall, distance [2.5m, 4.0m]
-Constraint 2: CoffeeTable between Sofa and TV-Wall
-Constraint 3: Free passage width >= 0.9m</code></pre>
+        <h3>2. Coding the Genetic Pipeline</h3>
+        <p>Because spatial checks are non-linear, genetic algorithms work perfectly. I coded the following pipeline:</p>
+        <ol>
+          <li><strong>Chromosomes</strong>: Encodes room coordinates and orientation rotations into array structures.</li>
+          <li><strong>Fitness Metrics</strong>:
+            <ul>
+              <li><strong>Overlap Penalties</strong>: Severe penalties if room meshes intersect.</li>
+              <li><strong>Daylight Ingress</strong>: Positive weight if windows face the sun.</li>
+              <li><strong>Circulation Paths</strong>: Deducts scores if pathing is too long.</li>
+            </ul>
+          </li>
+        </ol>
 
-        <h3>3. Commercial Impact</h3>
-        <p>This enables users to input natural sentences: "Generate a layout for a family of three, prioritizing a quiet study corner and high solar exposure." In 2 seconds, the engine generates an ergonomic, physically validated 3D layout.</p>
+        <pre><code>// Fitness calculation
+func evaluate(c *Chromosome) float64 {
+    score := 1000.0
+    score -= c.CalculateOverlapArea() * 100.0
+    score += c.EvaluateSunlightExposure() * 50.0
+    score -= c.CalculateCirculationPathLength() * 10.0
+    return score
+}</code></pre>
+
+        <h3>3. Results</h3>
+        <p>Through Go concurrency pipelines, the engine completes 500 generations of evolution in <strong>2.1 seconds</strong>, generating compliant floorplans.</p>
       `
     }
   },
   {
-    id: 'proptech-trends',
-    category: 'proptech',
-    date: '2026-05-02',
+    id: 'mesh-extractor-post',
+    category: 'spatial-ai',
+    date: '2026-05-18',
     zh: {
-      title: '绿色低碳建筑：基于 AI 的光照与能耗模拟优化',
-      categoryName: '行业生态',
-      description: '应对全球低碳环保趋势，普瑞智能分析了如何结合快速代理模型 (Surrogate Model) 与 AI，将传统需要耗时数小时的日照折射与空调节能热工分析降至毫秒级，实现辅助建筑设计优化。',
+      title: '点云到网格：3DGS 三维空间重构中的网格提取工程实践',
+      categoryName: '图形与空间算法',
+      description: '在将三维高斯泼溅 (3DGS) 用于空间扫描时，如何输出 CAD/BIM 能读懂的网格？本文拆解了我使用 C++ 结合 TSDF 算法和三角化算法，将点云重构为干净 OBJ 格式网格的完整步骤。',
       content: `
-        <p>传统建筑热力学和光照分析需要极高的算力，设计方案微小的改动就需要重新运行复杂的流体与辐射模拟（如 EnergyPlus 或 Radiance）。<strong>AI 代理模型 (Surrogate Models)</strong> 的出现，彻底改变了耗时的能耗评估工作流。</p>
+        <p>三维高斯泼溅（3D Gaussian Splatting）在逼真渲染上表现惊艳，但它是由无数半透明的椭球体（高斯点）组成的，建筑师所使用的 CAD/BIM 软件根本无法导入和编辑。<strong>为了解决这个问题，我开发了一套点云提取干净多边形网格（Mesh）的算法工具。</strong></p>
         
-        <h3>一、什么是 AI 能耗代理模型</h3>
-        <p>能耗代理模型并不是做真正的物理热传导计算，而是利用神经网络学习数万个历史物理模拟案例的“输入-输出”映射。当设计师修改窗墙比（WWR）、隔热材质或阳台挑檐宽度时，AI 可以在毫秒级内“预估”出全年的空调节能表现和日照系数（Daylight Factor），准确率高达 95% 以上。</p>
+        <h3>一、算法流程设计</h3>
+        <p>从无定型的椭球体中抽离出规则的多边形网格，核心步骤如下：</p>
+        <ul>
+          <li><strong>点云致密化与去噪</strong>：提取 3DGS 的均值中心点，根据不透明度（Opacity）阈值过滤掉空气中的漂浮噪点。</li>
+          <li><strong>隐式表面重建</strong>：使用截断带符号距离场（TSDF, Truncated Signed Distance Function）将点云投影到连续体素场中。</li>
+          <li><strong>多边形提取</strong>：使用 <strong>Marching Cubes (等值面提取)</strong> 算法抽取零水平集（Zero-Level Set），生成初步的三角网格。</li>
+        </ul>
 
-        <h3>二、在方案初期实现“性能导向设计”</h3>
-        <p>借助快速预测能力，我们将能耗预测直接嵌入到建筑形体的生成式算法（即 purai PlanGenerator）中。算法在生成大楼朝向与高度时，会自动计算太阳辐射热增益。若某一个体块排布会导致强烈的西晒和空调能耗暴增，AI 会自动施加惩罚函数并旋转体块，最终帮助建筑师在创意初期就筛选出最具绿色低碳基因的建筑方案。</p>
+        <h3>二、C++ 核心代码实现</h3>
+        <p>我使用 C++ 和 Open3D 库实现了这一计算重塑模块。关键的 Marching Cubes 计算效率极高，能在毫秒级提取复杂的室内墙体边界。</p>
+        <pre><code>// C++ TSDF 网格重建
+auto tsdf_volume = std::make_shared&lt;TSDFVolume&gt;(voxel_length, sdf_trunc);
+for (const auto& frame : camera_frames) {
+    tsdf_volume->Integrate(frame.depth, frame.color, frame.intrinsic, frame.extrinsic);
+}
+auto mesh = tsdf_volume->ExtractTriangleMesh();</code></pre>
+
+        <h3>三、BIM 导出的后续挑战</h3>
+        <p>刚提取出来的三角网格通常包含百万级面片。为了让其真正能在 CAD 中使用，我实现了一套基于 **RANSAC (随机抽样一致)** 的平面提取算法，自动将复杂的三角面拟合归并为规整的平直墙面，进而导出为洁净的工业标准 DWG/IFC 二维和三维图纸，为 purai.cc 的 3D 重建模块打通了最后的闭环。</p>
       `
     },
     en: {
-      title: 'Green Architecture: AI-Driven Daylight and Thermal Energy Simulation',
-      categoryName: 'PropTech Ecosystem',
-      description: 'Using deep surrogate neural networks to reduce traditional hours-long thermal heat gains and daylight simulations to milliseconds, driving sustainable architecture.',
+      title: 'From Point Cloud to CAD Mesh: Extracting Meshes in 3DGS Spatial Reconstruction',
+      categoryName: 'Graphics & Spatial Algos',
+      description: 'When applying 3DGS for spatial scans, CAD/BIM software cannot read raw Gaussian ellipsoids. This post details my C++ implementation of extracting OBJ meshes via TSDF and Marching Cubes.',
       content: `
-        <p>Traditional thermodynamics and lighting simulations demand massive CPU power. A tiny modification in structural massing forces designers to run hours-long radiation compute (e.g. EnergyPlus). **AI Surrogate Models** are modern game-changers.</p>
+        <p>While 3D Gaussian Splatting (3DGS) renders photoreal scenes beautifully, it is made of millions of semi-transparent gaussians. CAD/BIM software cannot edit these. **I developed an algorithm to extract clean polygon meshes from 3DGS scans.**</p>
         
-        <h3>1. What are AI Energy Surrogates?</h3>
-        <p>Instead of solving raw partial differential equations, we train neural networks to learn mappings from thousands of physical simulations. When building facades, window-to-wall ratios (WWR), or insulation values are altered, the AI infers annual HVAC loads and Daylight Factors in milliseconds, with >95% accuracy.</p>
+        <h3>1. The Reconstruction Workflow</h3>
+        <p>The processing pipeline consists of three core steps:</p>
+        <ul>
+          <li><strong>Point Pruning</strong>: Extract Gaussian centers and discard points with opacity values below custom thresholds.</li>
+          <li><strong>Implicit Surface Reconstruction</strong>: Project points into Truncated Signed Distance Fields (TSDF) voxels.</li>
+          <li><strong>Polygon Extraction</strong>: Run **Marching Cubes** to extract zero-level isosurfaces into triangular meshes.</li>
+        </ul>
 
-        <h3>2. Performance-Driven Generative Planning</h3>
-        <p>Using millisecond predictions, we embed energy audits directly into shape-generating loops. As our genetic algorithm tweaks building orientations, it estimates solar heat gains. If a massing triggers extreme summer cooling loads, the AI scores it down, optimizing building blocks dynamically.</p>
+        <h3>2. C++ Implementation</h3>
+        <p>I built this using C++ and Open3D. Marching Cubes runs fast on local CPUs, resolving interior boundaries in milliseconds.</p>
+        <pre><code>// C++ TSDF Mesh Extraction
+auto tsdf_volume = std::make_shared&lt;TSDFVolume&gt;(voxel_length, sdf_trunc);
+for (const auto& frame : camera_frames) {
+    tsdf_volume->Integrate(frame.depth, frame.color, frame.intrinsic, frame.extrinsic);
+}
+auto mesh = tsdf_volume->ExtractTriangleMesh();</code></pre>
+
+        <h3>3. Flattening for BIM</h3>
+        <p>Raw meshes are dense. I applied a **RANSAC planar-fitting** loop to merge triangles into flat plane walls, exporting neat standard IFC/BIM formats, completing purai.cc\'s scan-to-CAD pipeline.</p>
       `
     }
   }
@@ -487,12 +560,12 @@ class Typewriter {
 
 // --- 6. GLOBAL LANGUAGE STATE & I18N LOGIC ---
 
-let currentLang = localStorage.getItem('purai-lang') || (navigator.language.startsWith('zh') ? 'zh' : 'en');
+let currentLang = localStorage.getItem('ounc-lang') || (navigator.language.startsWith('zh') ? 'zh' : 'en');
 let typewriterInstance = null;
 
 function applyLanguage(lang) {
   currentLang = lang;
-  localStorage.setItem('purai-lang', lang);
+  localStorage.setItem('ounc-lang', lang);
 
   // Update HTML lang attribute
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
@@ -535,8 +608,8 @@ function applyLanguage(lang) {
 
   // Update Page Title
   document.title = lang === 'zh' 
-    ? 'purai · AI & Spatial Architecture | 用人工智能重构建筑设计' 
-    : 'purai · AI & Spatial Architecture | Reimagining Spatial Design with AI';
+    ? 'ounc · Tech Blog | 后端架构 · 空间计算 · AI 工程实践' 
+    : 'ounc · Tech Blog | Backend · Spatial AI · Systems';
 }
 
 // --- 7. RENDERERS: Blog & Projects ---
@@ -664,13 +737,13 @@ function renderComments() {
   const commentsList = document.getElementById('comments-list');
   if (!commentsList) return;
 
-  let comments = localStorage.getItem('purai-inquiries');
+  let comments = localStorage.getItem('ounc-guestbook');
   if (!comments) {
     const defaultComments = [
-      { nickname: '林阳设计事务所', content: TRANSLATIONS[currentLang]['comment-default-1'], date: '2026-07-28 10:24', isDefault: true },
-      { nickname: 'Matrix BIM Group', content: TRANSLATIONS[currentLang]['comment-default-2'], date: '2026-07-29 16:45', isDefault: true }
+      { nickname: 'GopherBoy', content: TRANSLATIONS[currentLang]['comment-default-1'], date: '2026-07-28 10:24', isDefault: true },
+      { nickname: 'ArchMaster', content: TRANSLATIONS[currentLang]['comment-default-2'], date: '2026-07-29 16:45', isDefault: true }
     ];
-    localStorage.setItem('purai-inquiries', JSON.stringify(defaultComments));
+    localStorage.setItem('ounc-guestbook', JSON.stringify(defaultComments));
     comments = JSON.stringify(defaultComments);
   }
 
@@ -678,27 +751,15 @@ function renderComments() {
   commentsList.innerHTML = list.map(c => {
     let displayContent = c.content;
     if (c.isDefault) {
-      displayContent = c.nickname.startsWith('林') || c.nickname.startsWith('L')
+      displayContent = c.nickname === 'GopherBoy' 
         ? TRANSLATIONS[currentLang]['comment-default-1']
         : TRANSLATIONS[currentLang]['comment-default-2'];
-    }
-
-    // Adapt nickname display to english if it's default
-    let displayNickname = c.nickname;
-    if (c.isDefault && currentLang === 'en') {
-      displayNickname = c.nickname.startsWith('林') 
-        ? 'Linyang Architecture Studio'
-        : 'Matrix BIM Group';
-    } else if (c.isDefault && currentLang === 'zh') {
-      displayNickname = c.nickname.startsWith('Mat') 
-        ? 'Matrix BIM 集团'
-        : '林阳设计事务所';
     }
 
     return `
       <div class="comment-item">
         <div class="comment-header">
-          <span class="comment-author">${escapeHtml(displayNickname)}</span>
+          <span class="comment-author">${escapeHtml(c.nickname)}</span>
           <span class="comment-date">${c.date}</span>
         </div>
         <div class="comment-text">${escapeHtml(displayContent)}</div>
@@ -734,9 +795,9 @@ function initGuestbook() {
 
     if (!newComment.nickname || !newComment.content) return;
 
-    const list = JSON.parse(localStorage.getItem('purai-inquiries') || '[]');
+    const list = JSON.parse(localStorage.getItem('ounc-guestbook') || '[]');
     list.push(newComment);
-    localStorage.setItem('purai-inquiries', JSON.stringify(list));
+    localStorage.setItem('ounc-guestbook', JSON.stringify(list));
 
     // Clear and render
     nicknameInput.value = '';
