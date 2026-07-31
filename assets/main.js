@@ -1,450 +1,329 @@
 /* ==========================================
-   ounc.github.io - Interactive Frontend Logic
+   purai.cc - Interactive Frontend Logic
    ========================================== */
 
 // --- 1. TRANSLATION DICTIONARY ---
 
 const TRANSLATIONS = {
   zh: {
-    'nav-blog': '博客',
-    'nav-projects': '项目',
-    'nav-about': '关于我',
-    'nav-guestbook': '留言板',
-    'hero-subtitle': 'Engineering the Future',
-    'hero-title-prefix': '构建高可用的',
-    'hero-title-gradient': '后端与 AI 系统',
-    'hero-btn-explore': '探索技术文章',
-    'hero-btn-projects': '查看我的项目',
-    'blog-tag': 'Read Articles',
-    'blog-title': '技术博客录',
+    'nav-products': '产品方案',
+    'nav-insights': '行业洞察',
+    'nav-about': '关于我们',
+    'nav-contact': '合作意向',
+    'hero-subtitle': 'Design the Unbuilt',
+    'hero-title-prefix': '人工智能重塑',
+    'hero-title-gradient': '建筑与空间设计',
+    'hero-btn-explore': '申请产品试用',
+    'hero-btn-projects': '提交商务合作',
+    'blog-tag': 'Insights',
+    'blog-title': '行业洞察与研究',
     'filter-all': '全部',
-    'filter-backend': '后端系统',
-    'filter-architecture': '系统架构',
-    'filter-ai': 'AI工程',
-    'projects-tag': 'Showcase',
-    'projects-title': '开源项目集',
-    'about-tag': 'About Me',
-    'about-title': '个人简介',
-    'about-intro': '我是 ounc，一名专注于后端高并发架构与 AI 落地的工程师。',
-    'about-p1': '在这里，我记录自己在分布式系统、微服务架构以及 AI 大模型应用落地中的实践经验。我相信好的架构应当像温润的清风，看似无形，却稳健地支撑着海量业务的发展。',
-    'about-p2': '除了敲代码，我也热衷于阅读经典系统源码、撰写技术深度解析，并在 GitHub 积极参与开源贡献。',
-    'about-github-btn': '在 GitHub 关注我',
-    'skill-backend': 'Go / Java (后端开发)',
-    'skill-distributed': 'Distributed Systems (分布式架构)',
-    'skill-ai': 'AI Engineering / LLM Ops (AI 应用落地)',
-    'skill-cloud': 'Kubernetes & Cloud Native (云原生)',
-    'guestbook-tag': 'Interactive',
-    'guestbook-title': '留言板',
-    'form-nickname': '昵称',
-    'form-content': '留言内容',
-    'form-submit': '发送留言',
-    'footer-feed': '网站订阅',
-    'footer-discussions': '讨论订阅',
-    'placeholder-nickname': '留下你的极客代号',
-    'placeholder-content': '写点什么吧... 支持 Markdown 符号哦',
-    'btn-read-more': '阅读全文',
-    'btn-project-code': '代码',
-    'btn-project-demo': '演示',
-    'comment-default-1': '网页排版真舒服，暖色调在冷冰冰的极客主页里确实有温度。催更你的 Raft 实践文！',
-    'comment-default-2': '对 Go 的 GC 分析很到位，我们线上也在通过微调 GOGC 缓解瞬间 STW，期待更多深度文章。'
+    'filter-backend': '生成式设计',
+    'filter-architecture': '空间智能',
+    'filter-ai': '行业生态',
+    'projects-tag': 'Solutions',
+    'projects-title': '产品与解决方案',
+    'about-tag': 'About Us',
+    'about-title': '关于普瑞智能',
+    'about-intro': '关于 purai',
+    'about-p1': '普瑞智能 (purai.cc) 是一家专注于将人工智能融入建筑设计与空间规划的科技创新企业。我们致力于打破传统设计流水线的效率壁垒，将生成式扩散模型、三维场景重建以及空间计算等前沿技术，无缝交付给全球的建筑师与设计师。',
+    'about-p2': '我们相信，AI 的角色不是取代灵感，而是消除繁琐的机械重复。通过自主研发的空间大模型，设计师可以在数秒内将草图渲染为高保真效果图，或基于复杂的地块限制进行最优空间布局规划，让设计的边界无限延伸。',
+    'about-github-btn': '在 GitHub 关注我们',
+    'skill-backend': 'Spatial AI & Image Generation (空间智能与渲染生成)',
+    'skill-distributed': '3D Scene Reconstruction (三维空间场景重建)',
+    'skill-ai': 'AI-Driven Layout Planning (智能空间布局规划)',
+    'skill-cloud': 'BIM & CAD Cloud Integration (BIM/CAD云端协同)',
+    'guestbook-tag': 'Inquiry',
+    'guestbook-title': '意向留言与商洽',
+    'form-nickname': '您的称呼 / 公司名称',
+    'form-content': '合作意向与需求描述',
+    'form-submit': '提交合作意向',
+    'footer-feed': '产品订阅',
+    'footer-discussions': '合作留言订阅',
+    'placeholder-nickname': '例如：普瑞建设 / 极客建筑师事务所',
+    'placeholder-content': '请描述您的合作意向或对我们 AI 工具的试用需求...',
+    'btn-read-more': '阅读详情',
+    'btn-project-code': '开源仓库',
+    'btn-project-demo': '产品演示',
+    'comment-default-1': 'purai Render 的渲染速度非常惊人，草图一键生成的建筑阴影和材质细节处理得非常合理，极大地缩短了我们前期方案的比选时间！',
+    'comment-default-2': '我们事务所近期在尝试将 CAD 图纸通过 Spatial3D 重建导入 BIM，空间识别率非常高，期待能和普瑞智能开展深度技术合作。'
   },
   en: {
-    'nav-blog': 'Blog',
-    'nav-projects': 'Projects',
-    'nav-about': 'About',
-    'nav-guestbook': 'Guestbook',
-    'hero-subtitle': 'Engineering the Future',
-    'hero-title-prefix': 'Building High-Availability',
-    'hero-title-gradient': 'Backend & AI Systems',
-    'hero-btn-explore': 'Explore Articles',
-    'hero-btn-projects': 'View Projects',
-    'blog-tag': 'Read Articles',
-    'blog-title': 'Technical Blog',
+    'nav-products': 'Products',
+    'nav-insights': 'Insights',
+    'nav-about': 'About Us',
+    'nav-contact': 'Inquiry',
+    'hero-subtitle': 'Design the Unbuilt',
+    'hero-title-prefix': 'Reimagining Architecture &',
+    'hero-title-gradient': 'Spatial Design with AI',
+    'hero-btn-explore': 'Request Free Trial',
+    'hero-btn-projects': 'Submit Partnership',
+    'blog-tag': 'Insights',
+    'blog-title': 'Industry Insights & Research',
     'filter-all': 'All',
-    'filter-backend': 'Backend',
-    'filter-architecture': 'Architecture',
-    'filter-ai': 'AI Engineering',
-    'projects-tag': 'Showcase',
-    'projects-title': 'Open Source Projects',
-    'about-tag': 'About Me',
-    'about-title': 'Profile',
-    'about-intro': 'I\'m ounc, a backend engineer focusing on high-concurrency architecture and AI system implementation.',
-    'about-p1': 'Here, I document my practical experience in distributed systems, microservice architectures, and LLM application deployments. I believe that good architecture is like a gentle breeze: invisible but firmly supporting massive business growth.',
-    'about-p2': 'Besides coding, I am passionate about reading classic system source codes, writing in-depth technical analyses, and actively contributing to open-source on GitHub.',
-    'about-github-btn': 'Follow me on GitHub',
-    'skill-backend': 'Go / Java (Backend Development)',
-    'skill-distributed': 'Distributed Systems',
-    'skill-ai': 'AI Engineering / LLM Ops',
-    'skill-cloud': 'Kubernetes & Cloud Native',
-    'guestbook-tag': 'Interactive',
-    'guestbook-title': 'Guestbook',
-    'form-nickname': 'Nickname',
-    'form-content': 'Message',
-    'form-submit': 'Send Message',
-    'footer-feed': 'Site Feed',
-    'footer-discussions': 'Discussions',
-    'placeholder-nickname': 'Your geek handle',
-    'placeholder-content': 'Write something... Supports Markdown formatting',
-    'btn-read-more': 'Read More',
-    'btn-project-code': 'Code',
-    'btn-project-demo': 'Demo',
-    'comment-default-1': 'The layout and custom sunset theme look absolutely stunning! Can\'t wait to read your next post on Raft implementation.',
-    'comment-default-2': 'Great deep-dive into Go GC tuning! We\'re adjusting GOGC ratios in our production API services to shave off latency spikes too. Looking forward to more posts.'
+    'filter-backend': 'Generative Design',
+    'filter-architecture': 'Spatial AI',
+    'filter-ai': 'PropTech Ecosystem',
+    'projects-tag': 'Solutions',
+    'projects-title': 'Products & Solutions',
+    'about-tag': 'About Us',
+    'about-title': 'About purai',
+    'about-intro': 'About purai',
+    'about-p1': 'purai (purai.cc) is a cutting-edge PropTech startup specializing in integrating Artificial Intelligence into architectural design and spatial planning. We break traditional workflow bottlenecks by delivering generative diffusion pipelines, 3D spatial reconstruction, and spatial computing to architects worldwide.',
+    'about-p2': 'We believe AI is built not to replace inspiration, but to automate repetition. Through our spatial models, architects convert hand sketches into high-fidelity renders in seconds or generate optimized layouts conforming to local zoning laws, infinitely extending the boundaries of creativity.',
+    'about-github-btn': 'Follow us on GitHub',
+    'skill-backend': 'Spatial AI & Image Generation',
+    'skill-distributed': '3D Scene Reconstruction',
+    'skill-ai': 'AI-Driven Layout Planning',
+    'skill-cloud': 'BIM & CAD Cloud Integration',
+    'guestbook-tag': 'Inquiry',
+    'guestbook-title': 'Business Inquiry',
+    'form-nickname': 'Your Name / Company Name',
+    'form-content': 'Inquiry / Requirements Description',
+    'form-submit': 'Submit Inquiry',
+    'footer-feed': 'Product Feed',
+    'footer-discussions': 'Inquiry Feed',
+    'placeholder-nickname': 'e.g., purai Construction / Geek Architects Ltd.',
+    'placeholder-content': 'Please describe your business inquiry or request for our AI design tools...',
+    'btn-read-more': 'Read Details',
+    'btn-project-code': 'GitHub Repo',
+    'btn-project-demo': 'Live Demo',
+    'comment-default-1': 'The rendering speed of purai Render is impressive. Generating materials and realistic shadows from a simple sketch saves us days during early bidding phases!',
+    'comment-default-2': 'Our firm tried uploading CAD drawings to Spatial3D for BIM reconstruction, and the spatial recognition rates were incredibly high. Looking forward to deepening our collaboration.'
   }
 };
 
 const TYPEWRITER_TEXTS = {
   zh: [
-    '关注后端分布式高并发系统设计。',
-    '实践前沿的大模型 AI 智能体工程调度。',
-    '追求极致的系统性能与云原生自动化架构。'
+    '一键将草图与线框图转化为写实建筑渲染图。',
+    '基于地块限制与日照分析自动规划最优空间户型。',
+    '使用空间智能，从全景照片一键重建 3D BIM 场景。'
   ],
   en: [
-    'Focusing on backend distributed high-concurrency system design.',
-    'Practicing cutting-edge LLM multi-agent orchestration scheduling.',
-    'Pursuing ultimate system performance and cloud-native automation.'
+    'Convert sketches & wireframes into photorealistic renders in seconds.',
+    'Auto-generate optimized floor plans conforming to zoning & sunlight.',
+    'Reconstruct 3D BIM models from 2D photos via spatial intelligence.'
   ]
 };
 
-// --- 2. BILINGUAL PROJECTS DATA ---
+// --- 2. BILINGUAL PRODUCTS DATA ---
 
 const PROJECTS = [
   {
-    id: 'gocache-sync',
-    icon: '💾',
-    github: 'https://github.com/ounc/gocache-sync',
+    id: 'purai-render',
+    icon: '🎨',
+    github: 'https://github.com/purai-cc/purai-render',
     demo: '#',
-    tech: ['Go', 'Raft', 'gRPC', 'Protobuf'],
+    tech: ['Diffusion Model', 'ControlNet', 'Stable Diffusion', 'GPU Edge'],
     zh: {
-      title: 'gocache-sync',
-      description: '使用 Go 编写的分布式一致性 KV 缓存。基于 Raft 协议实现高可用与强一致性，支持 LRU 淘汰机制与 HTTP/gRPC 双重协议接入。在弱网络环境下具备优秀的自动选主和数据恢复能力。'
+      title: 'purai Render (建筑智能渲染引擎)',
+      description: '一键将建筑手绘草图、CAD 线框图转化为高拟真的写实渲染图。内置写实、概念、水彩等十余种风格模板，支持日景、夜景、阴雨天等精细光影调节。'
     },
     en: {
-      title: 'gocache-sync',
-      description: 'A distributed consistent KV cache written in Go. Implements Raft consensus for high availability and strong consistency. Supports LRU eviction and HTTP/gRPC API. Resilient under network partition.'
+      title: 'purai Render (AI Rendering Engine)',
+      description: 'Converts hand sketches or CAD wireframes into high-fidelity photorealistic renders instantly. Features 10+ architectural styles and day/night lighting overrides.'
     }
   },
   {
-    id: 'llm-agent-orchestrator',
-    icon: '🤖',
-    github: 'https://github.com/ounc/llm-orchestrator',
+    id: 'purai-generator',
+    icon: '📐',
+    github: 'https://github.com/purai-cc/purai-plan-generator',
     demo: '#',
-    tech: ['Go', 'Python', 'LLM', 'Event-Driven'],
+    tech: ['Genetic Algorithm', 'Constraint Solving', 'CAD Engine', 'Python'],
     zh: {
-      title: 'llm-orchestrator',
-      description: '面向多 Agent 协同的微秒级任务分发与编排框架。基于协程并发模型和事件驱动架构，支持动态有向无环图 (DAG) 依赖解析，适用于大规模 AI Agent 自动化流水线。'
+      title: 'purai PlanGenerator (智能空间布局规划)',
+      description: '根据日照时间、地块红线、容积率及朝向限制，通过遗传算法自动计算生成最优的户型平面图与楼宇排布方案，极大地减少方案调整周期。'
     },
     en: {
-      title: 'llm-orchestrator',
-      description: 'A microsecond-latency task dispatching and orchestration framework for multi-agent workflows. Based on concurrent coroutines and event-driven architecture with dynamic DAG dependency resolving.'
+      title: 'purai PlanGenerator (Auto-Layout Planner)',
+      description: 'Calculates and generates optimized residential floor plans and building layouts based on specific sunlight requirements, zoning boundaries, and density limits.'
     }
   },
   {
-    id: 'fast-rpc',
-    icon: '⚡',
-    github: 'https://github.com/ounc/fast-rpc',
+    id: 'purai-spatial',
+    icon: '🧊',
+    github: 'https://github.com/purai-cc/purai-spatial3d',
     demo: '#',
-    tech: ['Java', 'Netty', 'ZooKeeper', 'Serialization'],
+    tech: ['Spatial Intelligence', 'NeRF / 3DGS', 'LiDAR Scan', 'C++'],
     zh: {
-      title: 'fast-rpc',
-      description: '基于 Netty 的高性能 RPC 框架。支持自定义二进制协议、基于 ZooKeeper 的服务注册与发现、一致性哈希负载均衡以及多轮编解码器，单机吞吐量达 10w+ QPS。'
+      title: 'purai Spatial3D (三维空间场景重建)',
+      description: '利用三维高斯泼溅 (3DGS) 及语义分割技术，从手机拍摄的全景视频或激光雷达点云中提取空间三维网格，一键转化为主流设计软件可编辑的标准 BIM 构件。'
     },
     en: {
-      title: 'fast-rpc',
-      description: 'A high-performance RPC framework built on Netty. Features custom binary protocols, ZooKeeper service discovery, consistent hashing load balancing, and custom codecs. Delivers 100k+ QPS.'
+      title: 'purai Spatial3D (3D Reconstruction System)',
+      description: 'Uses 3D Gaussian Splatting (3DGS) and computer vision to extract spatial meshes from mobile videos or scans, generating editable, standard BIM components.'
     }
   },
   {
-    id: 'prometheus-scaler',
-    icon: '☸️',
-    github: 'https://github.com/ounc/k8s-metrics-scaler',
+    id: 'purai-copilot',
+    icon: '💬',
+    github: 'https://github.com/purai-cc/purai-architect-copilot',
     demo: '#',
-    tech: ['Go', 'Kubernetes', 'Prometheus', 'Control-Loop'],
+    tech: ['LLM', 'RAG Engine', 'Vector DB', 'Zoning Code'],
     zh: {
-      title: 'k8s-metrics-scaler',
-      description: 'Kubernetes 自定义指标自动弹性伸缩控制器。订阅 Prometheus 的慢 SQL 或队列积压指标，支持基于线性回归预测的超前扩容，避免突发流量下的系统雪崩。'
+      title: 'purai Copilot (建筑师智能助理)',
+      description: '基于大语言模型的建筑智能顾问。输入自然语言即可秒级检索全国复杂的地方建筑设计规范、消防通则，并智能推荐合规的节能低碳绿色建材。'
     },
     en: {
-      title: 'k8s-metrics-scaler',
-      description: 'A Kubernetes custom metrics autoscaler controller. Subscribes to Prometheus queue lag or slow query rates and applies linear regression models to auto-scale preemptively.'
+      title: 'purai Copilot (AI Architect Assistant)',
+      description: 'An LLM-based assistant that queries complex building codes, zoning regulations, and fire codes, recommending eligible green and low-carbon construction materials.'
     }
   }
 ];
 
-// --- 3. BILINGUAL BLOG POSTS DATA ---
+// --- 3. BILINGUAL INSIGHTS DATA ---
 
 const BLOG_POSTS = [
   {
-    id: 'go-gc-tuning',
-    category: 'backend',
-    date: '2026-07-15',
+    id: 'facade-ai',
+    category: 'ai-design',
+    date: '2026-07-28',
     zh: {
-      title: '深入浅出 Go 垃圾回收与内存分配器调优',
-      categoryName: '后端系统',
-      description: '本文深入拆解了 Go 运行时基于三色标记法的并发垃圾回收机制，并结合生产环境中遇到的 Stop-The-World (STW) 延迟抖动问题，分享了 GOGC 调优与内存对齐的实战经验。',
+      title: '生成式 AI 在现代建筑立面设计中的应用实践',
+      categoryName: '生成式设计',
+      description: '探索基于 Stable Diffusion 和 ControlNet 的条件图像生成技术，在幕墙设计阶段从体块草图直接生成多方案立面纹理与材质配色的工程工作流。',
       content: `
-        <p>Go 语言的并发垃圾回收器（Garbage Collector）经历了多次重大迭代，当前基于<strong>无分代、并发、三色标记清除</strong>算法。由于其设计高度简化，许多开发者在编写高性能代码时常常忽略其底层的资源开销。本文将通过理论与线上案例，探讨 Go 内存分配与 GC 调优。</p>
+        <p>建筑立面设计是表达建筑美感与技术性的关键环节，传统的幕墙立面比选需要建模、打光、材质贴图以及数小时的漫长渲染。<strong>生成式 AI 正在打破这一繁杂工作流</strong>，将概念设计时间缩短至秒级。</p>
         
-        <h3>一、Go 内存分配机制：TCMalloc 变体</h3>
-        <p>Go 的内存分配器设计直接借鉴了 TCMalloc 的多级缓存思想。分配器将对象按大小分为三类：</p>
+        <h3>一、立面条件生成的控制瓶颈</h3>
+        <p>在直接将 Diffusion 模型应用于立面设计时，通常面临两大难题：</p>
         <ul>
-          <li><strong>微小对象 (Tiny, < 16B)</strong>：使用 tiny allocator 合并分配在同一个 16B 的内存块中。</li>
-          <li><strong>小对象 (Small, 16B ~ 32KB)</strong>：分配在对应的 mspan 规格链表上。每个 P（处理器）绑定了本地 mcache，无锁分配，性能极高。</li>
-          <li><strong>大对象 (Large, > 32KB)</strong>：直接绕过多级缓存，在 mheap 上进行大页级分配。</li>
+          <li><strong>结构失真</strong>：建筑结构具有严苛的物理对齐特征。单纯通过 Prompt 生成图像常会导致外轮廓扭曲、窗缝歪斜。</li>
+          <li><strong>材质模糊</strong>：生成的玻璃、金属板纹理缺乏物理厚度与精确的高光反馈，无法用于方案决策。</li>
         </ul>
+
+        <h3>二、基于 ControlNet + 提示词权重的完美解法</h3>
+        <p>为了获得高可控度的立面生成，我们构建了以下工程管道：</p>
+        <ol>
+          <li><strong>深度图与边缘线（Lineart）提取</strong>：从三维软件（如 Rhino/SketchUp）导出立面体块图，使用 Canny 或 Lineart 算法提取控制线稿。</li>
+          <li><strong>多网络并联控制</strong>：在 ControlNet 中并联加载线稿模型（控制宏观结构）与深度模型（控制遮阳格栅、窗洞凹凸的深度层级）。</li>
+          <li><strong>风格权重调优</strong>：在主模型中融合建筑学经典摄影语义（例如 “minimalist, curtain wall glass, dynamic parametric paneling, architectural photography, Hasselblad”），并使用负向提示词屏蔽非理性构件。</li>
+        </ol>
         <blockquote>
-          <p><strong>避坑指南：</strong> 在高并发场景下，避免频繁申请大对象。这不仅会导致 mcache 锁竞争转移到 mheap，还会触发 Go 运行时的主动 GC 协助（Mark Assist），拉高请求响应时长。</p>
+          <p><strong>实战成果：</strong> 配合我们的渲染引擎，设计师只需绘制一张铅笔线条的结构草图，就可以在一分钟内并行产出 10 套包含了金属格栅、通高玻璃幕墙等不同参数化质感的立面方案大图。</p>
         </blockquote>
 
-        <h3>二、三色标记与写屏障</h3>
-        <p>Go 使用三色标记法实现并发标记：</p>
-        <pre><code>// 标记过程示意
-1. 白色：未搜索的对象（垃圾回收开始时全部为白色）
-2. 灰色：已搜索但其引用的对象未搜索（等待入队）
-3. 黑色：已搜索且其引用的对象也已搜索（活跃对象）</code></pre>
-        <p>为了保证并发标记的正确性，Go 在编译期插入了<strong>混合写屏障 (Hybrid Write Barrier)</strong>。写屏障的作用是拦截指针修改，确保黑色对象不会指向白色对象，除非该白色对象被标记为灰色。写屏障的启用会导致 CPU 额外的指令开销，但在标记阶段这是为了极短 STW 所必须做出的权衡。</p>
-
-        <h3>三、生产环境 GC 调优技巧</h3>
-        <p>在线上高吞吐量 API 服务中，我们遇到了 GC 占用了 15% CPU 时间的问题。通过以下两个步骤，我们成功将其降至 3% 以下：</p>
-        <ol>
-          <li><strong>调整 GOGC 参数</strong>：GOGC 控制着下一次 GC 触发的堆增长比例，默认是 100%。我们将其调整为 200~300%，合理利用容器充裕的空闲物理内存，显著降低了 GC 频次。</li>
-          <li><strong>使用 sync.Pool 复用临时对象</strong>：通过 pool 复用频繁创建的 JSON 序列化 Context 和 byte 数组，极大减少了逃逸到堆上的对象数量，减轻标记压力。</li>
-        </ol>
-        <p>总结来说，优化 Go 内存性能的核心法则是：<strong>尽量在栈上分配，减少指针逃逸，充分复用堆内存，合理调配 GOGC 参数。</strong></p>
+        <h3>三、结语</h3>
+        <p>生成式 AI 的使命不是代替建筑师画施工图，而是将前期的创意头脑风暴放大百倍。通过人机协同，未来的建筑外立面可以拥有更强的参数化细节与环境适应力。</p>
       `
     },
     en: {
-      title: 'Deep Dive into Go GC and Memory Allocator Tuning',
-      categoryName: 'Backend Systems',
-      description: 'An in-depth breakdown of Go runtimes concurrent tricolor marking GC mechanism, combined with production Stop-The-World (STW) latency tuning and memory alignment practices.',
+      title: 'Generative AI Applications in Modern Architectural Facade Design',
+      categoryName: 'Generative Design',
+      description: 'Explore the conditional image generation pipeline using Stable Diffusion and ControlNet to render complex facade textures and materials from volumetric massing models.',
       content: `
-        <p>The concurrent Garbage Collector (GC) in Go has undergone significant updates. Today, it is built on a <strong>non-generational, concurrent, tricolor mark-and-sweep</strong> algorithm. Because of its automated simplicity, developers often ignore the underlying allocations. This post explores Go memory and GC tuning with production use cases.</p>
+        <p>Architectural facade design is critical for aesthetics and engineering. Traditional facade options require modeling, texturing, lighting, and hours of rendering. <strong>Generative AI is bypassing this heavy workflow</strong>, cutting concept iterations down to seconds.</p>
         
-        <h3>1. Go Memory Allocation: A TCMalloc Variant</h3>
-        <p>Go memory allocator mimics TCMalloc multi-level cache principles. Objects are categorized into three sizes:</p>
+        <h3>1. The Bottlenecks of Facade Generative Control</h3>
+        <p>When directly using diffusion models for facade rendering, architects face two major issues:</p>
         <ul>
-          <li><strong>Tiny Objects (< 16B)</strong>: Bundled and allocated in a single 16B block by the tiny allocator.</li>
-          <li><strong>Small Objects (16B ~ 32KB)</strong>: Allocated onto corresponding size-class mspans. Each processor (P) holds a local thread-safe mcache.</li>
-          <li><strong>Large Objects (> 32KB)</strong>: Bypass local caches and are allocated directly on the mheap.</li>
+          <li><strong>Structural Distortion</strong>: Buildings demand strict alignments. Naive prompts result in curved structural grids and distorted windows.</li>
+          <li><strong>Unrealistic Materials</strong>: Generated glass and metal panels lack physical thickness and correct reflection properties.</li>
         </ul>
+
+        <h3>2. Solving via ControlNet & Conditional Multi-Pipelining</h3>
+        <p>To acquire highly controllable facade renderings, we built the following pipeline:</p>
+        <ol>
+          <li><strong>Lineart and Depth Extraction</strong>: Export structural wireframes from CAD/Rhino, and run Canny or Lineart edge extraction.</li>
+          <li><strong>Parallel Network Control</strong>: Load structural lineart to lock global framing, concurrently utilizing depth controls to parse louvers and window extrusions.</li>
+          <li><strong>Textual Prompts Tuning</strong>: Feed architectural photography tags (e.g. "parametric facade, aluminum paneling, clear low-E glass, architectural photography") and negative prompts to rule out illogical artifacts.</li>
+        </ol>
         <blockquote>
-          <p><strong>Anti-pattern:</strong> Avoid allocating large objects in hot code paths. This bypasses thread-local caches, shifts lock contention to the mheap, and triggers runtime Assist Mark, increasing request latency.</p>
+          <p><strong>Result:</strong> By drawing a simple pencil sketch, designers generate 10 high-fidelity variants of aluminum parametric grids and curtain-wall skins in under a minute.</p>
         </blockquote>
 
-        <h3>2. Tricolor Marking & Write Barrier</h3>
-        <p>Go uses a tricolor marking scheme during concurrent execution:</p>
-        <pre><code>// Marking Phases
-1. White: Unvisited objects (candidates for GC)
-2. Grey: Visited objects whose references are not yet searched
-3. Black: Visited objects with all references searched (retained)</code></pre>
-        <p>To preserve accuracy during concurrent scanning, Go uses a <strong>Hybrid Write Barrier</strong>. It intercepts pointer changes to ensure black objects do not point to white objects unless shaded grey. Although write barriers introduce small CPU instruction overheads, they are vital to achieving sub-millisecond STW pauses.</p>
-
-        <h3>3. Production Tuning Strategies</h3>
-        <p>In our high-throughput API services, GC overhead accounted for 15% of total CPU time. We reduced it to less than 3% via:</p>
-        <ol>
-          <li><strong>Tuning GOGC ratio</strong>: The GOGC variable decides heap growth triggers (default 100). We raised GOGC to 200~300% to leverage container RAM headroom and lower GC cycles.</li>
-          <li><strong>Object Pools (sync.Pool)</strong>: Reusing transient structs, byte buffers, and JSON contexts mitigated heap escape, scaling down memory allocator pressures.</li>
-        </ol>
-        <p>In short, the golden rules for Go memory performance are: <strong>stack-allocate when possible, limit pointer escapes, reuse heap memories, and tune GOGC variables wisely.</strong></p>
+        <h3>3. Summary</h3>
+        <p>Generative AI is not designed to replace architects, but to supercharge concepts. Man-machine synergy enables facades with deeper detailing and environmental performance.</p>
       `
     }
   },
   {
-    id: 'agent-orch-engine',
-    category: 'ai',
-    date: '2026-06-28',
+    id: 'spatial-llm-interior',
+    category: 'spatial-llm',
+    date: '2026-06-12',
     zh: {
-      title: '构建微秒级 LLM 智能体编排引擎的工程挑战',
-      categoryName: 'AI工程',
-      description: '在大模型多 Agent 协同链路中，延迟是制约体验的致命瓶颈。本文分享了我们如何采用事件驱动架构和并发依赖解析算法，将 Agent 调度框架的调度开销压降到微秒级的工程实践。',
+      title: '空间大模型 (Spatial LLM) 在室内空间智能规划中的落地探索',
+      categoryName: '空间智能',
+      description: '大模型不仅能读懂文本，还能理解空间。本文探讨普瑞智能如何构建轻量级空间边界表示算法，将三维空间坐标映射为 LLM 向量，从而实现自动户型诊断与家具软装智能排布。',
       content: `
-        <p>随着 AI 应用从简单的“单轮问答”走向“自主编排与复杂推理”，多 Agent 协同系统正逐渐成为核心交付模式。然而，由于绝大部分开源框架偏向 Python 脚本化生态，在面临高并发、低延迟的工业级场景时，调度框架本身的开销往往高达数百毫秒。</p>
+        <p>传统大语言模型（LLM）擅长逻辑与符号推导，但无法感知物理空间。要实现真正的智能空间规划，必须解决<strong>“大模型如何理解三维几何与距离约束”</strong>的问题。我们在 purai-generator 的研发中开展了探索。</p>
         
-        <h3>一、Python 调度引擎的瓶颈</h3>
-        <p>很多开源编排框架的底层实现采用了同步阻塞或低效率的进程/线程模型，主要瓶颈体现在：</p>
+        <h3>一、空间边界的向量化编码 (Spatial Tokenization)</h3>
+        <p>为了让 LLM 能够处理空间排布，我们采用三维网格（3D Grids）与图表示（Graph Representation）对室内格局进行编码：</p>
         <ul>
-          <li><strong>Python GIL（全局解释器锁）</strong>限制了多线程在 CPU 密集任务中的并行能力。</li>
-          <li><strong>链式调度延迟</strong>：各 Agent 节点串行执行，缺少细粒度的 DAG（有向无环图）依赖并行计算能力。</li>
-          <li><strong>上下文传递开销</strong>：Agent 之间的状态交换通过重型的数据库同步读写，导致网络 I/O 耗时高。</li>
+          <li>将房间划分成细颗粒度的体素（Voxels），每个障碍物、门窗、柱体用一个三维边界坐标包围盒（AABB Bounding Box）表示。</li>
+          <li>把建筑动线（Circulation）和采光要求建模为拓扑图中的边（Edges），例如 “卧室 -> 必须直达 -> 独立卫浴”、“沙发 -> 必须面对 -> 电视背景墙”。</li>
         </ul>
 
-        <h3>二、基于 Go 的微秒级调度引擎设计要点</h3>
-        <p>为了解决高延迟，我们用 <strong>Go 语言</strong> 重构了 Agent 编排调度核心：</p>
-        
-        <h4>1. 基于无锁信道与协程模型的事件总线</h4>
-        <p>Agent 之间的交互被建模为生产-消费队列。采用无锁环形缓冲区（Lock-free Ring Buffer）处理 Agent 产生的中间状态事件，将线程切换和锁的争用限制在极小范围内。</p>
+        <h3>二、基于空间约束的网络优化</h3>
+        <p>我们将上述编码拼接进 prompt，利用专门经过空间拓扑对齐微调的开源底模进行布局推荐。模型会返回一组建议的三维物体坐标点。最后，通过传统的<strong>约束求解器 (Constraint Solver)</strong> 对物体坐标进行物理碰撞微调，避免软装穿墙或阻挡走道。</p>
+        <pre><code>// 拓扑图依赖示例
+Room: LivingRoom
+Constraint 1: Sofa facing TV-Wall, distance [2.5m, 4.0m]
+Constraint 2: CoffeeTable between Sofa and TV-Wall
+Constraint 3: Free passage width >= 0.9m</code></pre>
 
-        <h4>2. 动态 DAG 拓扑分析与并行执行</h4>
-        <p>在任务分发前，引擎将任务解析为一棵 DAG 依赖树。对于没有前置依赖的 Agent 节点，引擎采用 Goroutine 并行拉起，实现最大化物理并发。当某个 Agent 计算完毕后，立即向下游发送完成信号，解除依赖。</p>
-        
-        <pre><code>// Go 协程调度
-func (engine *Orchestrator) executeNode(node *DAGNode) {
-    node.WaitForDependencies()
-    result := node.Agent.Run(node.Context)
-    node.NotifySuccessors(result)
-}</code></pre>
-
-        <h3>三、重构收益</h3>
-        <p>通过用 Go 和内存态状态机重构编排层，框架本身的平均调度开销从 <strong>320ms 降至 0.8ms (800微秒)</strong>。这保证了在面对 LLM 极快的流式输出时，调度引擎不会成为阻碍瓶颈。</p>
+        <h3>三、商业价值</h3>
+        <p>该技术使普通用户可以仅用日常语言说出：“我需要一个能容纳三口之家、兼顾安静书房区和充足采光的客厅布局”，系统即可在 2 秒内输出符合人体工学与物理约束的三维设计模型，极大地降低了定制家居与精装房的设计门槛。</p>
       `
     },
     en: {
-      title: 'Engineering Challenges of Building a Microsecond-Latency LLM Agent Orchestrator',
-      categoryName: 'AI Engineering',
-      description: 'Latency is a massive bottleneck in multi-agent workflows. This article details how we designed an event-driven scheduler with concurrent DAG execution to lower dispatching overhead to microseconds.',
+      title: 'Spatial LLM Implementations in Intelligent Interior Layout Planning',
+      categoryName: 'Spatial AI',
+      description: 'How to map 3D spatial boundary matrices into LLM tokens, achieving automatic floorplan auditing and ergonomic furniture layout suggestions.',
       content: `
-        <p>As AI applications shift from single-turn chat to autonomous multi-agent reasoning, orchestrators become critical. However, most open-source frameworks are built on synchronous Python runtimes, generating scheduling latency overheads of hundreds of milliseconds.</p>
+        <p>Traditional Large Language Models (LLMs) are great at text but blind to physical spaces. To build smart layout planners, we must resolve <strong>"how to make LLMs understand 3D geometry and distance constraints"</strong>. We developed solutions inside purai-generator.</p>
         
-        <h3>1. Why Python Schedulers Suffer from Latency</h3>
-        <p>Python-based orchestrator engines face structural limitations under high-concurrency loads:</p>
+        <h3>1. Spatial Tokenization</h3>
+        <p>We encode indoor layouts using voxel subdivisions and topological graph representations:</p>
         <ul>
-          <li><strong>GIL (Global Interpreter Lock)</strong> blocks multi-threaded CPU-heavy task execution.</li>
-          <li><strong>Sequential Processing</strong>: Agents execute serially without native DAG parallel dependency resolving.</li>
-          <li><strong>Heavy State Transfers</strong>: Inter-agent state exchange relies on standard DB synchronous I/O, adding network latency.</li>
+          <li>Rooms are divided into fine-grained voxels. Walls, columns, windows, and doors are modeled as Axis-Aligned Bounding Boxes (AABB).</li>
+          <li>Circulations and lighting rules are modeled as graph edges (e.g. "Bedroom -> direct access -> Bathroom", "Sofa -> face -> TV-wall").</li>
         </ul>
 
-        <h3>2. Microsecond-Latency Orchestration Design in Go</h3>
-        <p>To eliminate framework dispatch overheads, we rebuilt the scheduler core using <strong>Go</strong>:</p>
-        
-        <h4>A. Lock-Free Event Bus</h4>
-        <p>Inter-agent interactions are modeled as ring-buffered events. Utilizing lock-free ring buffers, we avoid context-switching overheads and thread contention.</p>
+        <h3>2. Integrating Constraint Solvers</h3>
+        <p>The topological inputs are fed to a fine-tuned spatial LLM, which outputs proposed 3D coordinate boxes. We then pass coordinates through a **deterministic Constraint Solver** to prevent collisions, wall-clippings, or corridor blocks.</p>
+        <pre><code>// Topological constraint model
+Room: LivingRoom
+Constraint 1: Sofa facing TV-Wall, distance [2.5m, 4.0m]
+Constraint 2: CoffeeTable between Sofa and TV-Wall
+Constraint 3: Free passage width >= 0.9m</code></pre>
 
-        <h4>B. Concurrent DAG Task Resolving</h4>
-        <p>Before dispatching, the engine constructs a Directed Acyclic Graph (DAG). Zero-dependency nodes are launched concurrently using lightweight Goroutines. Once a node completes, it signals and triggers downstream nodes immediately.</p>
-        
-        <pre><code>// Goroutine dispatch pseudo-code
-func (engine *Orchestrator) executeNode(node *DAGNode) {
-    node.WaitForDependencies()
-    result := node.Agent.Run(node.Context)
-    node.NotifySuccessors(result)
-}</code></pre>
-
-        <h3>3. Results and Takeaways</h3>
-        <p>Rebuilding the orchestrator with Go and in-memory state machines slashed scheduling overhead from <strong>320ms to 0.8ms (800µs)</strong>. This guarantees the orchestrator does not block real-time agent output.</p>
+        <h3>3. Commercial Impact</h3>
+        <p>This enables users to input natural sentences: "Generate a layout for a family of three, prioritizing a quiet study corner and high solar exposure." In 2 seconds, the engine generates an ergonomic, physically validated 3D layout.</p>
       `
     }
   },
   {
-    id: 'raft-kv-database',
-    category: 'architecture',
-    date: '2026-05-18',
+    id: 'proptech-trends',
+    category: 'proptech',
+    date: '2026-05-02',
     zh: {
-      title: '基于 Raft 共识协议的分布式 Key-Value 数据库设计与实现',
-      categoryName: '系统架构',
-      description: '在分布式一致性领域，Raft 几乎成了高可用的代名词。本文从零开始实现一个 Raft 一致性算法模块，探讨分布式数据库在面对网络分区、脑裂和日志压缩时的应对策略。',
+      title: '绿色低碳建筑：基于 AI 的光照与能耗模拟优化',
+      categoryName: '行业生态',
+      description: '应对全球低碳环保趋势，普瑞智能分析了如何结合快速代理模型 (Surrogate Model) 与 AI，将传统需要耗时数小时的日照折射与空调节能热工分析降至毫秒级，实现辅助建筑设计优化。',
       content: `
-        <p>在设计分布式后端系统时，保证数据一致性与可用性是重要命题。本文将回顾我们从零实现分布式缓存 gocache-sync 时所依赖的核心协议——<strong>Raft 共识算法</strong>。</p>
+        <p>传统建筑热力学和光照分析需要极高的算力，设计方案微小的改动就需要重新运行复杂的流体与辐射模拟（如 EnergyPlus 或 Radiance）。<strong>AI 代理模型 (Surrogate Models)</strong> 的出现，彻底改变了耗时的能耗评估工作流。</p>
         
-        <h3>一、Raft 核心状态机划分</h3>
-        <p>Raft 协议将复杂的共识问题拆解为：<strong>领导者选举</strong>、<strong>日志复制</strong> 和 <strong>安全性</strong>。节点在运行期处于以下三者之一的身份：</p>
-        <ul>
-          <li><strong>Leader</strong>：接收写请求，并同步日志给 Follower。</li>
-          <li><strong>Follower</strong>：被动接收 Leader 的日志和心跳，超时则转为 Candidate。</li>
-          <li><strong>Candidate</strong>：主动发起投票，争取成为新的 Leader。</li>
-        </ul>
-        <blockquote>
-          <p><strong>核心精髓：</strong> 节点间的随机化心跳超时时间是防止“选票分裂”的巧妙设计。一般设在 150ms ~ 300ms 之间。</p>
-        </blockquote>
+        <h3>一、什么是 AI 能耗代理模型</h3>
+        <p>能耗代理模型并不是做真正的物理热传导计算，而是利用神经网络学习数万个历史物理模拟案例的“输入-输出”映射。当设计师修改窗墙比（WWR）、隔热材质或阳台挑檐宽度时，AI 可以在毫秒级内“预估”出全年的空调节能表现和日照系数（Daylight Factor），准确率高达 95% 以上。</p>
 
-        <h3>二、网络分区的脑裂挑战</h3>
-        <p>当网络发生物理分区时，会出现脑裂：</p>
-        <pre><code>[Client] -> (Leader A, Follower B)  // 分区一：无法达成多数派写入
---- 网络断开 ---
-(Candidate C, Follower D, Follower E) // 分区二：选出新 Leader C</code></pre>
-        <p>在此状态下，分区一 Leader A 因为无法满足“过半数确认”，所有写入都会失败。分区二选出新 Leader C 并正常服务。网络恢复后，Leader A 收到 Term 更高的 Leader C 心跳，自动降级为 Follower，并同步最新的日志，优雅解决脑裂。</p>
-
-        <h3>三、日志压缩快照</h3>
-        <p>我们实现了快照压缩机制以解决日志膨胀问题：</p>
-        <ol>
-          <li>当日志达到阈值（如 64MB），将内存 KV 数据序列化为快照文件。</li>
-          <li>截断快照之前的日志项。</li>
-          <li>落后太多的 Follower 会直接通过 InstallSnapshot RPC 接收整份快照。</li>
-        </ol>
-        <p>这些设计保证了系统在网络丢包、机器宕机等极端情况下的数据安全和自我修复能力。</p>
+        <h3>二、在方案初期实现“性能导向设计”</h3>
+        <p>借助快速预测能力，我们将能耗预测直接嵌入到建筑形体的生成式算法（即 purai PlanGenerator）中。算法在生成大楼朝向与高度时，会自动计算太阳辐射热增益。若某一个体块排布会导致强烈的西晒和空调能耗暴增，AI 会自动施加惩罚函数并旋转体块，最终帮助建筑师在创意初期就筛选出最具绿色低碳基因的建筑方案。</p>
       `
     },
     en: {
-      title: 'Design and Implementation of a Distributed Key-Value Database Based on Raft',
-      categoryName: 'System Architecture',
-      description: 'Raft has become synonymous with high availability in distributed systems. This article details building a Raft consensus module from scratch and tackling network partitioning, split-brain, and compaction.',
+      title: 'Green Architecture: AI-Driven Daylight and Thermal Energy Simulation',
+      categoryName: 'PropTech Ecosystem',
+      description: 'Using deep surrogate neural networks to reduce traditional hours-long thermal heat gains and daylight simulations to milliseconds, driving sustainable architecture.',
       content: `
-        <p>Building high-availability distributed systems demands bulletproof consensus algorithms. This post reviews the <strong>Raft consensus algorithm</strong> developed for our distributed cache, gocache-sync.</p>
+        <p>Traditional thermodynamics and lighting simulations demand massive CPU power. A tiny modification in structural massing forces designers to run hours-long radiation compute (e.g. EnergyPlus). **AI Surrogate Models** are modern game-changers.</p>
         
-        <h3>1. Raft Roles & States</h3>
-        <p>Raft splits consensus into three sub-problems: <strong>Leader Election</strong>, <strong>Log Replication</strong>, and <strong>Safety</strong>. Nodes transition between three roles:</p>
-        <ul>
-          <li><strong>Leader</strong>: Handles client writes and replicates log entries to Followers.</li>
-          <li><strong>Follower</strong>: Remains passive, responding to heartbeat and replication RPCs.</li>
-          <li><strong>Candidate</strong>: Incites votes to elect a new Leader.</li>
-        </ul>
-        <blockquote>
-          <p><strong>Design Tip:</strong> Randomized election timeout is the key to preventing split votes. Values are set between 150ms and 300ms.</p>
-        </blockquote>
+        <h3>1. What are AI Energy Surrogates?</h3>
+        <p>Instead of solving raw partial differential equations, we train neural networks to learn mappings from thousands of physical simulations. When building facades, window-to-wall ratios (WWR), or insulation values are altered, the AI infers annual HVAC loads and Daylight Factors in milliseconds, with >95% accuracy.</p>
 
-        <h3>2. Network Partition & Split-Brain</h3>
-        <p>When a network partition splits a 5-node cluster into two segments:</p>
-        <pre><code>[Client] -> (Leader A, Follower B)  // Partition 1: Cannot commit writes (No Majority)
---- Network Split ---
-(Candidate C, Follower D, Follower E) // Partition 2: Elects new Leader C (Majority = 3)</code></pre>
-        <p>Writes to Partition 1 fail because Leader A cannot gather a majority quorum (>=3). Meanwhile, Partition 2 processes writes under C. When network heals, Leader A steps down upon seeing C's higher term, overwriting uncommitted logs.</p>
-
-        <h3>3. Log Compaction and Snapshotting</h3>
-        <p>To avoid infinite disk write-ahead log (WAL) growth, we implemented log compaction:</p>
-        <ol>
-          <li>Upon reaching size limits (e.g. 64MB), memory states are flushed into snapshot files.</li>
-          <li>Pre-snapshot log history is pruned.</li>
-          <li>Slow followers catch up using the InstallSnapshot RPC.</li>
-        </ol>
-        <p>This implementation ensures zero data loss and automated recovery under unexpected machine failures.</p>
-      `
-    }
-  },
-  {
-    id: 'k8s-canary-release',
-    category: 'architecture',
-    date: '2026-04-05',
-    zh: {
-      title: '云原生环境下的全链路灰度发布方案设计',
-      categoryName: '系统架构',
-      description: '在微服务架构中，一次迭代往往涉及上下游多个服务。如何在不影响线上的情况下实现端到端的一键灰度？本文提供了一套结合 Service Mesh 和 HTTP Header 传递的端到端灰度架构设计。',
-      content: `
-        <p>在以 Kubernetes + Envoy 为核心的分布式微服务架构下，调用链错综复杂。仅在网关处做分流远远不够，我们需要的是<strong>全链路灰度</strong>。</p>
-        
-        <h3>一、设计诉求</h3>
-        <p>当用户发起请求时，网关根据请求特征给流量打标（如 <code>x-gray-tag: v2</code>）。该标记需要在后续的 RPC、HTTP 中透传，确保流量精准命中各微服务的灰度版本。</p>
-
-        <h3>二、基于 Service Mesh 实现</h3>
-        <p>我们采用 <strong>Istio + Envoy</strong> 服务网格方案以避免业务代码入侵：</p>
-        <ul>
-          <li><strong>Envoy</strong> 作为 Sidecar 拦截容器流量并进行转发。</li>
-          <li><strong>Istio</strong> 负责下发 VirtualService 与 DestinationRule。</li>
-        </ul>
-        <p>部署配置划分为 <code>stable</code> 和 <code>canary</code> 两个子集。VirtualService 通过匹配 HTTP Header 的特定属性进行按需分发。</p>
-
-        <h3>三、上下文透传挑战</h3>
-        <p>虽然 Envoy 承担了路由转发，但如果是跨进程或协程异步调用，底层的 trace header 仍需透传。我们在 Go 中封装了 context 拦截器，自动读取当前 context 绑定的灰度标签，并在发起网络请求时追加至新的 header 中，从而在无侵入下实现了高可靠性的灰度流水线。</p>
-      `
-    },
-    en: {
-      title: 'Design of a Full-Link Canary Release Architecture in Cloud-Native Environments',
-      categoryName: 'System Architecture',
-      description: 'In complex microservice architectures, an iteration often spans multiple services. This post explains an end-to-end canary routing scheme using Service Mesh and custom HTTP Header propagation.',
-      content: `
-        <p>In distributed microservice networks powered by Kubernetes, requests flow through chains of microservices. Merely splitting traffic at the API gateway is insufficient; we need <strong>end-to-end canary propagation</strong>.</p>
-        
-        <h3>1. Core Objectives</h3>
-        <p>When a request hits the gateway, it tags the traffic with custom labels (e.g. <code>x-gray-tag: v2</code>). This label must propagate downstream through nested HTTP and RPC calls, directing traffic to correct versions.</p>
-
-        <h3>2. Leveraging Service Mesh (Istio/Envoy)</h3>
-        <p>To avoid hard-coding routing logic, we used <strong>Istio + Envoy Service Mesh</strong>:</p>
-        <ul>
-          <li><strong>Envoy Proxy Sidecars</strong> intercept container ingress/egress.</li>
-          <li><strong>Istio Control Plane</strong> distributes VirtualService routing instructions.</li>
-        </ul>
-        <p>Microservice Deployments are split into <code>stable</code> and <code>canary</code> subsets. The VirtualService routes matching traffic to the canary subset accordingly.</p>
-
-        <h3>3. Context Propagation Challenges</h3>
-        <p>Although Envoy handles traffic routing, code execution across goroutines requires propagation. In Go, we wrapped request Contexts with middleware that extracts canary headers and appends them to outgoing requests, ensuring seamless canary execution.</p>
+        <h3>2. Performance-Driven Generative Planning</h3>
+        <p>Using millisecond predictions, we embed energy audits directly into shape-generating loops. As our genetic algorithm tweaks building orientations, it estimates solar heat gains. If a massing triggers extreme summer cooling loads, the AI scores it down, optimizing building blocks dynamically.</p>
       `
     }
   }
@@ -608,12 +487,12 @@ class Typewriter {
 
 // --- 6. GLOBAL LANGUAGE STATE & I18N LOGIC ---
 
-let currentLang = localStorage.getItem('ounc-lang') || (navigator.language.startsWith('zh') ? 'zh' : 'en');
+let currentLang = localStorage.getItem('purai-lang') || (navigator.language.startsWith('zh') ? 'zh' : 'en');
 let typewriterInstance = null;
 
 function applyLanguage(lang) {
   currentLang = lang;
-  localStorage.setItem('ounc-lang', lang);
+  localStorage.setItem('purai-lang', lang);
 
   // Update HTML lang attribute
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
@@ -656,8 +535,8 @@ function applyLanguage(lang) {
 
   // Update Page Title
   document.title = lang === 'zh' 
-    ? 'ounc · 后端架构与 AI 工程实践' 
-    : 'ounc · Backend & AI Engineering';
+    ? 'purai · AI & Spatial Architecture | 用人工智能重构建筑设计' 
+    : 'purai · AI & Spatial Architecture | Reimagining Spatial Design with AI';
 }
 
 // --- 7. RENDERERS: Blog & Projects ---
@@ -680,7 +559,7 @@ function renderProjects() {
             ${p.tech.map(t => `<span>${t}</span>`).join('')}
           </div>
           <div class="project-links">
-            <a href="${p.github}" target="_blank" class="project-link" aria-label="Github code repository for ${data.title}">
+            <a href="${p.github}" target="_blank" class="project-link" aria-label="Open-source repository for ${data.title}">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
               ${TRANSLATIONS[currentLang]['btn-project-code']}
             </a>
@@ -785,30 +664,41 @@ function renderComments() {
   const commentsList = document.getElementById('comments-list');
   if (!commentsList) return;
 
-  let comments = localStorage.getItem('ounc-guestbook');
+  let comments = localStorage.getItem('purai-inquiries');
   if (!comments) {
     const defaultComments = [
-      { nickname: 'GopherBoy', content: TRANSLATIONS[currentLang]['comment-default-1'], date: '2026-07-28 10:24', isDefault: true },
-      { nickname: 'ArchMaster', content: TRANSLATIONS[currentLang]['comment-default-2'], date: '2026-07-29 16:45', isDefault: true }
+      { nickname: '林阳设计事务所', content: TRANSLATIONS[currentLang]['comment-default-1'], date: '2026-07-28 10:24', isDefault: true },
+      { nickname: 'Matrix BIM Group', content: TRANSLATIONS[currentLang]['comment-default-2'], date: '2026-07-29 16:45', isDefault: true }
     ];
-    localStorage.setItem('ounc-guestbook', JSON.stringify(defaultComments));
+    localStorage.setItem('purai-inquiries', JSON.stringify(defaultComments));
     comments = JSON.stringify(defaultComments);
   }
 
   const list = JSON.parse(comments);
   commentsList.innerHTML = list.map(c => {
-    // If it is a default mock comment, translate it on-the-fly to keep the language uniform!
     let displayContent = c.content;
     if (c.isDefault) {
-      displayContent = c.nickname === 'GopherBoy' 
+      displayContent = c.nickname.startsWith('林') || c.nickname.startsWith('L')
         ? TRANSLATIONS[currentLang]['comment-default-1']
         : TRANSLATIONS[currentLang]['comment-default-2'];
+    }
+
+    // Adapt nickname display to english if it's default
+    let displayNickname = c.nickname;
+    if (c.isDefault && currentLang === 'en') {
+      displayNickname = c.nickname.startsWith('林') 
+        ? 'Linyang Architecture Studio'
+        : 'Matrix BIM Group';
+    } else if (c.isDefault && currentLang === 'zh') {
+      displayNickname = c.nickname.startsWith('Mat') 
+        ? 'Matrix BIM 集团'
+        : '林阳设计事务所';
     }
 
     return `
       <div class="comment-item">
         <div class="comment-header">
-          <span class="comment-author">${escapeHtml(c.nickname)}</span>
+          <span class="comment-author">${escapeHtml(displayNickname)}</span>
           <span class="comment-date">${c.date}</span>
         </div>
         <div class="comment-text">${escapeHtml(displayContent)}</div>
@@ -844,9 +734,9 @@ function initGuestbook() {
 
     if (!newComment.nickname || !newComment.content) return;
 
-    const list = JSON.parse(localStorage.getItem('ounc-guestbook') || '[]');
+    const list = JSON.parse(localStorage.getItem('purai-inquiries') || '[]');
     list.push(newComment);
-    localStorage.setItem('ounc-guestbook', JSON.stringify(list));
+    localStorage.setItem('purai-inquiries', JSON.stringify(list));
 
     // Clear and render
     nicknameInput.value = '';
