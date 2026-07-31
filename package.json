@@ -1,0 +1,16 @@
+{
+  "name": "ounc-blog",
+  "version": "1.0.0",
+  "description": "ounc's personal tech blog and homepage",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y http-server -p 8080"
+  },
+  "keywords": [
+    "blog",
+    "portfolio",
+    "github-pages"
+  ],
+  "author": "ounc",
+  "license": "MIT"
+}
