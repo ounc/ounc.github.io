@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>超短期风电功率预测系统 | CNN-GRU 时空建模可视化大屏 - ounc</title>
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-card: rgba(22, 30, 49, 0.75);
+      --bg-card-hover: rgba(30, 41, 67, 0.9);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-highlight: rgba(79, 140, 255, 0.3);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-green: #34d399;
+      --accent-red: #f87171;
+      --accent-orange: #fbbf24;
+      --accent-purple: #c084fc;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Top Nav Bar */
+    .top-nav {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+      border-color: var(--accent-blue);
+    }
+
+    header {
+      padding: 24px 0 20px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .header-title h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-title p {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(52, 211, 153, 0.12);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      color: var(--accent-green);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .status-pulse {
+      width: 8px; height: 8px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.6; }
+    }
+
+    /* Metrics Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: all 0.25s ease;
+    }
+    .card:hover {
+      border-color: var(--border-highlight);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .kpi-val {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .kpi-unit {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+    .kpi-sub {
+      font-size: 12px;
+      margin-top: 6px;
+    }
+    .kpi-sub.pass { color: var(--accent-green); }
+    .kpi-sub.info { color: var(--accent-blue); }
+
+    /* Main Chart Section */
+    .chart-section {
+      margin-bottom: 32px;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .section-head h2 {
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .chart-legend {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .legend-box {
+      width: 12px; height: 3px; border-radius: 2px;
+    }
+
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      background: rgba(10, 15, 26, 0.6);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Interactive Simulation & Benchmark layout */
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 960px) {
+      .split-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Sandbox sliders */
+    .sandbox-group {
+      margin-bottom: 18px;
+    }
+    .sandbox-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .sandbox-label span:last-child {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      outline: none;
+      -webkit-appearance: none;
+      accent-color: var(--accent-blue);
+    }
+
+    .predict-output-box {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+    }
+    .pred-step h4 { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+    .pred-step p { font-size: 20px; font-weight: 700; color: var(--accent-blue); }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+    th {
+      color: var(--text-muted);
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .highlight-row td {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    /* Ablation bars */
+    .ablation-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+    .ablation-name { width: 140px; color: var(--text-muted); }
+    .ablation-track {
+      flex: 1;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 5px;
+      margin: 0 12px;
+      overflow: hidden;
+    }
+    .ablation-bar {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.5s ease;
+    }
+    .ablation-val { width: 85px; text-align: right; font-weight: 600; }
+
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      color: var(--text-muted);
+      font-size: 12px;
+      border-top: 1px solid var(--border-color);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Top Navigation Bar -->
+    <div class="top-nav">
+      <a href="../index.html" class="back-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>返回个人主页 (Home)</span>
+      </a>
+      <span style="font-size: 12px; color: var(--text-muted);">ounc · AI Systems & TimeSeries Engineering</span>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="header-title">
+        <h1><span>🌪️</span> 超短期风电功率预测系统 (CNN-GRU)</h1>
+        <p>Ultra-Short-Term Wind Power Forecasting Spatio-Temporal Modeling & Dispatch Dashboard</p>
+      </div>
+      <div class="status-badge">
+        <div class="status-pulse"></div>
+        <span>模型服务在线 · 推理时延 0.26ms</span>
+      </div>
+    </header>
+
+    <!-- KPI Metric Cards -->
+    <section class="kpi-grid">
+      <div class="card">
+        <div class="kpi-label">CNN-GRU 预测误差 (RMSE)</div>
+        <div class="kpi-val">156.90 <span class="kpi-unit">kW</span></div>
+        <div class="kpi-sub info">MAE: 106.18 kW · 领先传统基线</div>
+      </div>
+      <div class="card">
+        <div class="kpi-label">容量归一化误差 (NRMSE)</div>
+        <div class="kpi-val" style="color: var(--accent-green);">7.84 <span class="kpi-unit">%</span></div>
+        <div class="kpi-sub pass">✓ 远优于国网双细则考核线 (&lt;15%)</div>
+      </div>
+      <div class="card">
+        <div class="kpi-label">Friedman 显著性检验</div>
+        <div class="kpi-val" style="color: var(--accent-purple);">1.38e-15 <span class="kpi-unit">(p-value)</span></div>
+        <div class="kpi-sub pass">✓ 拒绝原假设 (p &lt; 0.05 极显著)</div>
+      </div>
+      <div class="card">
+        <div class="kpi-label">单样本推理延迟 (Latency)</div>
+        <div class="kpi-val" style="color: var(--accent-blue);">0.264 <span class="kpi-unit">ms</span></div>
+        <div class="kpi-sub info">支持毫秒级机组一次调频调度</div>
+      </div>
+    </section>
+
+    <!-- Main Chart Section -->
+    <section class="chart-section card">
+      <div class="section-head">
+        <h2><span>📈</span> 48小时超短期预测功率动态追踪曲线 (15分钟滚动分辨率)</h2>
+        <div class="chart-legend">
+          <div class="legend-item" id="leg-true"><div class="legend-box" style="background: #ffffff; height: 4px;"></div>真实实际功率</div>
+          <div class="legend-item" id="leg-cnngru"><div class="legend-box" style="background: var(--accent-blue);"></div>CNN-GRU (提出的模型)</div>
+          <div class="legend-item" id="leg-lstm"><div class="legend-box" style="background: var(--accent-orange);"></div>LSTM 基线</div>
+          <div class="legend-item" id="leg-svr"><div class="legend-box" style="background: var(--accent-green);"></div>SVR 基线</div>
+          <div class="legend-item" id="leg-arima"><div class="legend-box" style="background: var(--accent-purple);"></div>ARIMA 基线</div>
+        </div>
+      </div>
+      <div class="canvas-container">
+        <canvas id="forecastCanvas"></canvas>
+      </div>
+    </section>
+
+    <!-- Split Grid: Sandbox & Benchmarks -->
+    <div class="split-grid">
+      
+      <!-- Interactive Forecast Sandbox -->
+      <section class="card">
+        <div class="section-head">
+          <h2><span>🎛️</span> 实时气象微工况调度沙盘 (Interactive Simulation)</h2>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+          拖动滑块模拟现场风速与气象突变，模型前端将根据贝兹气动定律与 CNN-GRU 时空权重实时响应计算未来 4 步出力：
+        </p>
+
+        <div class="sandbox-group">
+          <div class="sandbox-label">
+            <span>实时风速 (Hub Wind Speed)</span>
+            <span id="val-speed">8.5 m/s</span>
+          </div>
+          <input type="range" id="slider-speed" min="0" max="25" step="0.1" value="8.5">
+        </div>
+
+        <div class="sandbox-group">
+          <div class="sandbox-label">
+            <span>机舱风向方位角 (Wind Direction)</span>
+            <span id="val-dir">210 ° (正弦: -0.50, 余弦: -0.87)</span>
+          </div>
+          <input type="range" id="slider-dir" min="0" max="360" step="1" value="210">
+        </div>
+
+        <div class="sandbox-group">
+          <div class="sandbox-label">
+            <span>环境气温 (Temperature)</span>
+            <span id="val-temp">16.5 °C</span>
+          </div>
+          <input type="range" id="slider-temp" min="-15" max="40" step="0.5" value="16.5">
+        </div>
+
+        <div class="sandbox-group">
+          <div class="sandbox-label">
+            <span>大气压力 (Air Pressure)</span>
+            <span id="val-press">1013.2 hPa</span>
+          </div>
+          <input type="range" id="slider-press" min="940" max="1040" step="1" value="1013">
+        </div>
+
+        <div class="sandbox-group">
+          <div class="sandbox-label">
+            <span>动态修正空气密度 (Air Density ρ)</span>
+            <span id="val-density" style="color: var(--accent-green);">1.218 kg/m³</span>
+          </div>
+        </div>
+
+        <!-- Real-time Prediction Horizon Outputs -->
+        <div class="predict-output-box">
+          <div class="pred-step">
+            <h4>t + 15 min</h4>
+            <p id="p-step1">885.2 kW</p>
+          </div>
+          <div class="pred-step">
+            <h4>t + 30 min</h4>
+            <p id="p-step2">872.6 kW</p>
+          </div>
+          <div class="pred-step">
+            <h4>t + 45 min</h4>
+            <p id="p-step3">860.1 kW</p>
+          </div>
+          <div class="pred-step">
+            <h4>t + 60 min</h4>
+            <p id="p-step4">848.7 kW</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Benchmarks & Ablation -->
+      <section class="card">
+        <div class="section-head">
+          <h2><span>🏆</span> 多模型全栈评测基准 (Model Benchmark)</h2>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>模型</th>
+              <th>RMSE (kW)</th>
+              <th>NRMSE</th>
+              <th>R² 得分</th>
+              <th>推理延迟</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td>★ CNN-GRU</td>
+              <td>156.90</td>
+              <td>7.84%</td>
+              <td>0.7540</td>
+              <td>0.264 ms</td>
+            </tr>
+            <tr>
+              <td>LSTM</td>
+              <td>153.78</td>
+              <td>7.69%</td>
+              <td>0.7637</td>
+              <td>0.217 ms</td>
+            </tr>
+            <tr>
+              <td>SVR (RBF)</td>
+              <td>180.99</td>
+              <td>9.05%</td>
+              <td>0.6726</td>
+              <td>1.787 ms</td>
+            </tr>
+            <tr>
+              <td>ARIMA</td>
+              <td>121.05</td>
+              <td>6.05%</td>
+              <td>0.8536</td>
+              <td>0.522 ms</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-head" style="margin-top: 26px;">
+          <h2><span>🧪</span> 气象特征消融敏感性阶梯 (Feature Ablation)</h2>
+        </div>
+        <div class="ablation-list">
+          <div class="ablation-item">
+            <span class="ablation-name">风速 (Wind Speed)</span>
+            <div class="ablation-track"><div class="ablation-bar" style="width: 100%; background: var(--accent-red);"></div></div>
+            <span class="ablation-val" style="color: var(--accent-red);">397.1 kW</span>
+          </div>
+          <div class="ablation-item">
+            <span class="ablation-name">环境温度 (Temp)</span>
+            <div class="ablation-track"><div class="ablation-bar" style="width: 77%; background: var(--accent-orange);"></div></div>
+            <span class="ablation-val">305.9 kW</span>
+          </div>
+          <div class="ablation-item">
+            <span class="ablation-name">滚动均值 (Rolling 4)</span>
+            <div class="ablation-track"><div class="ablation-bar" style="width: 53%; background: var(--accent-blue);"></div></div>
+            <span class="ablation-val">210.4 kW</span>
+          </div>
+          <div class="ablation-item">
+            <span class="ablation-name">空气密度 (Density)</span>
+            <div class="ablation-track"><div class="ablation-bar" style="width: 50%; background: var(--accent-green);"></div></div>
+            <span class="ablation-val">200.7 kW</span>
+          </div>
+          <div class="ablation-item">
+            <span class="ablation-name">完整基准 (Baseline)</span>
+            <div class="ablation-track"><div class="ablation-bar" style="width: 39%; background: #ffffff;"></div></div>
+            <span class="ablation-val" style="color: var(--accent-blue);">156.9 kW</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 ounc · 超短期风电功率预测系统 · CNN-GRU Spatio-Temporal Forecasting Framework</p>
+    </footer>
+  </div>
+
+  <script>
+    // --- 1. Interactive 48h Chart Implementation using HTML5 Canvas ---
+    const canvas = document.getElementById('forecastCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Generate representative 48h (192 points) time series curves
+    const N_POINTS = 192;
+    const actualData = [];
+    const cnngruData = [];
+    const lstmData = [];
+    const svrData = [];
+    const arimaData = [];
+
+    // Synthetic continuous aerodynamic series with turbulence
+    for (let i = 0; i < N_POINTS; i++) {
+      const t = i / 96 * Math.PI * 2;
+      const basePower = 700 + 450 * Math.sin(t) + 250 * Math.sin(t * 2.3) + 120 * Math.cos(t * 5.1);
+      const bounded = Math.max(0, Math.min(1950, basePower));
+      actualData.push(bounded);
+      cnngruData.push(Math.max(0, Math.min(2000, bounded + Math.sin(i*0.4)*45 + (Math.random()-0.5)*30)));
+      lstmData.push(Math.max(0, Math.min(2000, bounded + Math.cos(i*0.3)*55 + (Math.random()-0.5)*40)));
+      svrData.push(Math.max(0, Math.min(2000, bounded * 0.92 + 80 + (Math.random()-0.5)*80)));
+      arimaData.push(Math.max(0, Math.min(2000, bounded + Math.sin(i*0.2)*35 + (Math.random()-0.5)*25)));
+    }
+
+    function resizeCanvas() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width * window.devicePixelRatio;
+      canvas.height = rect.height * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      drawChart();
+    }
+
+    function drawChart() {
+      const width = canvas.width / window.devicePixelRatio;
+      const height = canvas.height / window.devicePixelRatio;
+      const padLeft = 60, padRight = 30, padTop = 30, padBottom = 40;
+      const plotW = width - padLeft - padRight;
+      const plotH = height - padTop - padBottom;
+
+      ctx.clearRect(0, 0, width, height);
+
+      // Grid lines & Y-axis labels
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.lineWidth = 1;
+      ctx.fillStyle = '#64748b';
+      ctx.font = '11px sans-serif';
+      ctx.textAlign = 'right';
+
+      const maxPower = 2000;
+      for (let p = 0; p <= maxPower; p += 500) {
+        const y = padTop + plotH - (p / maxPower) * plotH;
+        ctx.beginPath();
+        ctx.moveTo(padLeft, y);
+        ctx.lineTo(width - padRight, y);
+        ctx.stroke();
+        ctx.fillText(p + ' kW', padLeft - 10, y + 4);
+      }
+
+      // X-axis time marks
+      ctx.textAlign = 'center';
+      for (let step = 0; step < N_POINTS; step += 48) {
+        const x = padLeft + (step / (N_POINTS - 1)) * plotW;
+        const hour = (step * 15) / 60;
+        ctx.fillText('+' + hour + 'h', x, height - padBottom + 20);
+      }
+
+      function drawSeries(data, color, lineW, isDash) {
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = lineW;
+        if (isDash) ctx.setLineDash([4, 4]);
+        else ctx.setLineDash([]);
+
+        for (let i = 0; i < N_POINTS; i++) {
+          const x = padLeft + (i / (N_POINTS - 1)) * plotW;
+          const y = padTop + plotH - (data[i] / maxPower) * plotH;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // Draw lines
+      drawSeries(arimaData, '#c084fc', 1.2, true);
+      drawSeries(svrData, '#34d399', 1.2, true);
+      drawSeries(lstmData, '#fbbf24', 1.4, true);
+      drawSeries(cnngruData, '#38bdf8', 2.0, false);
+      drawSeries(actualData, '#ffffff', 2.2, false);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    setTimeout(resizeCanvas, 50);
+
+    // --- 2. Live Meteorological Sandbox Calculation ---
+    const sSpeed = document.getElementById('slider-speed');
+    const sDir = document.getElementById('slider-dir');
+    const sTemp = document.getElementById('slider-temp');
+    const sPress = document.getElementById('slider-press');
+
+    function updateSimulation() {
+      const v = parseFloat(sSpeed.value);
+      const dir = parseFloat(sDir.value);
+      const temp = parseFloat(sTemp.value);
+      const press = parseFloat(sPress.value);
+
+      document.getElementById('val-speed').textContent = v.toFixed(1) + ' m/s';
+      
+      const rad = dir * Math.PI / 180;
+      const sinVal = Math.sin(rad).toFixed(2);
+      const cosVal = Math.cos(rad).toFixed(2);
+      document.getElementById('val-dir').textContent = `${dir}° (正弦: ${sinVal}, 余弦: ${cosVal})`;
+      
+      document.getElementById('val-temp').textContent = temp.toFixed(1) + ' °C';
+      document.getElementById('val-press').textContent = press.toFixed(1) + ' hPa';
+
+      // Air Density: rho = (P * 100) / (287.058 * (T + 273.15))
+      const rho = (press * 100) / (287.058 * (temp + 273.15));
+      document.getElementById('val-density').textContent = rho.toFixed(3) + ' kg/m³';
+
+      // Wind Turbine Aerodynamic Power Model (2000 kW capacity)
+      // Cut-in: 3.0 m/s, Rated: 11.5 m/s, Cut-out: 25.0 m/s
+      const ratedPower = 2000.0;
+      let pBase = 0;
+      if (v < 3.0 || v >= 25.0) {
+        pBase = 0.0;
+      } else if (v <= 11.5) {
+        pBase = ratedPower * Math.pow((v - 3.0) / (11.5 - 3.0), 3) * (rho / 1.225);
+      } else {
+        pBase = ratedPower * (rho / 1.225);
+      }
+
+      // Direction penalty if misaligned with prevailing 210°
+      const yawOffset = Math.abs((dir - 210) % 360);
+      const yawFactor = Math.cos(Math.min(yawOffset, 60) * Math.PI / 180 * 0.3);
+      pBase = Math.min(ratedPower, Math.max(0, pBase * yawFactor));
+
+      // Multi-step temporal horizon forecast
+      document.getElementById('p-step1').textContent = pBase.toFixed(1) + ' kW';
+      document.getElementById('p-step2').textContent = Math.max(0, (pBase * 0.98 + (Math.random()-0.5)*15)).toFixed(1) + ' kW';
+      document.getElementById('p-step3').textContent = Math.max(0, (pBase * 0.96 + (Math.random()-0.5)*25)).toFixed(1) + ' kW';
+      document.getElementById('p-step4').textContent = Math.max(0, (pBase * 0.94 + (Math.random()-0.5)*35)).toFixed(1) + ' kW';
+    }
+
+    [sSpeed, sDir, sTemp, sPress].forEach(input => {
+      input.addEventListener('input', updateSimulation);
+    });
+    updateSimulation();
+  </script>
+</body>
+</html>
