@@ -98,13 +98,13 @@ const TRANSLATIONS = {
 const TYPEWRITER_TEXTS = {
   zh: [
     '关注高并发后端架构与空间计算算法开发。',
-    '设计 purai.cc 的核心渲染后端与空间布局求解器。',
-    '热衷于用算法与系统设计解决建筑空间效率。'
+    '设计 purai.cc 的核心渲染调度引擎与空间计算管道。',
+    '热衷于用算法与系统设计解决物理世界效率难题。'
   ],
   en: [
     'Focusing on high-concurrency backend & spatial computing.',
-    'Designing rendering backend & spatial solvers for purai.cc.',
-    'Passionate about solving spatial efficiency via system design.'
+    'Designing rendering schedulers & spatial pipelines for purai.cc.',
+    'Passionate about solving physical world efficiency via system design.'
   ]
 };
 
@@ -139,21 +139,6 @@ const PROJECTS = [
     en: {
       title: 'purai-render-scheduler',
       description: 'A distributed scheduling engine for high-concurrency GPU rendering tasks. Developed in Go, featuring dynamic load balancing based on GPU memory pressure, priority queues, and automatic fault-tolerance.'
-    }
-  },
-  {
-    id: 'spatial-layout-solver',
-    icon: '📐',
-    github: 'https://github.com/ounc/spatial-layout-solver',
-    demo: '#',
-    tech: ['Go', 'Genetic Algorithm', 'Constraint Solving', 'JSON-Schema'],
-    zh: {
-      title: 'spatial-layout-solver',
-      description: '基于图约束关系与遗传算法的室内空间布局生成器。输入房屋红线、日照采光方向和相对距离约束，引擎即可在秒级内并行求解并输出符合人体工学的 3D 家具排布方案。'
-    },
-    en: {
-      title: 'spatial-layout-solver',
-      description: 'An indoor layout generator based on genetic algorithms and graph constraints. Solves and generates optimal 3D furniture arrangements in seconds matching daylight and ergonomic requirements.'
     }
   },
   {
@@ -341,88 +326,6 @@ func (s *Scheduler) startDispatchLoop() {
 
         <h3>3. Outcome</h3>
         <p>This scheduler cut queueing latency by <strong>75%</strong>. If a GPU node crashes, the scheduler intercepts and re-routes its active workloads automatically, achieving bulletproof resilience.</p>
-      `
-    }
-  },
-  {
-    id: 'spatial-solver-post',
-    category: 'spatial-ai',
-    date: '2026-06-12',
-    zh: {
-      title: '从零编写一个室内空间布局求解器 (Go + 遗传算法实践)',
-      categoryName: '图形与空间算法',
-      description: '空间排布在算法上面临巨大的搜索维度挑战。本文详细记录了我如何采用图约束表示户型关系，并设计遗传算法的适应度函数，让 Go 求解器引擎在 2 秒内求解出符合日照和建筑学规则的户型排布。',
-      content: `
-        <p>自动布局生成是 <code>purai.cc</code> 空间规划模型的核心。从数学上看，这是一个典型的<strong>约束满足问题 (Constraint Satisfaction Problem, CSP)</strong>，我们通常需要在一个无限连续的三维空间中寻找最优解。本文将介绍我是如何用 Go 从零实现这个求解器的。</p>
-        
-        <h3>一、将空间布局抽象为图</h3>
-        <p>在编写求解器之前，我们不能把房间看作毫无关系的积木。我将室内空间建模为一个有向带有属性的图：</p>
-        <ul>
-          <li><strong>节点 (Nodes)</strong>：代表各个空间，如“客厅”、“主卧”、“玄关”，每个节点包含长、宽、高的范围。</li>
-          <li><strong>边 (Edges)</strong>：代表空间的相对约束，包含连通约束（如“卧室必须通向走廊”）与朝向约束（如“客厅必须朝向正南 ±15°”）。</li>
-        </ul>
-
-        <h3>二、遗传算法的编码与演化设计</h3>
-        <p>由于空间搜索边界极其巨大，且存在非线性的重叠约束，传统的搜索树极易陷入局部最优。我设计了以下遗传算法架构：</p>
-        <ol>
-          <li><strong>基因编码 (Chromosome)</strong>：一条染色体代表一套房屋内的房间相对坐标及旋转角度。</li>
-          <li><strong>适应度函数 (Fitness Function)</strong>：
-            <ul>
-              <li><strong>重叠度罚分</strong>：房间与房间重叠，扣除高额积分。</li>
-              <li><strong>日照匹配分</strong>：窗户朝向阳光方向，增加积分。</li>
-              <li><strong>动线合理性</strong>：主要交通路线的总长度越短，积分越高。</li>
-            </ul>
-          </li>
-          <li><strong>变异与杂交</strong>：随机平移房间，或者在两条优秀的户型图之间交换卧室与次卧的分支。</li>
-        </ol>
-
-        <pre><code>// 适应度计算逻辑
-func evaluate(c *Chromosome) float64 {
-    score := 1000.0
-    score -= c.CalculateOverlapArea() * 100.0
-    score += c.EvaluateSunlightExposure() * 50.0
-    score -= c.CalculateCirculationPathLength() * 10.0
-    return score
-}</code></pre>
-
-        <h3>三、结语</h3>
-        <p>该求解器单次运行在 Go 并发优化下，可在 <strong>2.1秒</strong> 内跑完 500 代进化，输出合理性接近专业设计师排出的高水准户型图，极大地展现了算法在物理空间应用中的神奇魅力。</p>
-      `
-    },
-    en: {
-      title: 'Writing an Indoor Spatial Layout Solver from Scratch: Go & Genetic Algorithms',
-      categoryName: 'Graphics & Spatial Algos',
-      description: 'Floorplan arrangement is a challenging constraint satisfaction problem. This article reviews how I built a Go-based layout solver using genetic algorithms to align architectural spaces.',
-      content: `
-        <p>Automated floorplan planning is the core module in purai.cc. Mathematically, it is a **Constraint Satisfaction Problem (CSP)** with an infinite 3D search space. Here is how I built the solver using Go.</p>
-        
-        <h3>1. Space as a Directed Constraint Graph</h3>
-        <p>Before writing math, we must model room links. Rooms are represented as nodes in a graph, with walls and paths as directional edges enforcing rules (e.g. "Living Room must orient South", "Bedroom requires Bathroom access").</p>
-
-        <h3>2. Coding the Genetic Pipeline</h3>
-        <p>Because spatial checks are non-linear, genetic algorithms work perfectly. I coded the following pipeline:</p>
-        <ol>
-          <li><strong>Chromosomes</strong>: Encodes room coordinates and orientation rotations into array structures.</li>
-          <li><strong>Fitness Metrics</strong>:
-            <ul>
-              <li><strong>Overlap Penalties</strong>: Severe penalties if room meshes intersect.</li>
-              <li><strong>Daylight Ingress</strong>: Positive weight if windows face the sun.</li>
-              <li><strong>Circulation Paths</strong>: Deducts scores if pathing is too long.</li>
-            </ul>
-          </li>
-        </ol>
-
-        <pre><code>// Fitness calculation
-func evaluate(c *Chromosome) float64 {
-    score := 1000.0
-    score -= c.CalculateOverlapArea() * 100.0
-    score += c.EvaluateSunlightExposure() * 50.0
-    score -= c.CalculateCirculationPathLength() * 10.0
-    return score
-}</code></pre>
-
-        <h3>3. Results</h3>
-        <p>Through Go concurrency pipelines, the engine completes 500 generations of evolution in <strong>2.1 seconds</strong>, generating compliant floorplans.</p>
       `
     }
   },
