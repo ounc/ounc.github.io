@@ -23,9 +23,10 @@ const TRANSLATIONS = {
     'filter-ai': '大模型工程',
     'projects-tag': 'Showcase',
     'projects-title': '开源项目与工程实践',
+    'brand-name': 'ounc (刘文帝)',
     'about-tag': 'About Me',
     'about-title': '个人简介',
-    'about-intro': '我是 ounc，一名专注于后端高并发架构与 AI 空间算法落地的工程师。',
+    'about-intro': '我是 ounc (刘文帝)，一名专注于后端高并发架构与 AI 空间/时空算法落地的工程师。',
     'about-p1': '目前我主要负责空间计算与建筑 AI 创业项目 purai.cc 的核心渲染后端与空间求解器算法的研发工作。我热衷于使用优雅的系统架构和算法，来解决真实空间设计中的效率难题。',
     'about-p2': '在这里，我记录自己在高并发分布式系统、三维空间重构、扩散渲染管道优化以及大模型工程落地中的实践经验。我相信好的代码和架构不仅是冰冷的逻辑，更是解决物理世界复杂性的桥梁。',
     'about-github-btn': '在 GitHub 关注我',
@@ -66,9 +67,10 @@ const TRANSLATIONS = {
     'filter-ai': 'LLM Engineering',
     'projects-tag': 'Showcase',
     'projects-title': 'Open Source Projects & Engineering Practice',
+    'brand-name': 'ounc (Wendi Liu)',
     'about-tag': 'About Me',
     'about-title': 'Profile',
-    'about-intro': 'I\'m ounc, a backend engineer focusing on high-concurrency architecture and AI spatial systems implementation.',
+    'about-intro': 'I\'m ounc (Wendi Liu), a software engineer focusing on backend high-concurrency architecture and applied AI systems.',
     'about-p1': 'Currently, I focus on developing the core rendering backends and spatial solver algorithms for purai.cc, a spatial architecture AI startup. I enjoy using clean architecture and logic to solve real-world spatial design efficiency issues.',
     'about-p2': 'Here, I log my engineering journeys in high-concurrency distributed systems, 3D spatial reconstruction, image diffusion pipelines optimization, and LLM implementations. I believe good architecture is a bridge to solving physical world complexity.',
     'about-github-btn': 'Follow me on GitHub',
@@ -693,8 +695,8 @@ function applyLanguage(lang) {
 
   // Update Page Title
   document.title = lang === 'zh' 
-    ? 'ounc · Tech Blog | 后端架构 · 空间计算 · AI 工程实践' 
-    : 'ounc · Tech Blog | Backend · Spatial AI · Systems';
+    ? 'ounc (刘文帝) · Tech Blog | 后端架构 · AI 工程与算法实践' 
+    : 'ounc (Wendi Liu) · Tech Blog | Backend · AI & Spatial Systems';
 }
 
 // --- 7. RENDERERS: Blog & Projects ---
