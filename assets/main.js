@@ -10,30 +10,30 @@ const TRANSLATIONS = {
     'nav-projects': '项目',
     'nav-about': '关于我',
     'nav-guestbook': '留言板',
-    'hero-subtitle': 'Engineering & Architecture',
-    'hero-title-prefix': '构建高可用的',
-    'hero-title-gradient': '后端与空间 AI 系统',
+    'hero-subtitle': 'Applied AI & Systems Engineering',
+    'hero-title-prefix': '探索大模型前沿与',
+    'hero-title-gradient': '空间智能物理落地',
     'hero-btn-explore': '探索技术文章',
-    'hero-btn-projects': '查看开源项目',
+    'hero-btn-projects': '查看开源成果',
     'blog-tag': 'Read Articles',
     'blog-title': '技术博客录',
     'filter-all': '全部',
-    'filter-backend': '后端与架构',
-    'filter-architecture': '图形与空间算法',
-    'filter-ai': '大模型工程',
+    'filter-backend': '大模型与推理计算',
+    'filter-architecture': '空间多模态与视觉',
+    'filter-ai': '时序与工程系统',
     'projects-tag': 'Showcase',
-    'projects-title': '开源项目与工程实践',
+    'projects-title': '科研课题与工程实践',
     'brand-name': 'ounc (刘文帝)',
     'about-tag': 'About Me',
     'about-title': '个人简介',
-    'about-intro': '我是 ounc (刘文帝)，一名专注于后端高并发架构与 AI 空间/时空算法落地的工程师。',
-    'about-p1': '目前我主要负责空间计算与建筑 AI 创业项目 purai.cc 的核心渲染后端与空间求解器算法的研发工作。我热衷于使用优雅的系统架构和算法，来解决真实空间设计中的效率难题。',
-    'about-p2': '在这里，我记录自己在高并发分布式系统、三维空间重构、扩散渲染管道优化以及大模型工程落地中的实践经验。我相信好的代码和架构不仅是冰冷的逻辑，更是解决物理世界复杂性的桥梁。',
+    'about-intro': '我是 ounc (刘文帝)，南洋理工大学 (NTU) 计算机硕士在读 (M.Comp. in Applied AI)。',
+    'about-p1': '我的研究重点聚焦于大语言模型推理时计算优化（Test-Time Compute 动态路由与 MCTS 慢思考）以及高分辨率多模态空间计算（VLM 图纸解析与空间拓扑图谱构建）。此前拥有 4 年大型工程项目数字化与全周期商务管控经验。',
+    'about-p2': '在这里，我记录自己在前沿大模型推理算法、多模态时空计算、工程规范 RAG 知识库以及全栈 AI 应用落地中的实战思考。我相信好的算法不仅存在于学术论文中，更应该成为赋能物理世界与复杂业务的坚实基石。',
     'about-github-btn': '在 GitHub 关注我',
-    'skill-backend': 'Go / Java (后端高并发与架构)',
-    'skill-distributed': 'Spatial AI & Image Diffusion (空间智能与图像扩散算法)',
-    'skill-ai': '3D Spatial Geometry & Solvers (三维空间几何与求解算法)',
-    'skill-cloud': 'Kubernetes & GPU Orchestration (云原生与GPU算力调度)',
+    'skill-backend': 'Python & FastAPI (深度学习工程与高效推理部署)',
+    'skill-distributed': 'LLMs, MCTS & Test-Time Compute (大模型慢思考与算力路由)',
+    'skill-ai': 'Multimodal VLM & Scene Graph (空间多模态实体抽取与拓扑图谱)',
+    'skill-cloud': 'Spatio-Temporal & Time-Series AI (时序深度学习与统计检验)',
     'guestbook-tag': 'Interactive',
     'guestbook-title': '留言板',
     'form-nickname': '昵称',
@@ -46,38 +46,38 @@ const TRANSLATIONS = {
     'btn-read-more': '阅读全文',
     'btn-project-code': '开源仓库',
     'btn-project-demo': '演示链接',
-    'comment-default-1': '网页排版真舒服，暖色调在冷冰冰的极客主页里确实有温度。催更你的 Raft 实践文！',
-    'comment-default-2': '对 Go 的 GC 分析很到位，我们线上也在通过微调 GOGC 缓解瞬间 STW，期待更多深度文章。'
+    'comment-default-1': '网页排版真舒服，暖色调在冷冰冰的极客主页里确实有温度。催更你的 MCTS 实践文！',
+    'comment-default-2': '对时序风电预测模型的特征工程分析很到位，期待更多前沿推理优化的深度文章。'
   },
   en: {
     'nav-blog': 'Blog',
     'nav-projects': 'Projects',
     'nav-about': 'About',
     'nav-guestbook': 'Guestbook',
-    'hero-subtitle': 'Engineering & Architecture',
-    'hero-title-prefix': 'Building High-Availability',
-    'hero-title-gradient': 'Backend & Spatial AI Systems',
+    'hero-subtitle': 'Applied AI & Systems Engineering',
+    'hero-title-prefix': 'Advancing Foundation Models &',
+    'hero-title-gradient': 'Spatial Intelligence Systems',
     'hero-btn-explore': 'Explore Articles',
-    'hero-btn-projects': 'View Open Source',
+    'hero-btn-projects': 'View Projects',
     'blog-tag': 'Read Articles',
     'blog-title': 'Technical Blog',
     'filter-all': 'All',
-    'filter-backend': 'Backend & Systems',
-    'filter-architecture': 'Graphics & Spatial Algos',
-    'filter-ai': 'LLM Engineering',
+    'filter-backend': 'LLM & Reasoning',
+    'filter-architecture': 'Spatial Multimodal & Vision',
+    'filter-ai': 'Time-Series & Systems',
     'projects-tag': 'Showcase',
-    'projects-title': 'Open Source Projects & Engineering Practice',
+    'projects-title': 'Research Projects & Engineering Practice',
     'brand-name': 'ounc (Wendi Liu)',
     'about-tag': 'About Me',
     'about-title': 'Profile',
-    'about-intro': 'I\'m ounc (Wendi Liu), a software engineer focusing on backend high-concurrency architecture and applied AI systems.',
-    'about-p1': 'Currently, I focus on developing the core rendering backends and spatial solver algorithms for purai.cc, a spatial architecture AI startup. I enjoy using clean architecture and logic to solve real-world spatial design efficiency issues.',
-    'about-p2': 'Here, I log my engineering journeys in high-concurrency distributed systems, 3D spatial reconstruction, image diffusion pipelines optimization, and LLM implementations. I believe good architecture is a bridge to solving physical world complexity.',
+    'about-intro': 'I\'m ounc (Wendi Liu), M.Comp. candidate in Applied Artificial Intelligence at Nanyang Technological University (NTU).',
+    'about-p1': 'My core research interests center on LLM test-time compute scaling (dynamic entropy routing & MCTS search) and multimodal spatial computing (VLM document parsing & Scene Graph construction). I also bring 4 years of full-cycle construction engineering & commerce experience.',
+    'about-p2': 'Here, I document my journey across frontier reasoning algorithms, multimodal spatial perception, engineering-grade RAG systems, and production AI deployments. I believe the true value of AI lies in bridging foundational models with physical-world complexity.',
     'about-github-btn': 'Follow me on GitHub',
-    'skill-backend': 'Go / Java (Backend & Systems)',
-    'skill-distributed': 'Spatial AI & Image Diffusion',
-    'skill-ai': '3D Spatial Geometry & Solvers',
-    'skill-cloud': 'Kubernetes & GPU Orchestration',
+    'skill-backend': 'Python & FastAPI (DL Engineering & Inference Deployment)',
+    'skill-distributed': 'LLMs, MCTS & Test-Time Compute (Reasoning Routing & Search)',
+    'skill-ai': 'Multimodal VLM & Scene Graph (Visual Entity Extraction & Topology)',
+    'skill-cloud': 'Spatio-Temporal & Time-Series AI (Forecasting & Robustness Testing)',
     'guestbook-tag': 'Interactive',
     'guestbook-title': 'Guestbook',
     'form-nickname': 'Nickname',
@@ -97,20 +97,80 @@ const TRANSLATIONS = {
 
 const TYPEWRITER_TEXTS = {
   zh: [
-    '关注高并发后端架构与空间计算算法开发。',
-    '设计 purai.cc 的核心渲染调度引擎与空间计算管道。',
-    '热衷于用算法与系统设计解决物理世界效率难题。'
+    '南洋理工大学 (NTU) 计算机硕士在读 (M.Comp. in Applied AI)。',
+    '专注大模型推理优化 (Test-Time Compute) 与多模态空间计算。',
+    '深耕垂直领域 AI 落地：从工程规范 RAG 到物理空间拓扑自动化。'
   ],
   en: [
-    'Focusing on high-concurrency backend & spatial computing.',
-    'Designing rendering schedulers & spatial pipelines for purai.cc.',
-    'Passionate about solving physical world efficiency via system design.'
+    'NTU M.Comp. in Applied AI candidate.',
+    'Specializing in Test-Time Compute routing & Multimodal Spatial AI.',
+    'Bridging foundational reasoning algorithms with industrial engineering domains.'
   ]
 };
 
 // --- 2. BILINGUAL PROJECTS DATA ---
 
 const PROJECTS = [
+  {
+    id: 'lightweight-adaptive-search',
+    icon: '🧠',
+    github: 'https://github.com/ounc/lightweight-adaptive-search',
+    demo: '#',
+    tech: ['vLLM', 'MCTS', 'Test-Time Compute', 'Qwen-2.5-7B', 'Entropy Routing', 'PyTorch'],
+    zh: {
+      title: 'lightweight-adaptive-search',
+      description: '大模型推理算力自适应路由框架（LAS）。通过前5个生成Token的预测熵动态评估任务难度，低难度走快速贪心解码，高难度路由至基于 vLLM 开发的隐式值引导蒙特卡洛树搜索（MCTS）引擎。在 MATH 数学推理集上超越基线 3.75% 准确率，并将平均推理开销由 2.00x 压缩至 1.67x。'
+    },
+    en: {
+      title: 'lightweight-adaptive-search',
+      description: 'Lightweight Adaptive Search (LAS), a test-time compute routing framework dynamically measuring query difficulty via early token predictive entropy. Routes easy queries to greedy decoding and complex queries to an implicit-value-guided MCTS engine on vLLM, outperforming baselines by +3.75% on MATH with 1.67x compute.'
+    }
+  },
+  {
+    id: 'multimodal-draft-spatial-ai',
+    icon: '📐',
+    github: 'https://github.com/ounc/multimodal-draft-spatial-ai',
+    demo: '#',
+    tech: ['Qwen-VL', 'DPO', 'Scene Graph', 'NetworkX', 'vLLM', 'AWQ-4bit'],
+    zh: {
+      title: 'multimodal-draft-spatial-ai',
+      description: '面向 A0/A1 超高分辨率工程图纸的多模态智能解析与空间拓扑图谱系统。设计动态分幅算法融合矢量与图像特征，微调 Qwen-VL 实现房间与消防通道空间实体的精准定位抽取；自动构建 Scene Graph 空间拓扑图并对接 NetworkX 进行疏散距离合规核验，采用 DPO 规范输出并基于 vLLM 4-bit 量化实现毫秒级交互反馈。'
+    },
+    en: {
+      title: 'multimodal-draft-spatial-ai',
+      description: 'An end-to-end multimodal spatial parsing and Scene Graph system for A0/A1 architectural drafts. Features dynamic patch sampling, fine-tuned Qwen-VL for bounding-box room extraction, and automated Scene Graph construction with NetworkX pathfinding for code-compliant evacuation checks, optimized via DPO and 4-bit vLLM.'
+    }
+  },
+  {
+    id: 'llm-rag-building-code-assistant',
+    icon: '🏛️',
+    github: 'https://github.com/ounc/llm-rag-building-code-assistant',
+    demo: '#',
+    tech: ['LLM', 'RAG', 'Vector-DB', 'LangChain', 'Python', 'FastAPI'],
+    zh: {
+      title: 'llm-rag-building-code-assistant',
+      description: '基于大语言模型与多源 RAG 检索增强架构的数字化工程辅助工具。构建垂直领域建筑设计规范、消防强制性条文与历史工程语料的混合索引数据库，提供秒级规范智能问答与工程设计合规性自动化初审，大幅减轻一线工程师的多源文献检索认知负荷。'
+    },
+    en: {
+      title: 'llm-rag-building-code-assistant',
+      description: 'An LLM-powered cognitive engineering assistant integrating multi-source Retrieval-Augmented Generation (RAG). Indexes complex national building codes and architectural standards for automated compliance pre-checks, significantly reducing cognitive load in multi-document retrieval.'
+    }
+  },
+  {
+    id: 'automated-boq-pipeline',
+    icon: '📊',
+    github: 'https://github.com/ounc/automated-boq-pipeline',
+    demo: '#',
+    tech: ['Python', 'BIM / CAD Data', 'Data Extraction', 'ETL Pipeline', 'SQL'],
+    zh: {
+      title: 'automated-boq-pipeline',
+      description: '结合中建八局 4 年大型工程全周期成本管控经验研发的工程量清单 (BOQ) 数字化处理流水线。对接 CAD/BIM 数字化图纸与工程数据库，将传统手工分项算量、定额套用与成本偏差分析升级为标准化半自动协同工作流，显著提升预算编制准确率与施工规划效率。'
+    },
+    en: {
+      title: 'automated-boq-pipeline',
+      description: 'A digital Bill of Quantities (BOQ) automation pipeline synthesized from 4 years of CSCEC full-cycle construction commerce practice. Connects CAD/BIM model data to automated quantity surveying and cost-variance analysis pipelines, streamlining budgeting transparency and collaborative estimation.'
+    }
+  },
   {
     id: 'wind-power-forecasting',
     icon: '🌪️',
@@ -127,48 +187,18 @@ const PROJECTS = [
     }
   },
   {
-    id: 'purai-render-scheduler',
-    icon: '🎨',
-    github: 'https://github.com/ounc/purai-render-scheduler',
+    id: 'multimodal-pv-defect-detection',
+    icon: '☀️',
+    github: 'https://github.com/ounc/multimodal-pv-defect-detection',
     demo: '#',
-    tech: ['Go', 'Redis', 'gRPC', 'Docker', 'GPU-Metrics'],
+    tech: ['YOLOv5', 'RGB-Thermal', 'Multimodal', 'Adaptive Illumination', 'OpenCV'],
     zh: {
-      title: 'purai-render-scheduler',
-      description: '面向高并发 GPU 渲染任务的分布式调度引擎。采用 Go 语言开发，支持基于 GPU 显存压力的动态负载均衡、多等级渲染任务优先级队列与自动重试，为 purai.cc 的渲染后端提供高可靠调度支持。'
+      title: 'multimodal-pv-defect-detection',
+      description: '结合热成像 (Thermal) 与可见光 (RGB) 图像的双流多模态光伏面板缺陷智能检测模型。引入自适应环境光照补偿算法与特征对齐网络，有效克服野外强光反射与阴影遮挡干扰，精准定位光伏隐裂、热斑与表面破损，保障工业巡检鲁棒性。'
     },
     en: {
-      title: 'purai-render-scheduler',
-      description: 'A distributed scheduling engine for high-concurrency GPU rendering tasks. Developed in Go, featuring dynamic load balancing based on GPU memory pressure, priority queues, and automatic fault-tolerance.'
-    }
-  },
-  {
-    id: 'mesh-extractor-3dgs',
-    icon: '🧊',
-    github: 'https://github.com/ounc/mesh-extractor-3dgs',
-    demo: '#',
-    tech: ['C++', 'Python', '3DGS', 'Marching Cubes', 'Open3D'],
-    zh: {
-      title: 'mesh-extractor-3dgs',
-      description: '使用 C++ 结合 TSDF 和 Marching Cubes 算法从训练完成的三维高斯泼溅 (3DGS) 场景中提取三维空间网格的轻量工具，支持一键导出为可以直接拖入 CAD/BIM 软件的 OBJ 网格。'
-    },
-    en: {
-      title: 'mesh-extractor-3dgs',
-      description: 'A lightweight 3D mesh extractor written in C++ and Python. Utilizes TSDF and Marching Cubes to reconstruct clean OBJ meshes from trained 3DGS spatial scans.'
-    }
-  },
-  {
-    id: 'gocache-sync',
-    icon: '💾',
-    github: 'https://github.com/ounc/gocache-sync',
-    demo: '#',
-    tech: ['Go', 'Raft Consensus', 'gRPC', 'Protobuf'],
-    zh: {
-      title: 'gocache-sync',
-      description: '基于 Raft 协议实现高可用与强一致性的分布式 KV 缓存。支持 LRU 淘汰机制，专门用于在空间计算引擎的分布式节点中进行三维切片文件状态和图元元数据的高速同步。'
-    },
-    en: {
-      title: 'gocache-sync',
-      description: 'A Raft-based consistent distributed KV cache. Features LRU eviction and HTTP/gRPC protocols, optimized for high-speed synchronization of 3D spatial slice metadata across nodes.'
+      title: 'multimodal-pv-defect-detection',
+      description: 'A dual-stream multimodal solar panel defect detection model integrating thermal imaging and RGB sensor inputs. Incorporates adaptive illumination compensation to mitigate outdoor glare and shadow interferences, reliably identifying micro-cracks, hotspots, and physical damage.'
     }
   }
 ];
@@ -247,146 +277,172 @@ const BLOG_POSTS = [
     }
   },
   {
-    id: 'render-scheduler-post',
+    id: 'lightweight-adaptive-search-post',
     category: 'backend',
-    date: '2026-07-28',
+    date: '2026-08-20',
     zh: {
-      title: '深度解析 purai.cc 架构：构建高可用 GPU 渲染任务调度器',
-      categoryName: '后端与架构',
-      description: '本文分享了我在 purai.cc 架构设计中，如何基于 Go 协程、Redis 阻塞队列和 gRPC，为成千上万的 Stable Diffusion 渲染实例实现一套具备弹性扩缩容和错误重试能力的 GPU 渲染任务调度后端。',
+      title: '深入理解大模型 Test-Time Compute：基于预测熵的动态路由与 vLLM MCTS 慢思考实践',
+      categoryName: '大模型与推理计算',
+      description: '大模型推理计算（Test-Time Compute）是当前提升复杂逻辑与数学推理能力的关键前沿。本文详细拆解如何通过前 5 个生成 Token 的预测熵评估题目难度，并将困难样本自适应路由至基于 vLLM 实现的隐式值引导 MCTS 搜索引擎。',
       content: `
-        <p>在 <code>purai.cc</code> 这样的生成式建筑渲染平台中，渲染任务是高度消耗 GPU 显存和算力的。传统的 Web 后端遇到暴涨的渲染请求很容易导致显卡溢出（OOM）或请求阻塞。<strong>为此，我编写了一套分布式的 GPU 渲染任务调度系统。</strong></p>
+        <p>在大语言模型（LLM）的复杂逻辑与数学推理中，固定计算预算的贪心解码（Greedy Decoding）对于难题往往表现乏力，而全局慢思考搜索又会导致极其高昂的算力开销。<strong>为了解决算力分配与推理深度的矛盾，我设计了 Lightweight Adaptive Search (LAS) 动态算力路由框架。</strong></p>
         
-        <h3>一、核心挑战</h3>
+        <h3>一、预测熵与动态难度评估</h3>
+        <p>在模型推理的初始阶段，模型对后续思路的“自信度”往往直接体现在首批生成的 Token 概率分布中：</p>
         <ul>
-          <li><strong>冷启动与延迟</strong>：GPU 渲染节点启动拉取大模型权重需要时间，调度器需要预测算力并提前唤醒节点。</li>
-          <li><strong>请求排队与防雪崩</strong>：当大量用户并行请求渲染时，必须对任务进行优先级排列与排队阻尼，防止显卡物理服务器雪崩。</li>
+          <li><strong>前置 Token 预测熵计算</strong>：通过提取模型生成的前 5 个 Token 的概率分布，计算香农预测熵 \\(H = -\\sum p_i \\log p_i\\)。若预测熵显著高于自适应阈值，表明模型处于不确定性极高的分支点。</li>
+          <li><strong>双轨路由机制</strong>：低熵样本（简单算术、直接知识提取）直接走高效贪心解码；高熵样本（复杂代数变换、竞赛级证明）则被调度引擎截获，转入深度搜索队列。</li>
         </ul>
 
-        <h3>二、基于 Go + Redis + gRPC 的调度设计</h3>
-        <p>调度器的设计分为三层：</p>
+        <h3>二、基于 vLLM 的隐式值引导 MCTS 引擎</h3>
+        <p>传统蒙特卡洛树搜索依赖独立的 Value Model 或复杂的自我评估 Prompt，存在极大的量化噪音。我们在 vLLM 架构之上实现了轻量级隐式搜索：</p>
         <ol>
-          <li><strong>事件网关（API Gateway）</strong>：接收客户端请求，将请求封装为渲染事件，压入 Redis 优先级阻尼阻塞队列（ZSet）。</li>
-          <li><strong>核心调度器（Scheduler Core）</strong>：运行一个无锁控制循环（Control Loop），监听队列。通过长连接与各个 GPU 工作节点（Worker）保持 gRPC 状态通信。</li>
-          <li><strong>GPU 工作节点（Worker Node）</strong>：单机部署的 Python/C++ 封装实例，订阅 GPU 空闲度并主动向调度器上报。</li>
+          <li><strong>节点扩展与剪枝</strong>：每次扩展时保留 Top-K 高概率且高信息熵的推理步骤，结合束搜索（Beam Search）生成备选推导分支；</li>
+          <li><strong>无 Prompt 价值打分</strong>：通过 Token 级困惑度（Perplexity）与多采样自一致性（Self-Consistency）的一致率计算节点隐式得分；</li>
+          <li><strong>回溯与决策</strong>：采用改进的 UCT 公式平衡探索与利用，最终选取最优推理路径。</li>
         </ol>
         
-        <pre><code>// 伪代码：调度器核心循环
-func (s *Scheduler) startDispatchLoop() {
-    for {
-        worker := s.GetLeastLoadedWorker()
-        if worker == nil {
-            s.ScaleUpGPUInstances() // 弹性扩容
-            time.Sleep(1 * time.Second)
-            continue
-        }
-        task := s.Queue.PopHighestPriorityTask()
-        go s.dispatch(task, worker)
-    }
-}</code></pre>
+        <pre><code>// 动态难度路由伪代码 (Python / vLLM)
+def route_and_generate(prompt, model, threshold=0.42):
+    # 预先生成前5个Token并计算平均预测熵
+    early_tokens, entropies = model.generate_early_tokens(prompt, max_tokens=5)
+    mean_entropy = sum(entropies) / len(entropies)
+    
+    if mean_entropy < threshold:
+        # 低难度：直接快速贪心生成
+        return model.greedy_decode(prompt)
+    else:
+        # 高难度：调度至隐式值引导 MCTS 慢思考搜索
+        mcts_engine = ImplicitMCTSEngine(model, beam_width=4, max_depth=8)
+        return mcts_engine.search(prompt, initial_context=early_tokens)</code></pre>
 
-        <h3>三、落地收益</h3>
-        <p>通过这套 Go 后端调度引擎，我们成功解决了 GPU 节点的频繁空闲与突发请求堆积问题。系统的渲染平均排队延迟降低了 <strong>75%</strong>，且具备完备的单点容错能力，某台 GPU 宿主机宕机时，调度器会自动拦截并重分发其未完成的渲染任务。</p>
+        <h3>三、MATH 基准评测与算力开销削减</h3>
+        <p>在严苛的 <strong>MATH</strong> 数学推理数据集上（基于 Qwen-2.5-7B）：</p>
+        <ul>
+          <li>准确率从 Greedy 基线的 <strong>42.25%</strong> 大幅提升至 <strong>46.0% (+3.75%)</strong>；</li>
+          <li>由于动态路由机制避免了在海量简单题目上滥用搜索，整体平均算力开销仅为单次推理的 <strong>1.67x</strong>（传统全量搜索通常需要 2.0x~4.0x 以上）。</li>
+        </ul>
       `
     },
     en: {
-      title: 'Deep Dive into purai.cc Architecture: Designing a High-Availability GPU Render Scheduler',
-      categoryName: 'Backend & Systems',
-      description: 'A technical write-up detailing how I designed and implemented a concurrent GPU task scheduler in Go using Redis priority queues and gRPC to scale Stable Diffusion pipelines.',
+      title: 'Deep Dive into LLM Test-Time Compute: Predictive Entropy Routing & vLLM MCTS in Practice',
+      categoryName: 'LLM & Reasoning',
+      description: 'Test-time compute scaling is pivotal for LLM complex reasoning. This article details how I designed Lightweight Adaptive Search (LAS) using early-token predictive entropy to route hard queries to an implicit-value-guided MCTS engine on vLLM.',
       content: `
-        <p>For generative architecture platforms like <code>purai.cc</code>, rendering is heavily resource-intensive. Standard API servers easily crash or experience OOM under sudden spikes. **I designed a dedicated distributed scheduler to queue and balance these jobs.**</p>
+        <p>In mathematical and logical reasoning, static greedy decoding fails on challenging problems, while exhaustive tree search imposes prohibitive latency. **I designed Lightweight Adaptive Search (LAS) to dynamically allocate test-time compute based on problem difficulty.**</p>
         
-        <h3>1. Architectural Challenges</h3>
+        <h3>1. Predictive Entropy as Difficulty Indicator</h3>
+        <p>A model\'s confidence surfaces in its initial output distribution:</p>
         <ul>
-          <li><strong>Cold Boot Latencies</strong>: Loading large weights on a GPU takes time. The scheduler must forecast load and scale nodes preemptively.</li>
-          <li><strong>Queueing & Anti-Avalanche</strong>: Large volumes of render requests require strict prioritization to prevent physical GPU hosts from crashing.</li>
+          <li><strong>Early Token Entropy</strong>: By evaluating Shannon entropy over the first 5 generated tokens, the system reliably predicts whether the query falls into low-confidence territory.</li>
+          <li><strong>Dual-Track Routing</strong>: Queries with low entropy finish immediately via greedy decoding, while high-entropy queries enter tree search.</li>
         </ul>
 
-        <h3>2. Go + Redis + gRPC Architecture</h3>
-        <p>The scheduler uses a three-tier model:</p>
+        <h3>2. Implicit-Value-Guided MCTS on vLLM</h3>
+        <p>Traditional MCTS relies on noisy self-evaluation prompts. We built a lightweight engine directly inside vLLM:</p>
         <ol>
-          <li><strong>API Gateway</strong>: Encapsulates requests into render events and pushes them onto Redis sorted sets (ZSet) by priority.</li>
-          <li><strong>Scheduler Core</strong>: Runs a lock-free control loop to monitor queues. Maintains real-time gRPC tunnels with active Workers.</li>
-          <li><strong>GPU Workers</strong>: Local scripts monitoring VRAM availability, reporting metrics back to the core.</li>
+          <li><strong>Expansion</strong>: Expands Top-K high-information candidate steps at key branch points;</li>
+          <li><strong>Implicit Scoring</strong>: Evaluates node quality using token-level perplexity and self-consistency consensus rather than slow LLM-as-a-judge prompts;</li>
+          <li><strong>Backpropagation</strong>: Applies adaptive UCT bounds to select optimal reasoning trajectories.</li>
         </ol>
         
-        <pre><code>// Dispatch loop pseudo-code
-func (s *Scheduler) startDispatchLoop() {
-    for {
-        worker := s.GetLeastLoadedWorker()
-        if worker == nil {
-            s.ScaleUpGPUInstances()
-            time.Sleep(1 * time.Second)
-            continue
-        }
-        task := s.Queue.PopHighestPriorityTask()
-        go s.dispatch(task, worker)
-    }
-}</code></pre>
+        <pre><code># Dynamic routing pseudo-code (Python / vLLM)
+def route_and_generate(prompt, model, threshold=0.42):
+    early_tokens, entropies = model.generate_early_tokens(prompt, max_tokens=5)
+    mean_entropy = sum(entropies) / len(entropies)
+    
+    if mean_entropy < threshold:
+        return model.greedy_decode(prompt)
+    else:
+        mcts_engine = ImplicitMCTSEngine(model, beam_width=4, max_depth=8)
+        return mcts_engine.search(prompt, initial_context=early_tokens)</code></pre>
 
-        <h3>3. Outcome</h3>
-        <p>This scheduler cut queueing latency by <strong>75%</strong>. If a GPU node crashes, the scheduler intercepts and re-routes its active workloads automatically, achieving bulletproof resilience.</p>
+        <h3>3. Benchmark Results on MATH</h3>
+        <p>On the competitive <strong>MATH</strong> benchmark using Qwen-2.5-7B, LAS boosted accuracy from <strong>42.25% to 46.0% (+3.75%)</strong>, while capping compute overhead at just <strong>1.67x</strong> compared to standard 2.00x+ search baselines.</p>
       `
     }
   },
   {
-    id: 'mesh-extractor-post',
-    category: 'spatial-ai',
-    date: '2026-05-18',
+    id: 'multimodal-spatial-ai-post',
+    category: 'architecture',
+    date: '2026-07-25',
     zh: {
-      title: '点云到网格：3DGS 三维空间重构中的网格提取工程实践',
-      categoryName: '图形与空间算法',
-      description: '在将三维高斯泼溅 (3DGS) 用于空间扫描时，如何输出 CAD/BIM 能读懂的网格？本文拆解了我使用 C++ 结合 TSDF 算法和三角化算法，将点云重构为干净 OBJ 格式网格的完整步骤。',
+      title: '多模态大模型工程实践：从高分辨率 A0 图纸解析到空间拓扑图谱 (Scene Graph) 的构建与校验',
+      categoryName: '空间多模态与视觉',
+      description: '大尺寸工程图纸在传统多模态模型中面临严重的像素下采样失真问题。本文系统回顾了我在微调 Qwen-VL 进行空间实体定位、利用动态分幅保留细节、构建 Scene Graph 空间拓扑图以及对接 NetworkX 算法进行安全疏散距离核验的全套落地流程。',
       content: `
-        <p>三维高斯泼溅（3D Gaussian Splatting）在逼真渲染上表现惊艳，但它是由无数半透明的椭球体（高斯点）组成的，建筑师所使用的 CAD/BIM 软件根本无法导入和编辑。<strong>为了解决这个问题，我开发了一套点云提取干净多边形网格（Mesh）的算法工具。</strong></p>
+        <p>建筑与工程图纸（如 A0/A1 规格）通常包含数十万像素的密集细线、文字标注与拓扑空间结构。普通的通用多模态视觉大模型（VLM）在面对大图时会直接将其等比缩放至 448x448 或 1024x1024，导致关键的消防门、走廊尺寸和墙体边界全部模糊成不可读的噪点。<strong>为此，我主导设计并实现了高分辨率图纸解析与空间拓扑图谱构建系统。</strong></p>
         
-        <h3>一、算法流程设计</h3>
-        <p>从无定型的椭球体中抽离出规则的多边形网格，核心步骤如下：</p>
+        <h3>一、动态分幅 (Dynamic Patching) 与微调 Qwen-VL</h3>
         <ul>
-          <li><strong>点云致密化与去噪</strong>：提取 3DGS 的均值中心点，根据不透明度（Opacity）阈值过滤掉空气中的漂浮噪点。</li>
-          <li><strong>隐式表面重建</strong>：使用截断带符号距离场（TSDF, Truncated Signed Distance Function）将点云投影到连续体素场中。</li>
-          <li><strong>多边形提取</strong>：使用 <strong>Marching Cubes (等值面提取)</strong> 算法抽取零水平集（Zero-Level Set），生成初步的三角网格。</li>
+          <li><strong>动态分幅算法</strong>：针对 A0/A1 图纸自适应划分网格瓦片（Patches），在保持全局坐标锚点（Anchor）的同时，将局部高分辨率图元保留并送入 Vision Transformer。</li>
+          <li><strong>归一化坐标与空间实体抽取</strong>：通过微调 <strong>Qwen-VL</strong>，模型能够准确理解图纸中的视觉提示词，精准输出房间名称、承重墙体以及消防安全门的边界框（Bounding Box）坐标：<code>[ymin, xmin, ymax, xmax]</code>。</li>
         </ul>
 
-        <h3>二、C++ 核心代码实现</h3>
-        <p>我使用 C++ 和 Open3D 库实现了这一计算重塑模块。关键的 Marching Cubes 计算效率极高，能在毫秒级提取复杂的室内墙体边界。</p>
-        <pre><code>// C++ TSDF 网格重建
-auto tsdf_volume = std::make_shared&lt;TSDFVolume&gt;(voxel_length, sdf_trunc);
-for (const auto& frame : camera_frames) {
-    tsdf_volume->Integrate(frame.depth, frame.color, frame.intrinsic, frame.extrinsic);
-}
-auto mesh = tsdf_volume->ExtractTriangleMesh();</code></pre>
+        <h3>二、自动构建 Scene Graph 空间拓扑图</h3>
+        <p>仅有空间实体的离散坐标是远远不够的。为了辅助设计师和审查人员完成合规验证，必须将空间重塑为关系图：</p>
+        <ol>
+          <li><strong>实体节点生成</strong>：每个识别出的空间（房间、前室、走廊、疏散楼梯间）成为拓扑图中的节点；</li>
+          <li><strong>连通性边判定</strong>：基于门窗物理交集判定实体间的可通行性（Passable Edge），并赋予几何中心距离权重；</li>
+          <li><strong>对接 NetworkX 算法验证</strong>：调用 Dijkstra 与全源最短路径算法，全自动遍历任意房间到最近疏散出口的最长行走距离，与国家规范阈值进行秒级比对。</li>
+        </ol>
+        
+        <pre><code># 空间拓扑合规校验伪代码 (NetworkX)
+import networkx as nx
 
-        <h3>三、BIM 导出的后续挑战</h3>
-        <p>刚提取出来的三角网格通常包含百万级面片。为了让其真正能在 CAD 中使用，我实现了一套基于 **RANSAC (随机抽样一致)** 的平面提取算法，自动将复杂的三角面拟合归并为规整的平直墙面，进而导出为洁净的工业标准 DWG/IFC 二维和三维图纸，为 purai.cc 的 3D 重建模块打通了最后的闭环。</p>
+def verify_evacuation_compliance(scene_graph, max_evac_distance=30.0):
+    violations = []
+    for room in scene_graph.get_occupied_spaces():
+        # 寻找到达任一最近防烟楼梯间的最短路径
+        min_dist = float('inf')
+        for exit_node in scene_graph.get_fire_exits():
+            if nx.has_path(scene_graph.graph, room.id, exit_node.id):
+                d = nx.shortest_path_length(scene_graph.graph, room.id, exit_node.id, weight='distance')
+                min_dist = min(min_dist, d)
+        
+        if min_dist > max_evac_distance:
+            violations.append({'space': room.name, 'actual_distance': min_dist, 'limit': max_evac_distance})
+    return violations</code></pre>
+
+        <h3>三、DPO 对齐与高性能 vLLM 部署</h3>
+        <p>为了让 AI 输出的审查报告符合严谨的工程术语规范，我们采用 **DPO (Direct Preference Optimization)** 进行了规范性偏好对齐。最终模型经过 AWQ 4-bit 量化，部署在 **vLLM** 多卡推理引擎上，实现了毫秒级的高清图纸交互式在线审查体验。</p>
       `
     },
     en: {
-      title: 'From Point Cloud to CAD Mesh: Extracting Meshes in 3DGS Spatial Reconstruction',
-      categoryName: 'Graphics & Spatial Algos',
-      description: 'When applying 3DGS for spatial scans, CAD/BIM software cannot read raw Gaussian ellipsoids. This post details my C++ implementation of extracting OBJ meshes via TSDF and Marching Cubes.',
+      title: 'Multimodal Spatial AI: From A0 Draft Parsing to Scene Graph Construction & Path Validation',
+      categoryName: 'Spatial Multimodal & Vision',
+      description: 'Large-scale architectural drafts suffer severe downsampling loss in generic VLMs. This post reviews how I built a dynamic patching pipeline, fine-tuned Qwen-VL for spatial entity extraction, constructed Scene Graphs, and interfaced NetworkX for code compliance.',
       content: `
-        <p>While 3D Gaussian Splatting (3DGS) renders photoreal scenes beautifully, it is made of millions of semi-transparent gaussians. CAD/BIM software cannot edit these. **I developed an algorithm to extract clean polygon meshes from 3DGS scans.**</p>
+        <p>Architectural drafts (A0/A1) pack hundreds of thousands of fine vector lines and dense annotations. Standard VLMs compress images to 448x448, turning vital fire doors and corridors into unreadable blurs. **I designed a high-resolution multimodal parsing and Scene Graph topology pipeline to solve this.**</p>
         
-        <h3>1. The Reconstruction Workflow</h3>
-        <p>The processing pipeline consists of three core steps:</p>
+        <h3>1. Dynamic Patching & Qwen-VL Fine-Tuning</h3>
         <ul>
-          <li><strong>Point Pruning</strong>: Extract Gaussian centers and discard points with opacity values below custom thresholds.</li>
-          <li><strong>Implicit Surface Reconstruction</strong>: Project points into Truncated Signed Distance Fields (TSDF) voxels.</li>
-          <li><strong>Polygon Extraction</strong>: Run **Marching Cubes** to extract zero-level isosurfaces into triangular meshes.</li>
+          <li><strong>Dynamic Patching</strong>: Adaptive tile division preserves vector-raster details while maintaining unified global anchor coordinates.</li>
+          <li><strong>Visual Entity Extraction</strong>: Fine-tuned **Qwen-VL** with normalized bounding boxes to locate rooms, structural walls, and fire escape exits.</li>
         </ul>
 
-        <h3>2. C++ Implementation</h3>
-        <p>I built this using C++ and Open3D. Marching Cubes runs fast on local CPUs, resolving interior boundaries in milliseconds.</p>
-        <pre><code>// C++ TSDF Mesh Extraction
-auto tsdf_volume = std::make_shared&lt;TSDFVolume&gt;(voxel_length, sdf_trunc);
-for (const auto& frame : camera_frames) {
-    tsdf_volume->Integrate(frame.depth, frame.color, frame.intrinsic, frame.extrinsic);
-}
-auto mesh = tsdf_volume->ExtractTriangleMesh();</code></pre>
+        <h3>2. Automated Scene Graph Topology</h3>
+        <p>Spatial coordinates alone cannot verify building regulations. We transform discrete boxes into a connected topological graph:</p>
+        <ol>
+          <li><strong>Nodes</strong>: Each physical room or transit space becomes a graph vertex;</li>
+          <li><strong>Edges</strong>: Doorway intersections dynamically instantiate passable edges with Euclidean distance weights;</li>
+          <li><strong>NetworkX Compliance Solving</strong>: Runs shortest-path calculations to verify maximum evacuation distances against statutory standards.</li>
+        </ol>
+        
+        <pre><code># Compliance checking pseudo-code
+import networkx as nx
 
-        <h3>3. Flattening for BIM</h3>
-        <p>Raw meshes are dense. I applied a **RANSAC planar-fitting** loop to merge triangles into flat plane walls, exporting neat standard IFC/BIM formats, completing purai.cc\'s scan-to-CAD pipeline.</p>
+def verify_evacuation_compliance(scene_graph, max_evac_distance=30.0):
+    violations = []
+    for room in scene_graph.get_occupied_spaces():
+        distances = [nx.shortest_path_length(scene_graph.graph, room.id, exit.id, weight='distance')
+                     for exit in scene_graph.get_fire_exits() if nx.has_path(scene_graph.graph, room.id, exit.id)]
+        if distances and min(distances) > max_evac_distance:
+            violations.append((room.name, min(distances)))
+    return violations</code></pre>
+
+        <h3>3. DPO Alignment & vLLM Serving</h3>
+        <p>We aligned outputs with professional terminology using **Direct Preference Optimization (DPO)**. Quantized to AWQ 4-bit and served on **vLLM**, the engine powers sub-second interactive layout validation.</p>
       `
     }
   }
