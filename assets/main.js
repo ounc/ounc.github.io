@@ -21,8 +21,8 @@ const TRANSLATIONS = {
     'filter-backend': '大模型与推理计算',
     'filter-architecture': '空间多模态与视觉',
     'filter-ai': '时序与工程系统',
-    'projects-tag': 'Showcase',
-    'projects-title': '科研课题与工程实践',
+    'projects-tag': 'Featured',
+    'projects-title': 'Featured Projects',
     'brand-name': 'ounc (刘文帝)',
     'about-tag': 'About Me',
     'about-title': '个人简介',
@@ -65,8 +65,8 @@ const TRANSLATIONS = {
     'filter-backend': 'LLM & Reasoning',
     'filter-architecture': 'Spatial Multimodal & Vision',
     'filter-ai': 'Time-Series & Systems',
-    'projects-tag': 'Showcase',
-    'projects-title': 'Research Projects & Engineering Practice',
+    'projects-tag': 'Featured',
+    'projects-title': 'Featured Projects',
     'brand-name': 'ounc (Wendi Liu)',
     'about-tag': 'About Me',
     'about-title': 'Profile',
@@ -110,97 +110,98 @@ const TYPEWRITER_TEXTS = {
 
 // --- 2. BILINGUAL PROJECTS DATA ---
 
+const FEATURED_PROJECT_IDS = [
+  'ai-quantity-copilot-revit',
+  'lightweight-adaptive-search',
+  'calibrated-pessimism-offline-rl',
+  'wind-power-forecasting'
+];
+
 const PROJECTS = [
+  {
+    id: 'ai-quantity-copilot-revit',
+    icon: '🏗️',
+    type: 'research',
+    github: null,
+    demo: null,
+    articleId: null,
+    badge: {
+      zh: '工程 AI · 在研',
+      en: 'Engineering AI · Ongoing'
+    },
+    tech: ['Revit API', 'LLM Intent Parsing', 'Deterministic Computation', 'BIM', 'BOQ', 'Variance Analysis'],
+    zh: {
+      title: 'AI Quantity Copilot for Revit',
+      description: '该产品方向起源于 2024.11–2025.10 的工程实践，后续作为独立项目持续开发。系统面向 Revit，结合 LLM intent parsing 与确定性 Revit API 计算；已在真实 Revit 模型中验证 1,085 个构件，支持 Walls / Floors / Columns / Beams 的 count / area / volume / length 查询，并具备 BOQ mapping 与 variance analysis 原型。'
+    },
+    en: {
+      title: 'AI Quantity Copilot for Revit',
+      description: 'The product direction originated in engineering work from Nov 2024 to Oct 2025 and has continued as an independently developed project. It combines LLM intent parsing with deterministic Revit API computation, validated on a real Revit model with 1,085 elements, supporting walls, floors, columns and beams across count, area, volume and length queries, with a BOQ mapping and variance-analysis prototype.'
+    }
+  },
   {
     id: 'lightweight-adaptive-search',
     icon: '🧠',
-    github: 'https://github.com/ounc/lightweight-adaptive-search',
-    demo: '#',
-    tech: ['vLLM', 'MCTS', 'Test-Time Compute', 'Qwen-2.5-7B', 'Entropy Routing', 'PyTorch'],
+    type: 'research',
+    github: null,
+    demo: null,
+    articleId: 'lightweight-adaptive-search-post',
+    badge: {
+      zh: 'LLM Reasoning · 在研',
+      en: 'LLM Reasoning · Ongoing'
+    },
+    tech: ['vLLM', 'MCTS', 'Test-Time Compute', 'Early-Token Uncertainty', 'Tree Search', 'PyTorch'],
     zh: {
-      title: 'lightweight-adaptive-search',
-      description: '大模型推理算力自适应路由框架（LAS）。通过前5个生成Token的预测熵动态评估任务难度，低难度走快速贪心解码，高难度路由至基于 vLLM 开发的隐式值引导蒙特卡洛树搜索（MCTS）引擎。在 MATH 数学推理集上超越基线 3.75% 准确率，并将平均推理开销由 2.00x 压缩至 1.67x。'
+      title: 'Lightweight Adaptive Search (LAS)',
+      description: '大模型推理与 Test-Time Compute 在研项目。LAS 利用早期 Token 不确定性动态评估样本难度：简单样本走快速贪心解码，困难样本路由至基于 vLLM 的树搜索与更高预算推理。'
     },
     en: {
-      title: 'lightweight-adaptive-search',
-      description: 'Lightweight Adaptive Search (LAS), a test-time compute routing framework dynamically measuring query difficulty via early token predictive entropy. Routes easy queries to greedy decoding and complex queries to an implicit-value-guided MCTS engine on vLLM, outperforming baselines by +3.75% on MATH with 1.67x compute.'
+      title: 'Lightweight Adaptive Search (LAS)',
+      description: 'Lightweight Adaptive Search (LAS) — an ongoing research project on adaptive test-time compute for LLM reasoning. LAS uses early-token uncertainty to route easy samples to fast decoding and harder samples to higher-budget search with vLLM-based tree search.'
     }
   },
   {
-    id: 'multimodal-draft-spatial-ai',
-    icon: '📐',
-    github: 'https://github.com/ounc/multimodal-draft-spatial-ai',
-    demo: '#',
-    tech: ['Qwen-VL', 'DPO', 'Scene Graph', 'NetworkX', 'vLLM', 'AWQ-4bit'],
+    id: 'calibrated-pessimism-offline-rl',
+    icon: '📉',
+    type: 'research',
+    github: null,
+    demo: null,
+    articleId: null,
+    badge: {
+      zh: 'Offline RL · 在研',
+      en: 'Offline RL · Ongoing'
+    },
+    tech: ['Offline RL', 'Uncertainty Calibration', 'Bellman Residual', 'ICLR 2027'],
     zh: {
-      title: 'multimodal-draft-spatial-ai',
-      description: '面向 A0/A1 超高分辨率工程图纸的多模态智能解析与空间拓扑图谱系统。设计动态分幅算法融合矢量与图像特征，微调 Qwen-VL 实现房间与消防通道空间实体的精准定位抽取；自动构建 Scene Graph 空间拓扑图并对接 NetworkX 进行疏散距离合规核验，采用 DPO 规范输出并基于 vLLM 4-bit 量化实现毫秒级交互反馈。'
+      title: 'Calibrated Pessimism in Offline RL',
+      description: '离线强化学习中的不确定性校准研究。当前证据支持更可靠的 calibration reliability / sharpness，而 held-out Bellman residual 仅作为 proxy，尚不支持稳定的 downstream control-return improvement。目标投稿 ICLR 2027。'
     },
     en: {
-      title: 'multimodal-draft-spatial-ai',
-      description: 'An end-to-end multimodal spatial parsing and Scene Graph system for A0/A1 architectural drafts. Features dynamic patch sampling, fine-tuned Qwen-VL for bounding-box room extraction, and automated Scene Graph construction with NetworkX pathfinding for code-compliant evacuation checks, optimized via DPO and 4-bit vLLM.'
-    }
-  },
-  {
-    id: 'llm-rag-building-code-assistant',
-    icon: '🏛️',
-    github: 'https://github.com/ounc/llm-rag-building-code-assistant',
-    demo: '#',
-    tech: ['LLM', 'RAG', 'Vector-DB', 'LangChain', 'Python', 'FastAPI'],
-    zh: {
-      title: 'llm-rag-building-code-assistant',
-      description: '基于大语言模型与多源 RAG 检索增强架构的数字化工程辅助工具。构建垂直领域建筑设计规范、消防强制性条文与历史工程语料的混合索引数据库，提供秒级规范智能问答与工程设计合规性自动化初审，大幅减轻一线工程师的多源文献检索认知负荷。'
-    },
-    en: {
-      title: 'llm-rag-building-code-assistant',
-      description: 'An LLM-powered cognitive engineering assistant integrating multi-source Retrieval-Augmented Generation (RAG). Indexes complex national building codes and architectural standards for automated compliance pre-checks, significantly reducing cognitive load in multi-document retrieval.'
-    }
-  },
-  {
-    id: 'automated-boq-pipeline',
-    icon: '📊',
-    github: 'https://github.com/ounc/automated-boq-pipeline',
-    demo: '#',
-    tech: ['Python', 'BIM / CAD Data', 'Data Extraction', 'ETL Pipeline', 'SQL'],
-    zh: {
-      title: 'automated-boq-pipeline',
-      description: '结合中建八局 4 年大型工程全周期成本管控经验研发的工程量清单 (BOQ) 数字化处理流水线。对接 CAD/BIM 数字化图纸与工程数据库，将传统手工分项算量、定额套用与成本偏差分析升级为标准化半自动协同工作流，显著提升预算编制准确率与施工规划效率。'
-    },
-    en: {
-      title: 'automated-boq-pipeline',
-      description: 'A digital Bill of Quantities (BOQ) automation pipeline synthesized from 4 years of CSCEC full-cycle construction commerce practice. Connects CAD/BIM model data to automated quantity surveying and cost-variance analysis pipelines, streamlining budgeting transparency and collaborative estimation.'
+      title: 'Calibrated Pessimism in Offline RL',
+      description: 'Calibrated Pessimism in Offline RL — ongoing research on uncertainty calibration for offline reinforcement learning. Current evidence supports improved calibration reliability and sharpness, while held-out Bellman residual remains a proxy and does not yet support stable downstream control-return improvements. Target venue: ICLR 2027.'
     }
   },
   {
     id: 'wind-power-forecasting',
     icon: '🌪️',
-    github: 'https://github.com/ounc/wind-power-forecasting',
+    type: 'opensource',
+    github: null,
     demo: './wind-forecast/',
-    tech: ['PyTorch', '1D-CNN', 'GRU', 'TimeSeries', 'Hypothesis-Testing'],
+    articleId: 'wind-power-forecasting-post',
+    badge: {
+      zh: '个人项目 · 时序预测',
+      en: 'Personal Project · Time-Series'
+    },
+    tech: ['PyTorch', '1D-CNN', 'GRU', 'LSTM', 'ARIMA', 'SVR', 'Wilcoxon', 'Friedman'],
     zh: {
-      title: 'wind-power-forecasting',
-      description: '基于 1D-CNN + GRU 混合时空深度学习架构的超短期风电功率预测系统。集成气象物理特征工程（风向正余弦分解、动态空气密度修正）、全套基准对照（LSTM/SVR/ARIMA）与学术级 Wilcoxon/Friedman 统计显著性检验，单样本推理时延仅 0.26ms。'
+      title: 'Ultra-Short-Term Wind Power Forecasting',
+      description: '个人时序预测项目，采用 CNN-GRU 架构并与 LSTM / ARIMA / SVR 基线进行对照，覆盖 grid search、sensitivity analysis 与 Wilcoxon / Friedman 统计评估。'
     },
     en: {
-      title: 'wind-power-forecasting',
-      description: 'An ultra-short-term wind power forecasting system using a hybrid 1D-CNN + GRU architecture. Captures multi-variable spatial correlations and temporal dynamics, featuring aerodynamic feature engineering, multi-model baselines, and Wilcoxon/Friedman hypothesis tests with 0.26ms latency.'
+      title: 'Ultra-Short-Term Wind Power Forecasting',
+      description: 'Ultra-Short-Term Wind Power Forecasting — a personal time-series forecasting project using a CNN-GRU architecture with LSTM, ARIMA and SVR baselines, grid search, sensitivity analysis, and Wilcoxon/Friedman statistical evaluation.'
     }
   },
-  {
-    id: 'multimodal-pv-defect-detection',
-    icon: '☀️',
-    github: 'https://github.com/ounc/multimodal-pv-defect-detection',
-    demo: '#',
-    tech: ['YOLOv5', 'RGB-Thermal', 'Multimodal', 'Adaptive Illumination', 'OpenCV'],
-    zh: {
-      title: 'multimodal-pv-defect-detection',
-      description: '结合热成像 (Thermal) 与可见光 (RGB) 图像的双流多模态光伏面板缺陷智能检测模型。引入自适应环境光照补偿算法与特征对齐网络，有效克服野外强光反射与阴影遮挡干扰，精准定位光伏隐裂、热斑与表面破损，保障工业巡检鲁棒性。'
-    },
-    en: {
-      title: 'multimodal-pv-defect-detection',
-      description: 'A dual-stream multimodal solar panel defect detection model integrating thermal imaging and RGB sensor inputs. Incorporates adaptive illumination compensation to mitigate outdoor glare and shadow interferences, reliably identifying micro-cracks, hotspots, and physical damage.'
-    }
-  }
 ];
 
 // --- 3. BILINGUAL BLOG POSTS DATA ---
@@ -660,37 +661,91 @@ function applyLanguage(lang) {
 
 // --- 7. RENDERERS: Blog & Projects ---
 
-function renderProjects() {
-  const grid = document.getElementById('projects-grid');
+function getOrderedProjects(ids) {
+  return ids.map(id => PROJECTS.find(p => p.id === id)).filter(Boolean);
+}
+
+function renderProjectCollection(projectList, grid) {
   if (!grid) return;
 
-  grid.innerHTML = PROJECTS.map(p => {
+  grid.innerHTML = projectList.map(p => {
     const data = p[currentLang];
+
+    const linkItems = [];
+
+    if (p.demo && p.demo !== '#') {
+      linkItems.push(`
+        <a href="${p.demo}" target="_blank" class="project-link project-link-demo" aria-label="Live Demo for ${data.title}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          ${currentLang === 'zh' ? '在线沙盒' : 'Live Demo'}
+        </a>
+      `);
+    }
+
+    if (p.articleId) {
+      linkItems.push(`
+        <button class="project-link project-link-article" onclick="openPostReader('${p.articleId}')" aria-label="Technical deep-dive for ${data.title}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+          ${currentLang === 'zh' ? '技术架构' : 'Deep Dive'}
+        </button>
+      `);
+    }
+
+    if (p.github && p.github !== '#') {
+      linkItems.push(`
+        <a href="${p.github}" target="_blank" class="project-link" aria-label="Open-source repository for ${data.title}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+          ${TRANSLATIONS[currentLang]['btn-project-code']}
+        </a>
+      `);
+    }
+
+    let badgeHtml = '';
+    if (p.badge) {
+      const badgeText = p.badge[currentLang];
+      const iconSvg = p.type === 'research'
+        ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>`
+        : p.type === 'opensource'
+        ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>`
+        : `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`;
+
+      badgeHtml = `
+        <span class="project-badge-tag ${p.type}">
+          ${iconSvg}
+          ${badgeText}
+        </span>
+      `;
+    }
+
     return `
       <article class="card fade-in" id="project-card-${p.id}">
         <div class="project-image">
           <div class="project-icon-wrapper">${p.icon}</div>
         </div>
         <div class="card-content">
-          <h3 class="card-title">${data.title}</h3>
+          <div class="project-meta-header">
+            <h3 class="card-title">${data.title}</h3>
+            ${badgeHtml}
+          </div>
           <p class="card-description">${data.description}</p>
           <div class="project-tech">
             ${p.tech.map(t => `<span>${t}</span>`).join('')}
           </div>
           <div class="project-links">
-            <a href="${p.github}" target="_blank" class="project-link" aria-label="Open-source repository for ${data.title}">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
-              ${TRANSLATIONS[currentLang]['btn-project-code']}
-            </a>
-            <a href="${p.demo}" class="project-link" aria-label="Live Demo for ${data.title}">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-              ${TRANSLATIONS[currentLang]['btn-project-demo']}
-            </a>
+            ${linkItems.join('')}
           </div>
         </div>
       </article>
     `;
   }).join('');
+}
+
+function renderProjects() {
+  const featureGrid = document.getElementById('projects-grid');
+  if (featureGrid) {
+    renderProjectCollection(getOrderedProjects(FEATURED_PROJECT_IDS), featureGrid);
+  }
+
 }
 
 function renderBlogPosts(filterCategory = 'all') {

@@ -623,28 +623,107 @@ a:hover {
   transform: scale(1.1) rotate(10deg);
 }
 
+.project-meta-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.project-meta-header .card-title {
+  margin-bottom: 0;
+}
+
+.project-badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-secondary);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+}
+
+.project-badge-tag.opensource {
+  background: rgba(16, 172, 132, 0.08);
+  color: #0c8566;
+  border-color: rgba(16, 172, 132, 0.25);
+}
+
+.project-badge-tag.enterprise {
+  background: rgba(255, 159, 67, 0.1);
+  color: #b35900;
+  border-color: rgba(255, 159, 67, 0.25);
+}
+
+.project-badge-tag.research {
+  background: rgba(255, 111, 89, 0.1);
+  color: #d63031;
+  border-color: rgba(255, 111, 89, 0.25);
+}
+
+.project-badge-tag.industrial {
+  background: rgba(52, 152, 219, 0.1);
+  color: #2980b9;
+  border-color: rgba(52, 152, 219, 0.25);
+}
+
 .project-links {
   display: flex;
-  gap: 12px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .project-link {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: 0.85rem;
+  gap: 5px;
+  font-size: 0.82rem;
   font-weight: 500;
   color: var(--text-secondary);
-  border: 1px solid rgba(255, 111, 89, 0.15);
+  background: transparent;
+  border: 1px solid rgba(255, 111, 89, 0.18);
   padding: 6px 12px;
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
 }
 
 .project-link:hover {
   background: var(--accent-gradient);
   color: white;
   border-color: transparent;
+  transform: translateY(-1px);
+}
+
+.project-link-demo {
+  color: #0c8566;
+  border-color: rgba(16, 172, 132, 0.35);
+  background: rgba(16, 172, 132, 0.04);
+}
+
+.project-link-demo:hover {
+  background: linear-gradient(135deg, #10ac84 0%, #1dd1a1 100%);
+  color: white;
+}
+
+.project-link-article {
+  color: var(--color-primary);
+  border-color: rgba(255, 111, 89, 0.3);
+  background: rgba(255, 111, 89, 0.04);
+}
+
+.project-link-article:hover {
+  background: var(--accent-gradient);
+  color: white;
 }
 
 .project-tech {
