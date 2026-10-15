@@ -498,15 +498,42 @@ a:hover {
   background: var(--accent-gradient);
   opacity: 0;
   transition: opacity var(--transition-fast);
+  z-index: 3;
+}
+
+/* Linear / Apple style cursor spotlight border glow */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: radial-gradient(
+    360px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+    rgba(255, 111, 89, 0.45),
+    rgba(255, 159, 67, 0.22) 45%,
+    transparent 80%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
 }
 
 .card:hover {
   transform: translateY(-6px);
   box-shadow: var(--card-shadow-hover);
-  border-color: rgba(255, 111, 89, 0.15);
+  border-color: rgba(255, 111, 89, 0.18);
 }
 
 .card:hover::before {
+  opacity: 1;
+}
+
+.card:hover::after {
   opacity: 1;
 }
 
@@ -1089,6 +1116,307 @@ a:hover {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ==========================================
+   Project Metric Capsules & Telemetry
+   ========================================== */
+.project-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+  gap: 8px;
+  margin: 12px 0 16px 0;
+  padding: 10px 14px;
+  background: rgba(255, 111, 89, 0.035);
+  border: 1px solid rgba(255, 111, 89, 0.1);
+  border-radius: var(--radius-sm);
+}
+
+.metric-pill {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metric-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.metric-value {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+/* Mini SCADA Live Waveform for Wind Power */
+.mini-scada-telemetry {
+  margin: 12px 0 16px 0;
+  background: linear-gradient(180deg, rgba(16, 172, 132, 0.05) 0%, rgba(16, 172, 132, 0.02) 100%);
+  border: 1px solid rgba(16, 172, 132, 0.22);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.scada-telemetry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: #0c8566;
+  margin-bottom: 6px;
+}
+
+.scada-live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.5px;
+}
+
+.scada-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10ac84;
+  box-shadow: 0 0 0 0 rgba(16, 172, 132, 0.7);
+  animation: scada-pulse-green 1.8s infinite;
+}
+
+@keyframes scada-pulse-green {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 172, 132, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 172, 132, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 172, 132, 0); }
+}
+
+.scada-current-val {
+  color: #10ac84;
+  font-weight: 700;
+}
+
+.scada-canvas-wrap {
+  width: 100%;
+  height: 48px;
+}
+
+.scada-canvas-wrap canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==========================================
+   Command Palette (⌘K) Styles
+   ========================================== */
+.cmd-k-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.035);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.cmd-k-btn:hover {
+  background: rgba(255, 111, 89, 0.08);
+  border-color: rgba(255, 111, 89, 0.3);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.cmd-k-shortcut {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  padding: 1px 4px;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.cmd-palette-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 35, 45, 0.42);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 14vh;
+  opacity: 0;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cmd-palette-backdrop.active {
+  display: flex;
+  opacity: 1;
+}
+
+.cmd-palette-modal {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 16px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 111, 89, 0.12);
+  overflow: hidden;
+  transform: scale(0.96) translateY(-8px);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.cmd-palette-backdrop.active .cmd-palette-modal {
+  transform: scale(1) translateY(0);
+}
+
+.cmd-palette-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.cmd-palette-search-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+#cmd-palette-input {
+  flex-grow: 1;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  outline: none;
+}
+
+#cmd-palette-input::placeholder {
+  color: var(--text-muted);
+}
+
+.cmd-palette-esc-badge kbd {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.cmd-palette-body {
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.cmd-group-title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  padding: 8px 12px 4px 12px;
+}
+
+.cmd-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+  color: var(--text-primary);
+}
+
+.cmd-item:hover, .cmd-item.selected {
+  background: rgba(255, 111, 89, 0.09);
+  color: var(--color-primary);
+}
+
+.cmd-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cmd-item-icon {
+  font-size: 1.1rem;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cmd-item-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.cmd-item-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: 8px;
+}
+
+.cmd-item-badge {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  background: rgba(0, 0, 0, 0.04);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--text-secondary);
+}
+
+.cmd-palette-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.015);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.cmd-footer-keys {
+  display: flex;
+  gap: 12px;
+}
+
+.cmd-footer-keys kbd {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
 }
 
 .fade-in {

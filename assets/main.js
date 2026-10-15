@@ -46,6 +46,11 @@ const TRANSLATIONS = {
     'btn-read-more': '阅读全文',
     'btn-project-code': '开源仓库',
     'btn-project-demo': '演示链接',
+    'cmd-k-text': '搜索',
+    'cmd-nav': '导航',
+    'cmd-select': '选择',
+    'cmd-close': '关闭',
+    'scada-live': '实时风电遥测流 (15-MIN)',
     'comment-default-1': '网页排版真舒服，暖色调在冷冰冰的极客主页里确实有温度。催更你的 MCTS 实践文！',
     'comment-default-2': '对时序风电预测模型的特征工程分析很到位，期待更多前沿推理优化的深度文章。'
   },
@@ -90,6 +95,11 @@ const TRANSLATIONS = {
     'btn-read-more': 'Read More',
     'btn-project-code': 'GitHub Repo',
     'btn-project-demo': 'Demo Link',
+    'cmd-k-text': 'Search',
+    'cmd-nav': 'Navigate',
+    'cmd-select': 'Select',
+    'cmd-close': 'Close',
+    'scada-live': 'LIVE SCADA STREAM (15-MIN)',
     'comment-default-1': 'The layout and custom sunset theme look absolutely stunning! Can\'t wait to read your next post on Raft implementation.',
     'comment-default-2': 'Great deep-dive into Go GC tuning! We\'re adjusting GOGC ratios in our production API services to shave off latency spikes too. Looking forward to more posts.'
   }
@@ -129,6 +139,11 @@ const PROJECTS = [
       zh: '工程 AI · 在研',
       en: 'Engineering AI · Ongoing'
     },
+    metrics: [
+      { label: { zh: '验证构件', en: 'Verified' }, value: '1,085', num: 1085, suffix: ' 个' },
+      { label: { zh: '图元分类', en: 'Categories' }, value: '4 类', num: 4, suffix: ' 大类' },
+      { label: { zh: '计算方式', en: 'Precision' }, value: 'Deterministic' }
+    ],
     tech: ['Revit API', 'LLM Intent Parsing', 'Deterministic Computation', 'BIM', 'BOQ', 'Variance Analysis'],
     zh: {
       title: 'AI Quantity Copilot for Revit',
@@ -150,6 +165,11 @@ const PROJECTS = [
       zh: 'LLM Reasoning · 在研',
       en: 'LLM Reasoning · Ongoing'
     },
+    metrics: [
+      { label: { zh: 'MATH 准确率', en: 'MATH Acc' }, value: '+3.75%', num: 3.75, prefix: '+', suffix: '%' },
+      { label: { zh: '推理算力上限', en: 'Compute Cap' }, value: '1.67x', num: 1.67, suffix: 'x' },
+      { label: { zh: '早期探测', en: 'Early Probe' }, value: '5 Tokens', num: 5, suffix: ' Tok' }
+    ],
     tech: ['vLLM', 'MCTS', 'Test-Time Compute', 'Early-Token Uncertainty', 'Tree Search', 'PyTorch'],
     zh: {
       title: 'Lightweight Adaptive Search (LAS)',
@@ -171,6 +191,11 @@ const PROJECTS = [
       zh: 'Offline RL · 在研',
       en: 'Offline RL · Ongoing'
     },
+    metrics: [
+      { label: { zh: '目标会议', en: 'Target' }, value: 'ICLR 2027' },
+      { label: { zh: '评估准则', en: 'Metric' }, value: 'Sharpness' },
+      { label: { zh: 'Bellman 残差', en: 'Proxy' }, value: 'Held-out' }
+    ],
     tech: ['Offline RL', 'Uncertainty Calibration', 'Bellman Residual', 'ICLR 2027'],
     zh: {
       title: 'Calibrated Pessimism in Offline RL',
@@ -192,6 +217,12 @@ const PROJECTS = [
       zh: '个人项目 · 时序预测',
       en: 'Personal Project · Time-Series'
     },
+    metrics: [
+      { label: { zh: 'RMSE 误差', en: 'RMSE' }, value: '156.9 kW', num: 156.9, suffix: ' kW' },
+      { label: { zh: '归一化误差', en: 'NRMSE' }, value: '7.84%', num: 7.84, suffix: '%' },
+      { label: { zh: '推理时延', en: 'Latency' }, value: '0.264 ms', num: 0.264, suffix: ' ms' },
+      { label: { zh: '显著性检验', en: 'p-value' }, value: 'p < 0.05' }
+    ],
     tech: ['PyTorch', '1D-CNN', 'GRU', 'LSTM', 'ARIMA', 'SVR', 'Wilcoxon', 'Friedman'],
     zh: {
       title: 'Ultra-Short-Term Wind Power Forecasting',
@@ -201,7 +232,7 @@ const PROJECTS = [
       title: 'Ultra-Short-Term Wind Power Forecasting',
       description: 'Ultra-Short-Term Wind Power Forecasting — a personal time-series forecasting project using a CNN-GRU architecture with LSTM, ARIMA and SVR baselines, grid search, sensitivity analysis, and Wilcoxon/Friedman statistical evaluation.'
     }
-  },
+  }
 ];
 
 // --- 3. BILINGUAL BLOG POSTS DATA ---
@@ -449,7 +480,9 @@ def verify_evacuation_compliance(scene_graph, max_evac_distance=30.0):
   }
 ];
 
-// --- 4. INTERACTIVE CANVAS BACKGROUND (Warm Sunset Grid & Particles) ---
+// --- 4. INTERACTIVE CANVAS BACKGROUND (Neural Tensor Flow & Particles) ---
+
+let canvasBgInstance = null;
 
 class CanvasBackground {
   constructor(canvasId) {
@@ -458,12 +491,21 @@ class CanvasBackground {
     this.ctx = this.canvas.getContext('2d');
     this.particles = [];
     this.animationFrameId = null;
-    this.maxParticles = 55;
-    this.connectionDistance = 140;
+    this.maxParticles = 65;
+    this.connectionDistance = 135;
+    this.mouse = { x: null, y: null, radius: 160 };
 
     this.init();
     this.animate();
     window.addEventListener('resize', () => this.resize());
+    window.addEventListener('mousemove', (e) => {
+      this.mouse.x = e.clientX;
+      this.mouse.y = e.clientY;
+    });
+    window.addEventListener('mouseleave', () => {
+      this.mouse.x = null;
+      this.mouse.y = null;
+    });
   }
 
   init() {
@@ -475,8 +517,8 @@ class CanvasBackground {
         y: Math.random() * this.canvas.height,
         vx: (Math.random() - 0.5) * 0.45,
         vy: (Math.random() - 0.5) * 0.45,
-        size: Math.random() * 3.5 + 1.5,
-        color: Math.random() > 0.5 ? 'rgba(255, 111, 89, 0.4)' : 'rgba(255, 159, 67, 0.35)'
+        size: Math.random() * 2.8 + 1.2,
+        color: Math.random() > 0.5 ? 'rgba(255, 111, 89, 0.45)' : 'rgba(255, 159, 67, 0.4)'
       });
     }
   }
@@ -493,9 +535,32 @@ class CanvasBackground {
     this.drawGrid();
 
     // Update and draw particles
-    this.particles.forEach((p, idx) => {
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+
       p.x += p.vx;
       p.y += p.vy;
+
+      // Mouse repulsion / tensor perturbation
+      if (this.mouse.x !== null && this.mouse.y !== null) {
+        const dx = p.x - this.mouse.x;
+        const dy = p.y - this.mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < this.mouse.radius) {
+          const force = (this.mouse.radius - dist) / this.mouse.radius;
+          p.x += (dx / dist) * force * 2.2;
+          p.y += (dy / dist) * force * 2.2;
+
+          // Dynamic tensor connection from cursor to particle
+          this.ctx.beginPath();
+          this.ctx.moveTo(this.mouse.x, this.mouse.y);
+          this.ctx.lineTo(p.x, p.y);
+          this.ctx.strokeStyle = `rgba(255, 111, 89, ${(1 - dist / this.mouse.radius) * 0.32})`;
+          this.ctx.lineWidth = 1;
+          this.ctx.stroke();
+        }
+      }
 
       // Boundary check
       if (p.x < 0 || p.x > this.canvas.width) p.vx *= -1;
@@ -507,14 +572,14 @@ class CanvasBackground {
       this.ctx.fill();
 
       // Connect near particles
-      for (let j = idx + 1; j < this.particles.length; j++) {
+      for (let j = i + 1; j < this.particles.length; j++) {
         const p2 = this.particles[j];
         const dx = p.x - p2.x;
         const dy = p.y - p2.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < this.connectionDistance) {
-          const alpha = (1 - dist / this.connectionDistance) * 0.12;
+          const alpha = (1 - dist / this.connectionDistance) * 0.15;
           this.ctx.beginPath();
           this.ctx.moveTo(p.x, p.y);
           this.ctx.lineTo(p2.x, p2.y);
@@ -523,7 +588,7 @@ class CanvasBackground {
           this.ctx.stroke();
         }
       }
-    });
+    }
 
     this.animationFrameId = requestAnimationFrame(() => this.animate());
   }
@@ -717,6 +782,37 @@ function renderProjectCollection(projectList, grid) {
       `;
     }
 
+    // Metrics capsules
+    let metricsHtml = '';
+    if (p.metrics && p.metrics.length > 0) {
+      metricsHtml = `
+        <div class="project-metrics-grid">
+          ${p.metrics.map(m => `
+            <div class="metric-pill">
+              <span class="metric-label">${m.label[currentLang]}</span>
+              <span class="metric-value" data-counter="${m.num !== undefined ? m.num : ''}" data-prefix="${m.prefix || ''}" data-suffix="${m.suffix || ''}">${m.value}</span>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // Mini SCADA telemetry stream for wind power
+    let scadaHtml = '';
+    if (p.id === 'wind-power-forecasting') {
+      scadaHtml = `
+        <div class="mini-scada-telemetry">
+          <div class="scada-telemetry-header">
+            <span class="scada-live-indicator"><span class="scada-pulse"></span>${TRANSLATIONS[currentLang]['scada-live']}</span>
+            <span class="scada-current-val">P_pred: <span id="scada-val-ticker">1,428.5 kW</span></span>
+          </div>
+          <div class="scada-canvas-wrap">
+            <canvas id="scada-mini-canvas" width="400" height="48"></canvas>
+          </div>
+        </div>
+      `;
+    }
+
     return `
       <article class="card fade-in" id="project-card-${p.id}">
         <div class="project-image">
@@ -728,6 +824,8 @@ function renderProjectCollection(projectList, grid) {
             ${badgeHtml}
           </div>
           <p class="card-description">${data.description}</p>
+          ${metricsHtml}
+          ${scadaHtml}
           <div class="project-tech">
             ${p.tech.map(t => `<span>${t}</span>`).join('')}
           </div>
@@ -738,6 +836,11 @@ function renderProjectCollection(projectList, grid) {
       </article>
     `;
   }).join('');
+
+  // Trigger interactive dynamic effects
+  initSpotlightTracker();
+  initMetricCounters();
+  initWindPowerLiveTelemetry();
 }
 
 function renderProjects() {
@@ -953,17 +1056,361 @@ function initScrollObserver() {
   });
 }
 
-// --- 11. INITIALIZE EVERYTHING ---
+// --- 11. ADVANCED INTERACTIVE ENGINES (Spotlight, Counters, SCADA & Command Palette) ---
+
+function initSpotlightTracker() {
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    if (card._hasSpotlight) return;
+    card._hasSpotlight = true;
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--mouse-x', `-500px`);
+      card.style.setProperty('--mouse-y', `-500px`);
+    });
+  });
+}
+
+function initMetricCounters() {
+  const metricEls = document.querySelectorAll('.metric-value[data-counter]');
+  if (!('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const targetStr = el.getAttribute('data-counter');
+      if (!targetStr) return;
+      const targetNum = parseFloat(targetStr);
+      if (isNaN(targetNum)) return;
+
+      const prefix = el.getAttribute('data-prefix') || '';
+      const suffix = el.getAttribute('data-suffix') || '';
+      const isFloat = targetStr.includes('.');
+      const decimals = isFloat ? targetStr.split('.')[1].length : 0;
+
+      let start = 0;
+      const duration = 1200;
+      const startTime = performance.now();
+
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const current = start + (targetNum - start) * ease;
+        const formatted = isFloat ? current.toFixed(decimals) : Math.round(current).toLocaleString();
+        el.textContent = `${prefix}${formatted}${suffix}`;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+
+      requestAnimationFrame(update);
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.15 });
+
+  metricEls.forEach(el => observer.observe(el));
+}
+
+let windTelemetryAnimId = null;
+function initWindPowerLiveTelemetry() {
+  const canvas = document.getElementById('scada-mini-canvas');
+  const ticker = document.getElementById('scada-val-ticker');
+  if (!canvas) return;
+
+  if (windTelemetryAnimId) {
+    cancelAnimationFrame(windTelemetryAnimId);
+  }
+
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const width = canvas.clientWidth || 380;
+  const height = canvas.clientHeight || 48;
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+  ctx.scale(dpr, dpr);
+
+  const points = [];
+  const maxPoints = 50;
+  let phase = 0;
+
+  for (let i = 0; i < maxPoints; i++) {
+    const p = 1420 + Math.sin(i * 0.25) * 200 + Math.cos(i * 0.5) * 80;
+    points.push(p);
+  }
+
+  function draw() {
+    phase += 0.045;
+    const latest = 1420 + Math.sin(phase * 1.8) * 230 + Math.sin(phase * 4.6) * 75 + (Math.random() - 0.5) * 30;
+    points.push(latest);
+    if (points.length > maxPoints) points.shift();
+
+    if (ticker) {
+      ticker.textContent = `${latest.toFixed(1)} kW`;
+    }
+
+    ctx.clearRect(0, 0, width, height);
+
+    // Subtle grid lines
+    ctx.strokeStyle = 'rgba(16, 172, 132, 0.08)';
+    ctx.lineWidth = 1;
+    for (let y = 10; y < height; y += 14) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(width, y);
+      ctx.stroke();
+    }
+
+    const min = 1000;
+    const max = 1850;
+    const stepX = width / (maxPoints - 1);
+
+    // 1. Shaded confidence band
+    ctx.beginPath();
+    for (let i = 0; i < points.length; i++) {
+      const x = i * stepX;
+      const upper = points[i] + 70;
+      const normY = height - ((upper - min) / (max - min)) * height;
+      if (i === 0) ctx.moveTo(x, normY);
+      else ctx.lineTo(x, normY);
+    }
+    for (let i = points.length - 1; i >= 0; i--) {
+      const x = i * stepX;
+      const lower = points[i] - 70;
+      const normY = height - ((lower - min) / (max - min)) * height;
+      ctx.lineTo(x, normY);
+    }
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(16, 172, 132, 0.12)';
+    ctx.fill();
+
+    // 2. Main prediction trajectory line
+    ctx.beginPath();
+    for (let i = 0; i < points.length; i++) {
+      const x = i * stepX;
+      const normY = height - ((points[i] - min) / (max - min)) * height;
+      if (i === 0) ctx.moveTo(x, normY);
+      else ctx.lineTo(x, normY);
+    }
+    ctx.strokeStyle = '#10ac84';
+    ctx.lineWidth = 1.8;
+    ctx.stroke();
+
+    // 3. Current active point head pulse
+    const lastX = (points.length - 1) * stepX;
+    const lastY = height - ((latest - min) / (max - min)) * height;
+    ctx.beginPath();
+    ctx.arc(lastX, lastY, 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#10ac84';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(lastX, lastY, 6, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(16, 172, 132, 0.45)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    windTelemetryAnimId = requestAnimationFrame(draw);
+  }
+
+  draw();
+}
+
+function triggerCanvasBurst() {
+  if (canvasBgInstance && canvasBgInstance.particles) {
+    canvasBgInstance.particles.forEach(p => {
+      p.vx = (Math.random() - 0.5) * 4.5;
+      p.vy = (Math.random() - 0.5) * 4.5;
+    });
+  }
+}
+
+function initCommandPalette() {
+  const triggerBtn = document.getElementById('cmd-k-trigger');
+  const backdrop = document.getElementById('cmd-palette-backdrop');
+  const input = document.getElementById('cmd-palette-input');
+  const list = document.getElementById('cmd-palette-list');
+  const countEl = document.getElementById('cmd-palette-count');
+
+  if (!backdrop || !input || !list) return;
+
+  function getCommands() {
+    return [
+      { group: currentLang === 'zh' ? '页面导航' : 'Navigation', icon: '📝', title: currentLang === 'zh' ? '前往技术博客录' : 'Go to Technical Blog', desc: '#posts', action: () => scrollToSection('posts') },
+      { group: currentLang === 'zh' ? '页面导航' : 'Navigation', icon: '💼', title: currentLang === 'zh' ? '查看精选项目与成果' : 'Go to Featured Projects', desc: '#projects', action: () => scrollToSection('projects') },
+      { group: currentLang === 'zh' ? '页面导航' : 'Navigation', icon: '👤', title: currentLang === 'zh' ? '个人简介与专业技能' : 'About Me & Skills', desc: '#about', action: () => scrollToSection('about') },
+      { group: currentLang === 'zh' ? '页面导航' : 'Navigation', icon: '💬', title: currentLang === 'zh' ? '极客互动留言板' : 'Guestbook', desc: '#guestbook', action: () => scrollToSection('guestbook') },
+
+      { group: currentLang === 'zh' ? '在线沙盒与演示' : 'Live Demos', icon: '🌪️', title: currentLang === 'zh' ? '超短期风电功率预测在线沙盒' : 'Wind Power Forecasting Sandbox', desc: '15-min Forecast & CI', action: () => window.open('./wind-forecast/', '_blank') },
+
+      { group: currentLang === 'zh' ? '精选技术长文' : 'Technical Articles', icon: '🌪️', title: currentLang === 'zh' ? '超短期风电功率预测实战' : 'Wind Power Forecasting Deep-Dive', desc: 'CNN-GRU + Wilcoxon', action: () => openPostReader('wind-power-forecasting-post') },
+      { group: currentLang === 'zh' ? '精选技术长文' : 'Technical Articles', icon: '🧠', title: currentLang === 'zh' ? '大模型推理自适应搜索 (LAS)' : 'Lightweight Adaptive Search (LAS)', desc: 'vLLM + MCTS', action: () => openPostReader('lightweight-adaptive-search-post') },
+      { group: currentLang === 'zh' ? '精选技术长文' : 'Technical Articles', icon: '📐', title: currentLang === 'zh' ? '高分辨率图纸解析与空间拓扑图谱' : 'Multimodal Spatial AI & Scene Graph', desc: 'Qwen-VL + NetworkX', action: () => openPostReader('multimodal-spatial-ai-post') },
+
+      { group: currentLang === 'zh' ? '快捷指令' : 'Quick Actions', icon: '🌐', title: currentLang === 'zh' ? '切换语言 / Switch Language' : 'Toggle Language / 切换中文', desc: currentLang === 'zh' ? 'English' : '中文', action: () => { const next = currentLang === 'zh' ? 'en' : 'zh'; applyLanguage(next); } },
+      { group: currentLang === 'zh' ? '快捷指令' : 'Quick Actions', icon: '🐙', title: 'GitHub: @ounc', desc: 'github.com/ounc', action: () => window.open('https://github.com/ounc', '_blank') },
+      { group: currentLang === 'zh' ? '快捷指令' : 'Quick Actions', icon: '💼', title: 'LinkedIn: Wendi Liu', desc: 'linkedin.com/in/liu-wendi', action: () => window.open('https://www.linkedin.com/in/liu-wendi', '_blank') },
+      { group: currentLang === 'zh' ? '快捷指令' : 'Quick Actions', icon: '✨', title: currentLang === 'zh' ? '流光彩蛋：粒子能量脉冲' : 'Easter Egg: Particle Energy Burst', desc: 'Trigger physics burst', action: () => triggerCanvasBurst() }
+    ];
+  }
+
+  let selectedIdx = 0;
+  let filteredCommands = [];
+
+  function openPalette() {
+    backdrop.classList.add('active');
+    backdrop.setAttribute('aria-hidden', 'false');
+    input.value = '';
+    renderList('');
+    setTimeout(() => input.focus(), 50);
+  }
+
+  function closePalette() {
+    backdrop.classList.remove('active');
+    backdrop.setAttribute('aria-hidden', 'true');
+  }
+
+  function renderList(query) {
+    const q = query.trim().toLowerCase();
+    const all = getCommands();
+    filteredCommands = q === '' 
+      ? all 
+      : all.filter(c => c.title.toLowerCase().includes(q) || (c.desc && c.desc.toLowerCase().includes(q)) || c.group.toLowerCase().includes(q));
+
+    selectedIdx = 0;
+
+    if (filteredCommands.length === 0) {
+      list.innerHTML = `<div style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 0.9rem;">${currentLang === 'zh' ? '未找到相关指令或内容' : 'No commands or posts found'}</div>`;
+      if (countEl) countEl.textContent = '0 items';
+      return;
+    }
+
+    if (countEl) countEl.textContent = `${filteredCommands.length} commands`;
+
+    let lastGroup = null;
+    let html = '';
+    filteredCommands.forEach((cmd, idx) => {
+      if (cmd.group !== lastGroup) {
+        lastGroup = cmd.group;
+        html += `<div class="cmd-group-title">${lastGroup}</div>`;
+      }
+      html += `
+        <div class="cmd-item ${idx === selectedIdx ? 'selected' : ''}" data-idx="${idx}">
+          <div class="cmd-item-left">
+            <span class="cmd-item-icon">${cmd.icon}</span>
+            <span class="cmd-item-title">${cmd.title}</span>
+            ${cmd.desc ? `<span class="cmd-item-desc">${cmd.desc}</span>` : ''}
+          </div>
+          <span class="cmd-item-badge">↵</span>
+        </div>
+      `;
+    });
+
+    list.innerHTML = html;
+
+    list.querySelectorAll('.cmd-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const idx = parseInt(item.getAttribute('data-idx'), 10);
+        executeCommand(idx);
+      });
+      item.addEventListener('mouseenter', () => {
+        selectedIdx = parseInt(item.getAttribute('data-idx'), 10);
+        updateSelection();
+      });
+    });
+  }
+
+  function updateSelection() {
+    list.querySelectorAll('.cmd-item').forEach((item, idx) => {
+      if (idx === selectedIdx) {
+        item.classList.add('selected');
+        item.scrollIntoView({ block: 'nearest' });
+      } else {
+        item.classList.remove('selected');
+      }
+    });
+  }
+
+  function executeCommand(idx) {
+    if (filteredCommands[idx] && typeof filteredCommands[idx].action === 'function') {
+      closePalette();
+      filteredCommands[idx].action();
+    }
+  }
+
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  if (triggerBtn) {
+    triggerBtn.addEventListener('click', openPalette);
+  }
+
+  backdrop.addEventListener('click', (e) => {
+    if (e.target === backdrop) closePalette();
+  });
+
+  input.addEventListener('input', (e) => {
+    renderList(e.target.value);
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (filteredCommands.length > 0) {
+        selectedIdx = (selectedIdx + 1) % filteredCommands.length;
+        updateSelection();
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (filteredCommands.length > 0) {
+        selectedIdx = (selectedIdx - 1 + filteredCommands.length) % filteredCommands.length;
+        updateSelection();
+      }
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      executeCommand(selectedIdx);
+    } else if (e.key === 'Escape') {
+      closePalette();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (backdrop.classList.contains('active')) {
+        closePalette();
+      } else {
+        openPalette();
+      }
+    } else if (e.key === 'Escape' && backdrop.classList.contains('active')) {
+      closePalette();
+    }
+  });
+}
+
+// --- 12. INITIALIZE EVERYTHING ---
 
 document.addEventListener('DOMContentLoaded', () => {
   // Init particle backgrounds
-  new CanvasBackground('canvas-bg');
+  canvasBgInstance = new CanvasBackground('canvas-bg');
 
   // Init Typewriter on landing hero
   typewriterInstance = new Typewriter('typewriter-text', TYPEWRITER_TEXTS[currentLang], 80, 45, 2500);
 
   // Apply default language
   applyLanguage(currentLang);
+
+  // Init command palette
+  initCommandPalette();
 
   // Language Switch Button Listener
   const langBtn = document.getElementById('lang-toggle');
@@ -1005,7 +1452,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Init comments and observers
+  // Init comments, observers and effects
   initGuestbook();
   initScrollObserver();
+  initSpotlightTracker();
+  initMetricCounters();
+  initWindPowerLiveTelemetry();
 });

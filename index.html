@@ -47,6 +47,13 @@
         <a href="#about" class="nav-link" data-i18n="nav-about">About</a>
         <a href="#guestbook" class="nav-link" data-i18n="nav-guestbook">Guestbook</a>
         
+        <!-- Command Palette Trigger -->
+        <button class="cmd-k-btn" id="cmd-k-trigger" aria-label="Open Command Palette (Ctrl+K / Cmd+K)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span class="cmd-k-text" data-i18n="cmd-k-text">搜索</span>
+          <kbd class="cmd-k-shortcut">⌘K</kbd>
+        </button>
+
         <!-- Language Toggle Button -->
         <button class="lang-toggle-btn" id="lang-toggle" aria-label="Toggle language / 切换语言">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
@@ -239,7 +246,31 @@
     </div>
   </footer>
 
+  <!-- Command Palette (⌘K / Ctrl+K) Modal -->
+  <div class="cmd-palette-backdrop" id="cmd-palette-backdrop" aria-hidden="true">
+    <div class="cmd-palette-modal" id="cmd-palette-modal" role="dialog" aria-modal="true" aria-label="Command Palette">
+      <div class="cmd-palette-header">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="cmd-palette-search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="cmd-palette-input" placeholder="输入搜索文章、项目、或执行快捷指令..." autocomplete="off" spellcheck="false" />
+        <span class="cmd-palette-esc-badge"><kbd>ESC</kbd></span>
+      </div>
+      <div class="cmd-palette-body" id="cmd-palette-list">
+        <!-- Dynamically injected commands & search results -->
+      </div>
+      <div class="cmd-palette-footer">
+        <div class="cmd-footer-keys">
+          <span><kbd>↑</kbd><kbd>↓</kbd> <span data-i18n="cmd-nav">导航</span></span>
+          <span><kbd>↵</kbd> <span data-i18n="cmd-select">选择</span></span>
+          <span><kbd>ESC</kbd> <span data-i18n="cmd-close">关闭</span></span>
+        </div>
+        <div class="cmd-footer-tip" id="cmd-palette-count">
+          <span>ounc Command Hub</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
-  <script src="assets/main.js?v=20260929"></script>
+  <script src="assets/main.js?v=20261015"></script>
 </body>
 </html>
